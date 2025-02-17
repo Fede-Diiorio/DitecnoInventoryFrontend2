@@ -1,0 +1,18 @@
+.button {
+  font-family: $primaryFont;
+  color: $black;
+  background-color: $white;
+  padding: 0.2rem 0.8rem;
+  font-size: 1.6rem;
+  border: 2px solid $lightPrimaryColor;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  box-shadow: $boxShadow $grey;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    border: 2px solid $primaryColor;
+    cursor: pointer;
+    scale: 1.1;
+  }
+}

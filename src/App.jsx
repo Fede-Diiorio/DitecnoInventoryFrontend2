@@ -1,32 +1,9 @@
-import { useEffect, useState } from "react";
+import { useFetch } from "./hooks/useFetch";
 
 function App() {
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-
-  const fetchData = async () => {
-    try {
-      setLoading(true);
-      const response = await fetch("http://localhost:8080/api/products");
-      if (!response.ok) {
-        throw new Error("Error al obtener los datos");
-      }
-      const jsonData = await response.json();
-
-      console.log(jsonData);
-      setData(jsonData);
-    } catch (error) {
-      setError(error);
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
+  const { data, loading, error } = useFetch(
+    "http://localhost:8080/api/products"
+  );
 
   if (loading) {
     return <h3>Cargando...</h3>;

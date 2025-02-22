@@ -1,17 +1,18 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
-export const useFetch = (url, dependencies = []) => {
-  const [data, setData] = useState([]);
+export const useFetch = (url) => {
+  const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const controller = new AbortController();
+    let controller = new AbortController();
+    setLoading(true);
 
     const fetchData = async () => {
-      setLoading(true);
       try {
-        const response = await fetch(url, controller);
+        const response = await fetch(url, { signal: controller.signal });
+        console.log(response);
 
         if (!response.ok) {
           throw new Error("Error en la petición");
@@ -20,8 +21,10 @@ export const useFetch = (url, dependencies = []) => {
         const jsonData = await response.json();
         setData(jsonData);
         setError(null);
-      } catch (error) {
-        setError(error.message);
+      } catch (err) {
+        if (err.name !== "AbortError") {
+          setError(err);
+        }
       } finally {
         setLoading(false);
       }
@@ -32,7 +35,7 @@ export const useFetch = (url, dependencies = []) => {
     return () => {
       controller.abort();
     };
-  }, [url, ...dependencies]);
+  }, [url]);
 
   return { data, loading, error };
 };

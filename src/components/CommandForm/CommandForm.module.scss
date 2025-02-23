@@ -1,0 +1,53 @@
+.section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 3rem;
+
+  .form {
+    border: 2px solid $lightPrimaryColor;
+    border-radius: 2rem;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 10rem;
+
+    legend,
+    .input {
+      font-size: 1.2rem;
+    }
+
+    .field {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 2rem;
+
+      .input {
+        padding: 0.7rem;
+        font-size: 1.6rem;
+        border: 1px solid #ccc;
+        border-radius: 0.4rem;
+        width: 20rem;
+      }
+
+      .button {
+        padding: 0.8rem 1.2rem;
+        background-color: $lightPrimaryColor;
+        color: #fff;
+        border: none;
+        border-radius: 0.5rem;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        font-size: 1.2rem;
+
+        &:hover {
+          background-color: $primaryColor;
+        }
+      }
+    }
+  }
+}

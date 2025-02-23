@@ -1,9 +1,9 @@
-import { Header, InventoryList } from "../../components";
+import { Header, InventoryList, NavbarAdmin } from "../../components";
 
 export const Dashboard = () => {
   return (
     <section>
-      <Header />
+      <Header navBar={<NavbarAdmin />} />
       <InventoryList />
     </section>
   );

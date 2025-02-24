@@ -7,6 +7,7 @@ import { useAutoFocus } from "../../../hooks";
 
 export const LoginFrom = () => {
   const [code, setCode] = useState("");
+  const [error, setError] = useState(null);
   const { login } = useContext(AuthContext);
   const inputRef = useAutoFocus();
 
@@ -17,15 +18,29 @@ export const LoginFrom = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     inputRef.current?.focus();
-    const response = await authUserByCode(code);
-    login(response.token);
+    setError(null); // Limpiar error antes de intentar autenticar
+
+    try {
+      const response = await authUserByCode(code);
+
+      if (response.error) {
+        throw new Error(response.message);
+      }
+
+      login(response.token);
+    } catch (error) {
+      setError(error.message);
+    }
   };
+
+  console.log(error);
 
   return (
     <CommandForm
       legend={"Ingrese su código de usuario para continuar"}
       onSubmit={handleSubmit}
       label={"Ingresar"}
+      error={error}
     >
       <input
         ref={inputRef}

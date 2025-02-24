@@ -8,6 +8,9 @@ export const authUserByCode = async (code) => {
     return response.data;
   } catch (error) {
     console.error("Error obteniendo usuario:", error);
-    return { error: error.message };
+    return {
+      error: error.message,
+      message: "No se pudo autenticar ese código de usuario",
+    };
   }
 };

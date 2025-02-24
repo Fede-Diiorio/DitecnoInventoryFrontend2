@@ -5,12 +5,7 @@ import { AuthContext } from "../../context";
 import { useContext } from "react";
 
 export const NavbarAdmin = () => {
-  const navigate = useNavigate();
   const { logout } = useContext(AuthContext);
-
-  const handleLogout = () => {
-    logout(), navigate("/");
-  };
 
   return (
     <FlexContainerRow>
@@ -25,9 +20,14 @@ export const NavbarAdmin = () => {
       <Link to={"/bajo-stock"}>
         <Button label={"Bajo stock"} />
       </Link>
-      <Button label={"Lista de precios"} />
 
-      <Button label={"Cerrar sesión"} parentMethod={handleLogout} />
+      <Link to={"/inventario"}>
+        <Button label={"Lista de precios"} />
+      </Link>
+
+      <Link to={"/"}>
+        <Button label={"Cerrar sesión"} parentMethod={() => logout()} />
+      </Link>
     </FlexContainerRow>
   );
 };

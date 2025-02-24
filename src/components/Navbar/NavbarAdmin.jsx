@@ -7,6 +7,10 @@ import { useContext } from "react";
 export const NavbarAdmin = () => {
   const { logout } = useContext(AuthContext);
 
+  const hadleLogout = () => {
+    logout();
+  };
+
   return (
     <FlexContainerRow>
       <Link to={"/"}>
@@ -26,7 +30,7 @@ export const NavbarAdmin = () => {
       </Link>
 
       <Link to={"/"}>
-        <Button label={"Cerrar sesión"} parentMethod={() => logout()} />
+        <Button label={"Cerrar sesión"} parentMethod={hadleLogout} />
       </Link>
     </FlexContainerRow>
   );

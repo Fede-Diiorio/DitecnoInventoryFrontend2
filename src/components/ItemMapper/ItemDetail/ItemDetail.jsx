@@ -1,6 +1,6 @@
-import classes from "./ProductItem.module.scss";
+import classes from "./ItemDetail.module.scss";
 
-export const ProductItem = ({ name, code, stock }) => {
+export const ItemDetail = ({ name, code, quantity, stock }) => {
   return (
     <div className={classes.box}>
       <p>
@@ -11,7 +11,7 @@ export const ProductItem = ({ name, code, stock }) => {
         <span>Código: </span> {code}
       </p>
       <p>
-        <span>Stock: </span> {stock}
+        <span>Cantidad: </span> {quantity || stock}
       </p>
     </div>
   );

@@ -1,5 +1,5 @@
 import classes from "./ProductAdder.module.scss";
-import { CommandForm, InventoryList } from "../../components";
+import { CommandForm, ItemMapper } from "../../components";
 import { useAutoFocus } from "../../hooks";
 import { useAdderContext } from "../../context";
 import { useState } from "react";
@@ -32,12 +32,17 @@ export const ProductAdder = () => {
       }
 
       const product = await getProductByCode(query);
-      console.log(product);
+
+      if (!product.error) {
+        console.log("Agregando producto al carrito:", product);
+        addItem(product);
+      }
+
       setQuery("");
       inputRef.current?.focus();
     } catch (error) {
       console.error("Error al obtener el producto:", error);
-      setError("Hubo un problema al buscar el producto."); // Mensaje genérico de error
+      setError("Hubo un problema al buscar el producto.");
     }
   };
 
@@ -58,6 +63,8 @@ export const ProductAdder = () => {
           className={classes.input}
         />
       </CommandForm>
+
+      <ItemMapper items={cart} />
     </section>
   );
 };

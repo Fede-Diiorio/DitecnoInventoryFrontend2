@@ -1,5 +1,5 @@
 import classes from "./ProductAdder.module.scss";
-import { CommandForm } from "../../components";
+import { CommandForm, InventoryList } from "../../components";
 import { useAutoFocus } from "../../hooks";
 import { useAdderContext } from "../../context";
 import { useState } from "react";

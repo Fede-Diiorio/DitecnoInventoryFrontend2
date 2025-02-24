@@ -17,7 +17,7 @@ export const AdderProvider = ({ children }) => {
         if (prod.id === itemToAdd.id) {
           return {
             ...prod,
-            quantity: itemToAdd.quantity,
+            quantity: 1,
           };
         } else {
           return prod;

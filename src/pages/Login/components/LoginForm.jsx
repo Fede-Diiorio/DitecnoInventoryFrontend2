@@ -34,8 +34,6 @@ export const LoginFrom = () => {
     setCode("");
   };
 
-  console.log(error);
-
   return (
     <CommandForm
       legend={"Ingrese su código de usuario para continuar"}

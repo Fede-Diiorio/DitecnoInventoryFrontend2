@@ -34,7 +34,6 @@ export const ProductAdder = () => {
       const product = await getProductByCode(query);
 
       if (!product.error) {
-        console.log("Agregando producto al carrito:", product);
         addItem(product);
       }
 

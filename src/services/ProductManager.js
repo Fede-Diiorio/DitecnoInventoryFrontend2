@@ -13,8 +13,13 @@ export const getInventory = async () => {
 };
 
 export const getProductsWithLowStock = async () => {
+  const token = sessionStorage.getItem("token");
   try {
-    const response = await axios.get(`${apiUrl}/api/products/low-stock`);
+    const response = await axios.get(`${apiUrl}/api/products/low-stock`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     return response.data;
   } catch (error) {
     console.error("Error obteniendo producto:", error);

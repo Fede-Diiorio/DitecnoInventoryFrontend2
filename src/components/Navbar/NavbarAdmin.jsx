@@ -13,7 +13,9 @@ export const NavbarAdmin = () => {
         <Button label={"Inventario"} />
       </Link>
 
-      <Button label={"Bajo stock"} />
+      <Link to={"/bajo-stock"}>
+        <Button label={"Bajo stock"} />
+      </Link>
       <Button label={"Lista de precios"} />
     </FlexContainerRow>
   );

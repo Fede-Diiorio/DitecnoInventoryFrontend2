@@ -3,6 +3,11 @@ import { useAsync } from "../../hooks";
 import { ItemMapper } from "../../components";
 
 export const LowStockList = () => {
-  const products = useAsync(getProductsWithLowStock);
+  const { data: products, error, loading } = useAsync(getProductsWithLowStock);
+
+  if (loading) return <h3>Cargando...</h3>;
+
+  if (error) return <h3>Acceso denegado</h3>;
+
   return <ItemMapper items={products} />;
 };

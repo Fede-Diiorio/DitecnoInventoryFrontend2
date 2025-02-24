@@ -31,6 +31,7 @@ export const LoginFrom = () => {
     } catch (error) {
       setError(error.message);
     }
+    setCode("");
   };
 
   console.log(error);

@@ -5,6 +5,6 @@ export * from "./Input/Input";
 export * from "./CommandForm/CommandForm";
 export * from "./Navbar/NavbarAdmin";
 export * from "./ProductAdder/ProductAdder";
-export * from "./ItemMapper/ItemMapper";
+export * from "./ItemContainer/ItemContainer";
 export * from "./LowStockList/LowStockList";
 export * from "./Withdrawals/Withdrawals";

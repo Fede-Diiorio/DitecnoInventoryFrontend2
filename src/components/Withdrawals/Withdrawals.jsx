@@ -1,5 +1,5 @@
 import classes from "./Withdrawals.module.scss";
-import { ItemMapper } from "../ItemMapper/ItemMapper";
+import { ItemContainer } from "../ItemContainer/ItemContainer";
 import { useAsync } from "../../hooks";
 import { getAllWithdrawals } from "../../services";
 
@@ -10,5 +10,5 @@ export const Withdrawals = () => {
 
   if (error) return <h3>Acceso denegado</h3>;
 
-  return <ItemMapper items={withdrawals} />;
+  return <ItemContainer items={withdrawals} />;
 };

@@ -1,6 +1,6 @@
 import { getProductsWithLowStock } from "../../services";
 import { useAsync } from "../../hooks";
-import { ItemMapper } from "../../components";
+import { ItemContainer } from "../../components";
 
 export const LowStockList = () => {
   const { data: products, error, loading } = useAsync(getProductsWithLowStock);
@@ -9,5 +9,5 @@ export const LowStockList = () => {
 
   if (error) return <h3>Acceso denegado</h3>;
 
-  return <ItemMapper items={products} />;
+  return <ItemContainer items={products} />;
 };

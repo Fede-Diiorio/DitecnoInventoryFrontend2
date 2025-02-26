@@ -1,5 +1,5 @@
 import classes from "./ProductAdder.module.scss";
-import { CommandForm, ItemMapper } from "../../components";
+import { CommandForm, ItemContainer } from "../../components";
 import { useAutoFocus } from "../../hooks";
 import { useAdderContext } from "../../context";
 import { useState } from "react";
@@ -63,7 +63,7 @@ export const ProductAdder = () => {
         />
       </CommandForm>
 
-      <ItemMapper items={cart} />
+      <ItemContainer items={cart} />
     </section>
   );
 };

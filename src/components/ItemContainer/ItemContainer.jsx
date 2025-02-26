@@ -1,7 +1,7 @@
 import { ItemDetail } from "./ItemDetail/ItemDetail";
 import { Container } from "../../styled-components";
 
-export const ItemMapper = ({ items }) => {
+export const ItemContainer = ({ items }) => {
   return (
     <Container>
       <section>

@@ -1,6 +1,6 @@
 import { getInventory } from "../../services";
 import { useAsync } from "../../hooks";
-import { ItemMapper } from "../../components";
+import { ItemContainer } from "../../components";
 import { FlexContainerColumn } from "../../styled-components";
 
 export const InventoryList = () => {
@@ -16,5 +16,5 @@ export const InventoryList = () => {
       </FlexContainerColumn>
     );
 
-  return <ItemMapper items={products} />;
+  return <ItemContainer items={products} />;
 };

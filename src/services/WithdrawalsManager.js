@@ -11,3 +11,13 @@ export const getAllWithdrawals = async () => {
     return { error: error.message };
   }
 };
+
+export const getWithdrawalById = async (id) => {
+  try {
+    const response = await axios.get(`${apiUrl}/api/withdrawals/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error obteniendo producto:", error);
+    return { error: error.message };
+  }
+};

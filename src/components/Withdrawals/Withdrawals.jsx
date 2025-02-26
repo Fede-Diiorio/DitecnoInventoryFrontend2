@@ -1,5 +1,5 @@
 import classes from "./Withdrawals.module.scss";
-import { ItemContainer } from "../ItemContainer/ItemContainer";
+import { WithdrawalsContainer } from "./components";
 import { useAsync } from "../../hooks";
 import { getAllWithdrawals } from "../../services";
 
@@ -10,5 +10,9 @@ export const Withdrawals = () => {
 
   if (error) return <h3>Acceso denegado</h3>;
 
-  return <ItemContainer items={withdrawals} />;
+  return (
+    <div className={classes.box}>
+      <WithdrawalsContainer withdrawals={withdrawals} />
+    </div>
+  );
 };

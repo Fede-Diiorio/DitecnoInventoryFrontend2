@@ -7,3 +7,4 @@ export * from "./Navbar/NavbarAdmin";
 export * from "./ProductAdder/ProductAdder";
 export * from "./ItemMapper/ItemMapper";
 export * from "./LowStockList/LowStockList";
+export * from "./Withdrawals/Withdrawals";

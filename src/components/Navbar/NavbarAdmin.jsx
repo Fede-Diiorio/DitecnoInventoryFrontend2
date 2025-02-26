@@ -25,8 +25,8 @@ export const NavbarAdmin = () => {
         <Button label={"Bajo stock"} />
       </Link>
 
-      <Link to={"/inventario"}>
-        <Button label={"Lista de precios"} />
+      <Link to={"/retiros"}>
+        <Button label={"Retiros"} />
       </Link>
 
       <Link to={"/"}>

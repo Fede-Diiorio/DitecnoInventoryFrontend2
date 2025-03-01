@@ -1,7 +1,8 @@
 import classes from "./ItemDetailForAdder.module.scss";
 
 export const ItemDetailForAdder = ({ name, code, quantity, stock }) => {
-  const handleStock = () => {};
+  const handleStock = stock !== 0 ? `${stock - quantity}` : "Sin stock";
+  const handleQuantity = stock !== 0 ? quantity : 0;
 
   return (
     <div className={classes.box}>
@@ -13,10 +14,10 @@ export const ItemDetailForAdder = ({ name, code, quantity, stock }) => {
         {name}
       </p>
       <p>
-        <span>Cantidad: </span> {quantity || stock}
+        <span>Cantidad: </span> {handleQuantity}
       </p>
       <p>
-        <span>Stock: </span> {stock - quantity}
+        <span>Stock: </span> {handleStock}
       </p>
     </div>
   );

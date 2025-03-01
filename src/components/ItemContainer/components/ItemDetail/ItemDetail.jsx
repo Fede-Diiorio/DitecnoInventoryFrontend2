@@ -1,6 +1,8 @@
 import classes from "./ItemDetail.module.scss";
 
 export const ItemDetail = ({ name, code, stock, quantity }) => {
+  const handleStock = stock !== 0 ? stock : "0";
+
   return (
     <div className={classes.box}>
       <p>
@@ -11,7 +13,7 @@ export const ItemDetail = ({ name, code, stock, quantity }) => {
         <span>Código: </span> {code}
       </p>
       <p>
-        <span>Cantidad: </span> {stock || quantity}
+        <span>Cantidad: </span> {handleStock || quantity}
       </p>
     </div>
   );

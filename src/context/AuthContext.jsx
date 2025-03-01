@@ -6,6 +6,10 @@ export const AuthContext = createContext();
 // Proveedor del contexto
 export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(sessionStorage.getItem("token"));
+  const [user, setUser] = useState(() => {
+    const storedUser = sessionStorage.getItem("user");
+    return storedUser ? JSON.parse(storedUser) : null;
+  });
 
   // Función para iniciar sesión
   const login = (newToken) => {
@@ -13,19 +17,29 @@ export const AuthProvider = ({ children }) => {
     setToken(newToken);
   };
 
+  //Fucnión para guardar inforamción de usuario
+
+  const userInfo = (newUser) => {
+    sessionStorage.setItem("user", JSON.stringify(newUser));
+    setUser(newUser);
+  };
+
   // Función para cerrar sesión
   const logout = () => {
     sessionStorage.removeItem("token");
+    sessionStorage.removeItem("user");
+    setUser(null);
     setToken(null);
   };
 
   // Verificar si hay un token al montar el componente
   useEffect(() => {
     setToken(sessionStorage.getItem("token"));
+    setUser(sessionStorage.getItem("user"));
   }, []);
 
   return (
-    <AuthContext.Provider value={{ token, login, logout }}>
+    <AuthContext.Provider value={{ token, login, logout, userInfo, user }}>
       {children}
     </AuthContext.Provider>
   );

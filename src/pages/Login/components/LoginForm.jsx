@@ -8,7 +8,7 @@ import { useAutoFocus } from "../../../hooks";
 export const LoginFrom = () => {
   const [code, setCode] = useState("");
   const [error, setError] = useState(null);
-  const { login } = useContext(AuthContext);
+  const { login, userInfo } = useContext(AuthContext);
   const inputRef = useAutoFocus();
 
   const handleInputChange = (e) => {
@@ -27,6 +27,7 @@ export const LoginFrom = () => {
         throw new Error(response.message);
       }
 
+      userInfo(response.userInfo.user);
       login(response.userInfo.token);
     } catch (error) {
       setError(error.message);

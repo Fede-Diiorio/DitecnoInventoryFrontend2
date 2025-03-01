@@ -1,4 +1,5 @@
 import { Button } from "../../components";
+import { UserInfo } from "./components";
 import { FlexContainerRow } from "../../styled-components";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context";
@@ -12,26 +13,29 @@ export const NavbarAdmin = () => {
   };
 
   return (
-    <FlexContainerRow>
-      <Link to={"/"}>
-        <Button label={"Agregar productos"} />
-      </Link>
+    <div>
+      <UserInfo />
+      <FlexContainerRow>
+        <Link to={"/"}>
+          <Button label={"Agregar productos"} />
+        </Link>
 
-      <Link to={"/inventario"}>
-        <Button label={"Inventario"} />
-      </Link>
+        <Link to={"/inventario"}>
+          <Button label={"Inventario"} />
+        </Link>
 
-      <Link to={"/bajo-stock"}>
-        <Button label={"Bajo stock"} />
-      </Link>
+        <Link to={"/bajo-stock"}>
+          <Button label={"Bajo stock"} />
+        </Link>
 
-      <Link to={"/retiros"}>
-        <Button label={"Retiros"} />
-      </Link>
+        <Link to={"/retiros"}>
+          <Button label={"Retiros"} />
+        </Link>
 
-      <Link to={"/"}>
-        <Button label={"Cerrar sesión"} parentMethod={hadleLogout} />
-      </Link>
-    </FlexContainerRow>
+        <Link to={"/"}>
+          <Button label={"Cerrar sesión"} parentMethod={hadleLogout} />
+        </Link>
+      </FlexContainerRow>
+    </div>
   );
 };

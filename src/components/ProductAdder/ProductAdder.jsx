@@ -47,22 +47,6 @@ export const ProductAdder = () => {
 
   return (
     <section>
-      {/* <CommandForm
-        legend={"Ingrese el código de producto o comando"}
-        label={"Buscar"}
-        onSubmit={handleSearch}
-        error={error}
-      >
-        <input
-          ref={inputRef}
-          type="text"
-          placeholder="Ingresar código o comando"
-          value={query}
-          onChange={handleInputChange}
-          className={classes.input}
-        />
-      </CommandForm> */}
-
       <form onSubmit={handleSearch}>
         <input
           ref={inputRef}
@@ -74,7 +58,7 @@ export const ProductAdder = () => {
         />
         <button type="submit"></button>
       </form>
-      <ItemContainer items={cart} />
+      <ItemContainer items={cart} useAdder={true} />
     </section>
   );
 };

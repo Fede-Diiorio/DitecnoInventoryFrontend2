@@ -8,4 +8,3 @@ export * from "./ProductAdder/ProductAdder";
 export * from "./ItemContainer/ItemContainer";
 export * from "./LowStockList/LowStockList";
 export * from "./Withdrawals/Withdrawals";
-export * from "./ItemDetail/ItemDetail";

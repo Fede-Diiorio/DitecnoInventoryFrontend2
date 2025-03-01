@@ -1,5 +1,5 @@
 import classes from "./ProductAdder.module.scss";
-import { CommandForm, ItemContainer } from "../../components";
+import { ItemContainer } from "../../components";
 import { useAutoFocus } from "../../hooks";
 import { useAdderContext } from "../../context";
 import { useState } from "react";
@@ -47,7 +47,7 @@ export const ProductAdder = () => {
 
   return (
     <section>
-      <CommandForm
+      {/* <CommandForm
         legend={"Ingrese el código de producto o comando"}
         label={"Buscar"}
         onSubmit={handleSearch}
@@ -61,8 +61,19 @@ export const ProductAdder = () => {
           onChange={handleInputChange}
           className={classes.input}
         />
-      </CommandForm>
+      </CommandForm> */}
 
+      <form onSubmit={handleSearch}>
+        <input
+          ref={inputRef}
+          type="text"
+          placeholder="Ingresar código o comando"
+          value={query}
+          onChange={handleInputChange}
+          className={classes.input}
+        />
+        <button type="submit"></button>
+      </form>
       <ItemContainer items={cart} />
     </section>
   );

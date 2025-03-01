@@ -27,7 +27,7 @@ export const LoginFrom = () => {
         throw new Error(response.message);
       }
 
-      login(response.token);
+      login(response.userInfo.token);
     } catch (error) {
       setError(error.message);
     }

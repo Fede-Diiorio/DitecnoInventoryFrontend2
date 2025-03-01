@@ -1,4 +1,4 @@
-import { ItemDetail } from "./ItemDetail/ItemDetail";
+import { ItemDetail } from "../../components";
 import { Container } from "../../styled-components";
 
 export const ItemContainer = ({ items }) => {

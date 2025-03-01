@@ -35,7 +35,9 @@ export const AuthProvider = ({ children }) => {
   // Verificar si hay un token al montar el componente
   useEffect(() => {
     setToken(sessionStorage.getItem("token"));
-    setUser(sessionStorage.getItem("user"));
+
+    const storedUser = sessionStorage.getItem("user");
+    setUser(storedUser ? JSON.parse(storedUser) : null);
   }, []);
 
   return (

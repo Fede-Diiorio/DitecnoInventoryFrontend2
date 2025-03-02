@@ -1,12 +1,24 @@
 .table {
   width: 100%;
   border-collapse: collapse;
+  table-layout: fixed;
 
   th {
     border: 1px solid $grey;
-    padding: 8px;
-    text-align: left;
+    text-align: center;
     background-color: $lightGrey;
     font-weight: bold;
+  }
+
+  .code {
+    width: 13%;
+  }
+
+  .description {
+    width: 75%;
+  }
+
+  .number {
+    width: 6%;
   }
 }

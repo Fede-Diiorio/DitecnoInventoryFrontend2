@@ -8,10 +8,10 @@ export const ItemContainerForAdder = ({ items }) => {
       <table className={classes.table}>
         <thead>
           <tr>
-            <th>Código</th>
-            <th>Descripción</th>
-            <th>Cantidad</th>
-            <th>Stock</th>
+            <th className={classes.code}>Código</th>
+            <th className={classes.description}>Descripción</th>
+            <th className={classes.number}>Cantidad</th>
+            <th className={classes.number}>Stock</th>
           </tr>
         </thead>
         <tbody>

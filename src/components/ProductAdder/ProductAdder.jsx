@@ -4,12 +4,14 @@ import { useAutoFocus } from "../../hooks";
 import { useAdderContext } from "../../context";
 import { useState } from "react";
 import { getProductByCode, descountStock } from "../../services";
+import { toast } from "react-toastify";
 
 export const ProductAdder = () => {
   const [query, setQuery] = useState("");
   const [error, setError] = useState("");
   const { cart, addItem, clearCart } = useAdderContext();
   const inputRef = useAutoFocus();
+  const successNotify = (message) => toast.success(message);
 
   const handleInputChange = (e) => {
     setQuery(e.target.value);
@@ -23,11 +25,13 @@ export const ProductAdder = () => {
       setError("");
 
       if (query === "CMD00001") {
+        successNotify("Carrito vaciado");
         clearCart();
       }
 
       if (query === "CMD00002") {
         await descountStock(cart);
+        successNotify("Items descontados");
         clearCart();
       }
 

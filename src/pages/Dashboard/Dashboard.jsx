@@ -9,6 +9,7 @@ import {
 import { WithdrawalDetail } from "../../components/Withdrawals/components";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AdderProvider } from "../../context";
+import { ToastContainer } from "react-toastify";
 
 export const Dashboard = () => {
   return (
@@ -25,6 +26,7 @@ export const Dashboard = () => {
           </Routes>
         </AdderProvider>
       </BrowserRouter>
+      <ToastContainer position="bottom-right" />
     </section>
   );
 };

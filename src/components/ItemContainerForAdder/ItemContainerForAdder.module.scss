@@ -1,0 +1,12 @@
+.table {
+  width: 100%;
+  border-collapse: collapse;
+
+  th {
+    border: 1px solid $grey;
+    padding: 8px;
+    text-align: left;
+    background-color: $lightGrey;
+    font-weight: bold;
+  }
+}

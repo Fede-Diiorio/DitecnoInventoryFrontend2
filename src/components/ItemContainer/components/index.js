@@ -1,2 +1,2 @@
 export * from "./ItemDetail/ItemDetail";
-export * from "./ItemDetailForAdder/ItemDetailForAdder";
+export * from "../../ItemContainerForAdder/components/ItemDetailForAdder/ItemDetailForAdder";

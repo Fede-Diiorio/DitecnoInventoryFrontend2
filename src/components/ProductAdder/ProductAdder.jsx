@@ -1,5 +1,5 @@
 import classes from "./ProductAdder.module.scss";
-import { ItemContainer } from "../../components";
+import { ItemContainerForAdder } from "../../components";
 import { useAutoFocus } from "../../hooks";
 import { useAdderContext } from "../../context";
 import { useState } from "react";
@@ -58,7 +58,7 @@ export const ProductAdder = () => {
         />
         <button type="submit"></button>
       </form>
-      <ItemContainer items={cart} useAdder={true} />
+      <ItemContainerForAdder items={cart} useAdder={true} />
     </section>
   );
 };

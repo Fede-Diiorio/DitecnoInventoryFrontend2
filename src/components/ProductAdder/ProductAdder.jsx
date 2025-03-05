@@ -12,6 +12,7 @@ export const ProductAdder = () => {
   const { cart, addItem, clearCart } = useAdderContext();
   const inputRef = useAutoFocus();
   const successNotify = (message) => toast.success(message);
+  const errorNotify = (message) => toast.error(message);
 
   const handleInputChange = (e) => {
     setQuery(e.target.value);
@@ -29,10 +30,14 @@ export const ProductAdder = () => {
         clearCart();
       }
 
-      if (query === "CMD00002") {
+      if (query === "CMD00002" && cart.length !== 0) {
         await descountStock(cart);
         successNotify("Items descontados");
         clearCart();
+      }
+
+      if (query === "CMD00002" && cart.length === 0) {
+        errorNotify("No hay productos que descontar");
       }
 
       const product = await getProductByCode(query);

@@ -1,4 +1,4 @@
-import { Dashboard, Login } from "./pages";
+import { Login, Dashboard } from "./pages";
 import { AuthContext, AuthProvider } from "./context";
 import { useContext } from "react";
 

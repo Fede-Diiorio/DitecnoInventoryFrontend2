@@ -1,2 +1,2 @@
 export * from "./Login/Login";
-export * from "./Dashboard/DashboardContainer";
+export * from "./Dashboard/Dashboard";

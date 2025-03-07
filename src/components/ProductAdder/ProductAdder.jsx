@@ -47,7 +47,6 @@ export const ProductAdder = () => {
       }
 
       const product = await getProductByCode(query);
-      console.log(query);
 
       if (!product.error) {
         addItem(product);

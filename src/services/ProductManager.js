@@ -4,7 +4,12 @@ const apiUrl = import.meta.env.VITE_HOST;
 
 export const getInventory = async () => {
   try {
-    const response = await axios.get(`${apiUrl}/api/products`);
+    const token = sessionStorage.getItem("token");
+    const response = await axios.get(`${apiUrl}/api/products`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     return response.data;
   } catch (error) {
     console.error("Error obteniendo producto:", error);
@@ -28,8 +33,17 @@ export const getProductsWithLowStock = async () => {
 };
 
 export const getProductByCode = async (code) => {
+  const token = sessionStorage.getItem("token");
   try {
-    const response = await axios.post(`${apiUrl}/api/products/code`, { code });
+    const response = await axios.post(
+      `${apiUrl}/api/products/code`,
+      { code },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
     return response.data;
   } catch (error) {
     console.error("Error obteniendo producto:", error);

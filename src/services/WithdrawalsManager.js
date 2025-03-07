@@ -4,7 +4,12 @@ const apiUrl = import.meta.env.VITE_HOST;
 
 export const getAllWithdrawals = async () => {
   try {
-    const response = await axios.get(`${apiUrl}/api/withdrawals`);
+    const token = sessionStorage.getItem("token");
+    const response = await axios.get(`${apiUrl}/api/withdrawals`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     return response.data;
   } catch (error) {
     console.error("Error obteniendo producto:", error);
@@ -14,7 +19,12 @@ export const getAllWithdrawals = async () => {
 
 export const getWithdrawalById = async (id) => {
   try {
-    const response = await axios.get(`${apiUrl}/api/withdrawals/${id}`);
+    const token = sessionStorage.getItem("token");
+    const response = await axios.get(`${apiUrl}/api/withdrawals/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     return response.data;
   } catch (error) {
     console.error("Error obteniendo producto:", error);

@@ -1,8 +1,8 @@
 import classes from "./ProductAdder.module.scss";
 import { ItemContainerForAdder } from "../../components";
 import { useAutoFocus } from "../../hooks";
-import { useAdderContext } from "../../context";
-import { useState } from "react";
+import { useAdderContext, AuthContext } from "../../context";
+import { useState, useContext } from "react";
 import { getProductByCode, descountStock } from "../../services";
 import { toast } from "react-toastify";
 
@@ -13,6 +13,8 @@ export const ProductAdder = () => {
   const inputRef = useAutoFocus();
   const successNotify = (message) => toast.success(message);
   const errorNotify = (message) => toast.error(message);
+
+  const { logout } = useContext(AuthContext);
 
   const handleInputChange = (e) => {
     setQuery(e.target.value);
@@ -25,7 +27,7 @@ export const ProductAdder = () => {
     try {
       setError("");
 
-      if (query === "CMD00001") {
+      if (query === "CMD00001" && cart.length !== 0) {
         successNotify("Carrito vaciado");
         clearCart();
       }
@@ -36,11 +38,16 @@ export const ProductAdder = () => {
         clearCart();
       }
 
-      if (query === "CMD00002" && cart.length === 0) {
-        errorNotify("No hay productos que descontar");
+      if (cart.length === 0) {
+        errorNotify("El carrito se encuentra vacio");
+      }
+
+      if (query === "CMD00003") {
+        logout();
       }
 
       const product = await getProductByCode(query);
+      console.log(query);
 
       if (!product.error) {
         addItem(product);

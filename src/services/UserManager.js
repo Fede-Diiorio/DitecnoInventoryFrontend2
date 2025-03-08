@@ -7,11 +7,9 @@ export const authUserByCode = async (code) => {
     const response = await axios.post(`${apiUrl}/api/users/code`, { code });
     return response.data;
   } catch (error) {
-    // console.error("Error obteniendo usuario:", error);
-    console.log(error.response.data.error);
+    console.error("Error obteniendo usuario:", error);
     return {
       error: error,
-      // message: "No se pudo autenticar ese código de usuario",
       message: error.response.data.error,
     };
   }

@@ -1,10 +1,8 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, useRef } from "react";
 import { userLogout } from "../services";
 
-// Crear el contexto
 export const AuthContext = createContext();
 
-// Proveedor del contexto
 export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(sessionStorage.getItem("token"));
   const [user, setUser] = useState(() => {
@@ -12,18 +10,7 @@ export const AuthProvider = ({ children }) => {
     return storedUser ? JSON.parse(storedUser) : null;
   });
 
-  // Función para iniciar sesión
-  const login = (newToken) => {
-    sessionStorage.setItem("token", newToken);
-    setToken(newToken);
-  };
-
-  //Fucnión para guardar inforamción de usuario
-
-  const userInfo = (newUser) => {
-    sessionStorage.setItem("user", JSON.stringify(newUser));
-    setUser(newUser);
-  };
+  const logoutTimerRef = useRef(null); // Referencia para el temporizador
 
   // Función para cerrar sesión
   const logout = async () => {
@@ -34,16 +21,40 @@ export const AuthProvider = ({ children }) => {
     setToken(null);
   };
 
+  // Función para reiniciar el temporizador
+  const resetLogoutTimer = () => {
+    if (logoutTimerRef.current) clearTimeout(logoutTimerRef.current);
+    logoutTimerRef.current = setTimeout(() => {
+      logout();
+    }, 5 * 60 * 1000); // 5 minutos en milisegundos
+  };
+
+  // Función para iniciar sesión
+  const login = (newToken) => {
+    sessionStorage.setItem("token", newToken);
+    setToken(newToken);
+    resetLogoutTimer(); // Reiniciar el temporizador al iniciar sesión
+  };
+
+  // Función para guardar información de usuario
+  const userInfo = (newUser) => {
+    sessionStorage.setItem("user", JSON.stringify(newUser));
+    setUser(newUser);
+  };
+
   // Verificar si hay un token al montar el componente
   useEffect(() => {
-    setToken(sessionStorage.getItem("token"));
+    if (token) {
+      resetLogoutTimer(); // Iniciar el temporizador si hay un token
+    }
 
-    const storedUser = sessionStorage.getItem("user");
-    setUser(storedUser ? JSON.parse(storedUser) : null);
-  }, []);
+    return () => clearTimeout(logoutTimerRef.current); // Limpiar al desmontar
+  }, [token]);
 
   return (
-    <AuthContext.Provider value={{ token, login, logout, userInfo, user }}>
+    <AuthContext.Provider
+      value={{ token, login, logout, userInfo, user, resetLogoutTimer }}
+    >
       {children}
     </AuthContext.Provider>
   );

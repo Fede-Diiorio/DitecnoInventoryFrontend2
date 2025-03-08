@@ -1,10 +1,10 @@
+import { useEffect, useState, useContext, useRef } from "react";
+import { toast } from "react-toastify";
 import classes from "./ProductAdder.module.scss";
 import { ItemContainerForAdder } from "../../components";
 import { useAutoFocus } from "../../hooks";
 import { useAdderContext, AuthContext } from "../../context";
-import { useState, useContext } from "react";
 import { getProductByCode, descountStock } from "../../services";
-import { toast } from "react-toastify";
 
 export const ProductAdder = () => {
   const [query, setQuery] = useState("");
@@ -14,7 +14,7 @@ export const ProductAdder = () => {
   const successNotify = (message) => toast.success(message);
   const errorNotify = (message) => toast.error(message);
 
-  const { logout } = useContext(AuthContext);
+  const { logout, resetLogoutTimer } = useContext(AuthContext);
 
   const handleInputChange = (e) => {
     setQuery(e.target.value);
@@ -30,16 +30,16 @@ export const ProductAdder = () => {
       if (query === "CMD00001" && cart.length !== 0) {
         successNotify("Carrito vaciado");
         clearCart();
+      } else if (query === "CMD00001" && cart.length === 0) {
+        errorNotify("El carrito ya se ecuentra vacío");
       }
 
       if (query === "CMD00002" && cart.length !== 0) {
         await descountStock(cart);
         successNotify("Items descontados");
         clearCart();
-      }
-
-      if (cart.length === 0) {
-        errorNotify("El carrito se encuentra vacio");
+      } else if (query === "CMD00002" && cart.length === 0) {
+        errorNotify("El carrito se ecuentra vacío");
       }
 
       if (query === "CMD00003") {
@@ -52,6 +52,7 @@ export const ProductAdder = () => {
         addItem(product);
       }
 
+      resetLogoutTimer();
       setQuery("");
       inputRef.current?.focus();
     } catch (error) {

@@ -14,3 +14,25 @@ export const authUserByCode = async (code) => {
     };
   }
 };
+
+export const userLogout = async (token) => {
+  try {
+    const response = await axios.post(
+      `${apiUrl}/api/users/logout`,
+      {}, // Importante: pasar un objeto vacío como data
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error cerrando sesión:", error);
+    return {
+      error: error.message,
+      message:
+        "Hubo un error al cerrar la sesión y su usuario puede haber quedado bloqueado.",
+    };
+  }
+};

@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect } from "react";
+import { userLogout } from "../services";
 
 // Crear el contexto
 export const AuthContext = createContext();
@@ -25,7 +26,8 @@ export const AuthProvider = ({ children }) => {
   };
 
   // Función para cerrar sesión
-  const logout = () => {
+  const logout = async () => {
+    await userLogout(token);
     sessionStorage.removeItem("token");
     sessionStorage.removeItem("user");
     setUser(null);

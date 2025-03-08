@@ -5,16 +5,11 @@ import { FlexContainerColumn } from "../../styled-components";
 
 export const InventoryList = () => {
   const { data: products, loading, error } = useAsync(getInventory);
+  console.log(error);
 
   if (loading) return <h3>Cargando...</h3>;
 
-  if (error)
-    return (
-      <FlexContainerColumn>
-        <h3>Ups! Hubo un error :(</h3>
-        <p>{JSON.stringify(error)}</p>
-      </FlexContainerColumn>
-    );
+  if (error) return <h3>Acceso denegado</h3>;
 
   return <ItemContainer items={products} />;
 };

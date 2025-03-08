@@ -10,8 +10,8 @@ export const ItemContainerForAdder = ({ items }) => {
           <tr>
             <th className={classes.code}>Código</th>
             <th className={classes.description}>Descripción</th>
-            <th className={classes.number}>Cantidad</th>
-            <th className={classes.number}>Stock</th>
+            <th className={classes.number}>Cant</th>
+            <th className={classes.number}>Stk</th>
           </tr>
         </thead>
         <tbody>

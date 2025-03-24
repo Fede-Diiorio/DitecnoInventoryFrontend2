@@ -4,7 +4,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useCallback } from "react";
 import { Container } from "../../../../styled-components";
 import { formatDate, formatTime } from "../../../../utilities";
-import { ItemContainer, Button } from "../../../../components";
+import { ItemContainer, Button, DeliveryNotes } from "../../../../components";
 import classes from "./OrderDetail.module.scss";
 
 export const OrderDetail = () => {
@@ -24,6 +24,8 @@ export const OrderDetail = () => {
 
   const { user_name, user_lastname, order_number, order_date } =
     data.orderInfo.order;
+
+  const deliveryNotes = data.deliveryNotes;
 
   const products = data.orderInfo.products;
 
@@ -50,6 +52,7 @@ export const OrderDetail = () => {
           <h4>Productos: </h4>
         </div>
         <ItemContainer items={products} />
+        <DeliveryNotes deliveryNotes={deliveryNotes} />
         <Button label={"Volver"} parentMethod={handleNavigate} />
       </section>
     </Container>

@@ -32,6 +32,10 @@ export const NavbarAdmin = () => {
           <Button label={"Retiros"} />
         </Link>
 
+        <Link to={"/ordenes"}>
+          <Button label={"Ordenes"} />
+        </Link>
+
         <Link to={"/"}>
           <Button label={"Cerrar sesión"} parentMethod={hadleLogout} />
         </Link>

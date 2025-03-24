@@ -6,6 +6,8 @@ import {
   ProductAdder,
   LowStockList,
   Withdrawals,
+  Orders,
+  OrderDetail,
 } from "../../components";
 import { WithdrawalDetail } from "../../components";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -29,6 +31,8 @@ export const Dashboard = () => {
             <Route path="/bajo-stock" element={<LowStockList />} />
             <Route path="/retiros" element={<Withdrawals />} />
             <Route path="/retiros/:id" element={<WithdrawalDetail />} />
+            <Route path="/ordenes" element={<Orders />} />
+            <Route path="/ordenes/:id" element={<OrderDetail />} />
           </Routes>
         </AdderProvider>
       </BrowserRouter>

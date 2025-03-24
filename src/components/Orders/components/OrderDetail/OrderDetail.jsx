@@ -3,7 +3,7 @@ import { useAsync } from "../../../../hooks";
 import { useParams, useNavigate } from "react-router-dom";
 import { useCallback } from "react";
 import { Container } from "../../../../styled-components";
-import { formatDate, formatTime } from "../../../../utilities";
+import { orderHanlder } from "../../../../utilities";
 import { ItemContainer, Button, DeliveryNotes } from "../../../../components";
 import classes from "./OrderDetail.module.scss";
 
@@ -22,14 +22,7 @@ export const OrderDetail = () => {
 
   if (error) return <h3>Ups! Ocurrió un error</h3>;
 
-  const { user_name, user_lastname, order_number, order_date } =
-    data.orderInfo.order;
-
-  const deliveryNotes = data.deliveryNotes;
-
-  const products = data.orderInfo.products;
-
-  const numberOrder = order_number ? order_number : "No asignado";
+  const { order, user, products, deliveryNotes } = orderHanlder(data);
 
   return (
     <Container>
@@ -37,17 +30,17 @@ export const OrderDetail = () => {
         <div className={classes.orderInfo}>
           <p>
             <span>Nombre: </span>
-            {user_name} {user_lastname}
+            {user.name} {user.lastname}
           </p>
           <p>
-            <span>Fecha: </span> {formatDate(order_date)}
+            <span>Fecha: </span> {order.date}
           </p>
           <p>
-            <span>Hora: </span> {formatTime(order_date)}
+            <span>Hora: </span> {order.time}
           </p>
           <p>
             <span>Número de orden: </span>
-            {numberOrder}
+            {order.number}
           </p>
           <h4>Productos: </h4>
         </div>

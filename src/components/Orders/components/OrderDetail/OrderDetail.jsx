@@ -1,20 +1,26 @@
 import { getOrderById } from "../../../../services";
 import { useAsync } from "../../../../hooks";
 import { useParams, useNavigate } from "react-router-dom";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { Container } from "../../../../styled-components";
 import { orderHanlder } from "../../../../utilities";
-import { ItemContainer, Button, DeliveryNotes } from "../../../../components";
+import {
+  ItemContainer,
+  Button,
+  DeliveryNotes,
+  NumberUpdates,
+} from "../../../../components";
 import classes from "./OrderDetail.module.scss";
 
 export const OrderDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const [refresh, setRefresh] = useState(false);
   const handleNavigate = () => {
     navigate(-1);
   };
 
-  const fetchOrder = useCallback(() => getOrderById(id), [id]);
+  const fetchOrder = useCallback(() => getOrderById(id), [id, refresh]);
 
   const { data, loading, error } = useAsync(fetchOrder);
 
@@ -40,7 +46,11 @@ export const OrderDetail = () => {
           </p>
           <p>
             <span>Número de orden: </span>
-            {order.number}
+            {order.number === "Sin asignar" ? (
+              <NumberUpdates orderId={order.id} onUpdate={setRefresh} />
+            ) : (
+              order.number
+            )}
           </p>
           <h4>Productos: </h4>
         </div>

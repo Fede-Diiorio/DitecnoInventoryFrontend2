@@ -34,3 +34,21 @@ export const getOrderById = async (id) => {
     return { error: error.message };
   }
 };
+
+export const updateOrdernumber = async (id, orderNumber) => {
+  try {
+    const token = sessionStorage.getItem("token");
+    await axios.post(
+      `${apiUrl}/api/orders/${id}`,
+      { orderNumber },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+  } catch (error) {
+    console.error("Error obteniendo producto:", error);
+    return { error: error.message };
+  }
+};

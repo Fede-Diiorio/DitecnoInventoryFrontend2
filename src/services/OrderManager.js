@@ -35,6 +35,26 @@ export const getOrderById = async (id) => {
   }
 };
 
+export const createOrder = async (products) => {
+  const token = sessionStorage.getItem("token");
+  try {
+    const response = await axios.post(
+      `${apiUrl}/api/orders`,
+      { products },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    return response.data;
+  } catch (error) {
+    console.error("Error al crear la orden:", error);
+    return { error: error.message };
+  }
+};
+
 export const updateOrdernumber = async (id, orderNumber) => {
   try {
     const token = sessionStorage.getItem("token");

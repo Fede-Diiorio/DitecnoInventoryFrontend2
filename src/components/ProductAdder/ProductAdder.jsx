@@ -4,7 +4,7 @@ import classes from "./ProductAdder.module.scss";
 import { ItemContainerForAdder } from "../../components";
 import { useAutoFocus } from "../../hooks";
 import { useAdderContext, AuthContext } from "../../context";
-import { getProductByCode, descountStock } from "../../services";
+import { getProductByCode, descountStock, createOrder } from "../../services";
 
 export const ProductAdder = () => {
   const [query, setQuery] = useState("");
@@ -40,6 +40,14 @@ export const ProductAdder = () => {
         clearCart();
       } else if (query === "CMD00002" && cart.length === 0) {
         errorNotify("El carrito se ecuentra vacío");
+      }
+
+      if (query === "CMD00004" && cart.length !== 0) {
+        await createOrder(cart);
+        successNotify("Orden creada");
+        clearCart();
+      } else if (query === "CMD00004" && cart.length === 0) {
+        errorNotify("No se pudo crear la orden");
       }
 
       if (query === "CMD00003") {

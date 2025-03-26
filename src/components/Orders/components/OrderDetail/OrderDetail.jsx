@@ -5,10 +5,10 @@ import { useCallback, useState } from "react";
 import { Container } from "../../../../styled-components";
 import { orderHanlder } from "../../../../utilities";
 import {
-  ItemContainer,
   Button,
   DeliveryNotes,
   NumberUpdates,
+  OrderItemContainer,
 } from "../../../../components";
 import classes from "./OrderDetail.module.scss";
 
@@ -54,7 +54,12 @@ export const OrderDetail = () => {
           </p>
           <h4>Productos: </h4>
         </div>
-        <ItemContainer items={products} />
+        <OrderItemContainer
+          items={products}
+          orderId={order.id}
+          orderNumber={order.number}
+          onUpdate={setRefresh}
+        />
         <DeliveryNotes deliveryNotes={deliveryNotes} />
         <Button label={"Volver"} parentMethod={handleNavigate} />
       </section>

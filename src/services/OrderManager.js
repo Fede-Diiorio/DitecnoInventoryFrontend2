@@ -72,3 +72,21 @@ export const updateOrdernumber = async (id, orderNumber) => {
     return { error: error.message };
   }
 };
+
+export const updateOrderQuantity = async (orderId, productId, quantity) => {
+  const token = sessionStorage.getItem("token");
+  try {
+    await axios.put(
+      `${apiUrl}/api/orders/${orderId}`,
+      { productId, quantity },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+  } catch (error) {
+    console.error("Error obteniendo producto:", error);
+    return { error: error.message };
+  }
+};

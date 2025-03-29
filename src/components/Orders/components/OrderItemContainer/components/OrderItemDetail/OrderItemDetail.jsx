@@ -8,7 +8,6 @@ export const OrderItemDetail = ({
   orderNumber,
   id,
   orderId,
-  onUpdate,
 }) => {
   return (
     <div className={classes.box}>
@@ -23,11 +22,7 @@ export const OrderItemDetail = ({
         <span>Cantidad: </span> {quantity}
       </p>
       {orderNumber === "Sin asignar" && (
-        <OrderQuantityUpdater
-          orderId={orderId}
-          productId={id}
-          onUpdate={onUpdate}
-        />
+        <OrderQuantityUpdater orderId={orderId} productId={id} />
       )}
     </div>
   );

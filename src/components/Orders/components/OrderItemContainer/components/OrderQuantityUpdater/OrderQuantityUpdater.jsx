@@ -1,8 +1,11 @@
 import { updateOrderQuantity } from "../../../../../../services";
 import { Button } from "../../../../../../components";
 import Swal from "sweetalert2";
+import { useRefreshContext } from "../../../../../../context";
 
-export const OrderQuantityUpdater = ({ orderId, productId, onUpdate }) => {
+export const OrderQuantityUpdater = ({ orderId, productId }) => {
+  const { toggleRefresh } = useRefreshContext();
+
   const updateQuantity = async () => {
     const { value: quantity } = await Swal.fire({
       title: "Ingresa la cantidad deseada",
@@ -22,7 +25,7 @@ export const OrderQuantityUpdater = ({ orderId, productId, onUpdate }) => {
       try {
         await updateOrderQuantity(orderId, productId, quantity);
         Swal.fire("Asignado", `Cantidad actualizada: ${quantity}`, "success");
-        onUpdate((prev) => !prev); // 🔄 Refrescar OrderDetail
+        toggleRefresh();
       } catch (error) {
         Swal.fire("Error", "No se pudo asignar el número", "error");
       }

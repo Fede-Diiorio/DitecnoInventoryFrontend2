@@ -1,5 +1,5 @@
 import { Login, Dashboard } from "./pages";
-import { AuthContext, AuthProvider } from "./context";
+import { AuthContext, AuthProvider, RefreshProvider } from "./context";
 import { useContext } from "react";
 
 function AppContent() {
@@ -10,7 +10,9 @@ function AppContent() {
 function App() {
   return (
     <AuthProvider>
-      <AppContent />
+      <RefreshProvider>
+        <AppContent />
+      </RefreshProvider>
     </AuthProvider>
   );
 }

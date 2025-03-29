@@ -1,12 +1,7 @@
 import { Container } from "../../../../styled-components";
 import { OrderItemDetail } from "./components/OrderItemDetail/OrderItemDetail";
 
-export const OrderItemContainer = ({
-  items,
-  orderNumber,
-  orderId,
-  onUpdate,
-}) => {
+export const OrderItemContainer = ({ items, orderNumber, orderId }) => {
   return (
     <Container>
       <section>
@@ -16,7 +11,6 @@ export const OrderItemContainer = ({
             {...item}
             orderNumber={orderNumber}
             orderId={orderId}
-            onUpdate={onUpdate}
           />
         ))}
       </section>

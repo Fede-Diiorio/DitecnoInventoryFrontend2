@@ -1,8 +1,11 @@
 import { Button } from "../../../../components";
 import Swal from "sweetalert2";
 import { updateOrdernumber } from "../../../../services";
+import { useRefreshContext } from "../../../../context";
 
-export const NumberUpdates = ({ orderId, onUpdate }) => {
+export const NumberUpdates = ({ orderId }) => {
+  const { toggleRefresh } = useRefreshContext();
+
   const handleAssignOrder = async () => {
     const { value: orderNumber } = await Swal.fire({
       title: "Ingresa el número de orden",
@@ -22,7 +25,7 @@ export const NumberUpdates = ({ orderId, onUpdate }) => {
       try {
         await updateOrdernumber(orderId, orderNumber);
         Swal.fire("Asignado", `Número asignado: ${orderNumber}`, "success");
-        onUpdate((prev) => !prev); // 🔄 Refrescar OrderDetail
+        toggleRefresh();
       } catch (error) {
         Swal.fire("Error", "No se pudo asignar el número", "error");
       }

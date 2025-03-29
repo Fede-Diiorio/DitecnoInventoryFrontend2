@@ -11,11 +11,12 @@ import {
   OrderItemContainer,
 } from "../../../../components";
 import classes from "./OrderDetail.module.scss";
+import { useRefreshContext } from "../../../../context";
 
 export const OrderDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [refresh, setRefresh] = useState(false);
+  const { refresh } = useRefreshContext();
   const handleNavigate = () => {
     navigate(-1);
   };
@@ -47,7 +48,7 @@ export const OrderDetail = () => {
           <p>
             <span>Número de orden: </span>
             {order.number === "Sin asignar" ? (
-              <NumberUpdates orderId={order.id} onUpdate={setRefresh} />
+              <NumberUpdates orderId={order.id} />
             ) : (
               order.number
             )}
@@ -58,7 +59,6 @@ export const OrderDetail = () => {
           items={products}
           orderId={order.id}
           orderNumber={order.number}
-          onUpdate={setRefresh}
         />
         <DeliveryNotes deliveryNotes={deliveryNotes} />
         <Button label={"Volver"} parentMethod={handleNavigate} />

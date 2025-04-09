@@ -1,16 +1,16 @@
 import {
   Header,
-  InventoryList,
   NavbarAdmin,
   NavbarUser,
   ProductAdder,
-  LowStockList,
   Withdrawals,
   Orders,
   OrderDetail,
+  InventoryView,
 } from "../../components";
 import { WithdrawalDetail } from "../../components";
 import { Routes, Route } from "react-router-dom";
+import { getInventory, getProductsWithLowStock } from "../../services";
 
 export const Dashboard = {
   Admin: () => (
@@ -18,8 +18,14 @@ export const Dashboard = {
       <Header navBar={<NavbarAdmin />} />
       <Routes>
         <Route path="/" element={<ProductAdder />} />
-        <Route path="/inventario" element={<InventoryList />} />
-        <Route path="/bajo-stock" element={<LowStockList />} />
+        <Route
+          path="/inventario"
+          element={<InventoryView fetchFunction={getInventory} />}
+        />
+        <Route
+          path="/bajo-stock"
+          element={<InventoryView fetchFunction={getProductsWithLowStock} />}
+        />
         <Route path="/retiros" element={<Withdrawals />} />
         <Route path="/retiros/:id" element={<WithdrawalDetail />} />
         <Route path="/ordenes" element={<Orders />} />

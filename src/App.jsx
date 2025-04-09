@@ -1,10 +1,23 @@
 import { Login, Dashboard } from "./pages";
 import { AuthContext, AuthProvider, RefreshProvider } from "./context";
 import { useContext } from "react";
+import { ToastContainer } from "react-toastify";
 
 function AppContent() {
-  const { token } = useContext(AuthContext);
-  return token ? <Dashboard /> : <Login />;
+  const { token, user } = useContext(AuthContext);
+
+  if (!token) {
+    return <Login />;
+  }
+
+  switch (user.role) {
+    case "admin":
+      return <Dashboard.Admin />;
+    case "user":
+      return <Dashboard.User />;
+    default:
+      return <Login />;
+  }
 }
 
 function App() {
@@ -12,6 +25,7 @@ function App() {
     <AuthProvider>
       <RefreshProvider>
         <AppContent />
+        <ToastContainer position="bottom-right" />
       </RefreshProvider>
     </AuthProvider>
   );

@@ -1,40 +1,42 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
-export const useFetch = (url) => {
+export const useFetch = (fetchFunction, deps = [], options = {}) => {
+  const { refetchInterval, refetchCondition } = options;
+
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    let controller = new AbortController();
+  const intervalRef = useRef(null);
+
+  const fetchData = async () => {
     setLoading(true);
+    try {
+      const result = await fetchFunction();
+      setData(result);
+      setError(null);
+    } catch (err) {
+      setError(err instanceof Error ? err : new Error(err));
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    const fetchData = async () => {
-      try {
-        const response = await fetch(url, { signal: controller.signal });
-
-        if (!response.ok) {
-          throw new Error("Error en la petición");
-        }
-
-        const jsonData = await response.json();
-        setData(jsonData);
-        setError(null);
-      } catch (err) {
-        if (err.name !== "AbortError") {
-          setError(err);
-        }
-      } finally {
-        setLoading(false);
-      }
-    };
-
+  useEffect(() => {
     fetchData();
+  }, [fetchFunction, ...deps]);
+
+  useEffect(() => {
+    if (refetchInterval && (!refetchCondition || refetchCondition(data))) {
+      intervalRef.current = setInterval(fetchData, refetchInterval);
+    }
 
     return () => {
-      controller.abort();
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
     };
-  }, [url]);
+  }, [refetchInterval, data]);
 
   return { data, loading, error };
 };

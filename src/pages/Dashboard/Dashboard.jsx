@@ -15,28 +15,29 @@ import { AdderProvider, AuthContext } from "../../context";
 import { ToastContainer } from "react-toastify";
 import { useContext } from "react";
 
-export const Dashboard = () => {
-  const { user } = useContext(AuthContext);
+export const Dashboard = {
+  Admin: () => (
+    <>
+      <Header navBar={<NavbarAdmin />} />
+      <Routes>
+        <Route path="/" element={<ProductAdder />} />
+        <Route path="/inventario" element={<InventoryList />} />
+        <Route path="/bajo-stock" element={<LowStockList />} />
+        <Route path="/retiros" element={<Withdrawals />} />
+        <Route path="/retiros/:id" element={<WithdrawalDetail />} />
+        <Route path="/ordenes" element={<Orders />} />
+        <Route path="/ordenes/:id" element={<OrderDetail />} />
+      </Routes>
+    </>
+  ),
 
-  const handleNavbar = user.role === "admin" ? <NavbarAdmin /> : <NavbarUser />;
-
-  return (
-    <section>
-      <BrowserRouter>
-        <AdderProvider>
-          <Header navBar={handleNavbar} />
-          <Routes>
-            <Route path="/" element={<ProductAdder />} />
-            <Route path="/inventario" element={<InventoryList />} />
-            <Route path="/bajo-stock" element={<LowStockList />} />
-            <Route path="/retiros" element={<Withdrawals />} />
-            <Route path="/retiros/:id" element={<WithdrawalDetail />} />
-            <Route path="/ordenes" element={<Orders />} />
-            <Route path="/ordenes/:id" element={<OrderDetail />} />
-          </Routes>
-        </AdderProvider>
-      </BrowserRouter>
-      <ToastContainer position="bottom-right" />
-    </section>
-  );
+  User: () => (
+    <>
+      <Header navBar={<NavbarUser />} />
+      <Routes>
+        <Route path="/" element={<ProductAdder />} />
+        <Route path="/inventario" element={<InventoryList />} />
+      </Routes>
+    </>
+  ),
 };

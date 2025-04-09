@@ -1,4 +1,4 @@
-import { DeliveryNoteDetail } from "../../components";
+import { DeliveryNoteDetail } from "../../../components";
 
 export const DeliveryNotes = ({ deliveryNotes }) => {
   if (!deliveryNotes || deliveryNotes.length === 0)

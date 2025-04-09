@@ -1,5 +1,5 @@
-import { formatDate } from "../../../../utilities";
-import { ItemContainer } from "../../../../components";
+import { formatDate } from "../../../utilities";
+import { ItemContainer } from "../../../components";
 
 export const DeliveryNoteDetail = ({
   deliveryNoteNumber,

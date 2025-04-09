@@ -20,23 +20,11 @@ export const Dashboard = {
         <Route path="/" element={<ProductAdder />} />
         <Route
           path="/inventario"
-          element={
-            <CustomDataTable
-              fetchFunction={getInventory}
-              showPagination={true}
-              showSearchBar={false}
-            />
-          }
+          element={<CustomDataTable fetchFunction={getInventory} />}
         />
         <Route
           path="/bajo-stock"
-          element={
-            <CustomDataTable
-              fetchFunction={getProductsWithLowStock}
-              showPagination={true}
-              showSearchBar={false}
-            />
-          }
+          element={<CustomDataTable fetchFunction={getProductsWithLowStock} />}
         />
         <Route path="/retiros" element={<Withdrawals />} />
         <Route path="/retiros/:id" element={<WithdrawalDetail />} />

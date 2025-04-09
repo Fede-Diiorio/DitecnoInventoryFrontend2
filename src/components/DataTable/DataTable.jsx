@@ -3,8 +3,9 @@ import DataTable from "react-data-table-component";
 import { useFetch } from "../../hooks";
 import { Container } from "../../styled-components";
 import { TableInputSearch } from "../../components";
-import { columns, customStyles } from "./utilities/dataTableUtilities";
+import { columns } from "./utilities/dataTableUtilities";
 import classes from "./DataTable.module.scss";
+import { customStyles } from "../../utilities";
 
 export const CustomDataTable = ({ fetchFunction }) => {
   const { data, loading, error } = useFetch(fetchFunction);

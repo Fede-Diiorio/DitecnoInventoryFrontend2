@@ -6,7 +6,7 @@ import {
   Withdrawals,
   Orders,
   OrderDetail,
-  InventoryView,
+  CustomDataTable,
 } from "../../components";
 import { WithdrawalDetail } from "../../components";
 import { Routes, Route } from "react-router-dom";
@@ -20,11 +20,23 @@ export const Dashboard = {
         <Route path="/" element={<ProductAdder />} />
         <Route
           path="/inventario"
-          element={<InventoryView fetchFunction={getInventory} />}
+          element={
+            <CustomDataTable
+              fetchFunction={getInventory}
+              showPagination={true}
+              showSearchBar={false}
+            />
+          }
         />
         <Route
           path="/bajo-stock"
-          element={<InventoryView fetchFunction={getProductsWithLowStock} />}
+          element={
+            <CustomDataTable
+              fetchFunction={getProductsWithLowStock}
+              showPagination={true}
+              showSearchBar={false}
+            />
+          }
         />
         <Route path="/retiros" element={<Withdrawals />} />
         <Route path="/retiros/:id" element={<WithdrawalDetail />} />

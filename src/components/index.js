@@ -9,4 +9,4 @@ export * from "./ItemContainerForAdder/ItemContainerForAdder";
 export * from "./Withdrawals/components";
 export * from "./Orders/Orders";
 export * from "./Orders/components";
-export * from "./Inventory/Inventory";
+export * from "./DataTable/DataTable";

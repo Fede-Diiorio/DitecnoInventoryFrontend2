@@ -20,14 +20,16 @@ export const customStyles = {
   rows: {
     style: {
       alignItems: "center",
+      fontSize: "1rem",
     },
   },
   headCells: {
     style: {
       textAlign: "center", // ✅ centra el texto del encabezado
+      display: "flex", // ✅ fuerza el layout en flex
       justifyContent: "center", // opcional si hay flex
       fontWeight: "bold",
-      display: "flex", // ✅ fuerza el layout en flex
+      fontSize: "1rem",
     },
   },
   cells: {

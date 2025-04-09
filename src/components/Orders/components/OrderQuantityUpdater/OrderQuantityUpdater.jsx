@@ -1,7 +1,7 @@
-import { updateOrderQuantity } from "../../../../../../services";
-import { Button } from "../../../../../../components";
+import { updateOrderQuantity } from "../../../../services";
+import { Button } from "../../../../components";
 import Swal from "sweetalert2";
-import { useRefreshContext } from "../../../../../../context";
+import { useRefreshContext } from "../../../../context";
 
 export const OrderQuantityUpdater = ({ orderId, productId }) => {
   const { toggleRefresh } = useRefreshContext();

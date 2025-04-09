@@ -1,5 +1,5 @@
 import { formatDate } from "../../../utilities";
-import { ItemContainer } from "../../../components";
+import { ItemContainer, SimpleDataTable } from "../../../components";
 
 export const DeliveryNoteDetail = ({
   deliveryNoteNumber,
@@ -17,7 +17,7 @@ export const DeliveryNoteDetail = ({
         {formatDate(createdAt)}
       </p>
       <h5>Productos: </h5>
-      <ItemContainer items={products} />
+      <SimpleDataTable data={products} />
     </div>
   );
 };

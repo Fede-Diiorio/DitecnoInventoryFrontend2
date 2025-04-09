@@ -10,10 +10,7 @@ import {
   OrderDetail,
 } from "../../components";
 import { WithdrawalDetail } from "../../components";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { AdderProvider, AuthContext } from "../../context";
-import { ToastContainer } from "react-toastify";
-import { useContext } from "react";
+import { Routes, Route } from "react-router-dom";
 
 export const Dashboard = {
   Admin: () => (

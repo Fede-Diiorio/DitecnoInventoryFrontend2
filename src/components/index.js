@@ -10,3 +10,4 @@ export * from "./Withdrawals/components";
 export * from "./Orders/Orders";
 export * from "./Orders/components";
 export * from "./DataTable/DataTable";
+export * from "./TableInputSearch/TableInputSearch";

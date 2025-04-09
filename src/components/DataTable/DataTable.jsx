@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import DataTable from "react-data-table-component";
 import { useFetch } from "../../hooks";
 import { Container } from "../../styled-components";
-import { TableInputSearch } from "./components";
+import { TableInputSearch } from "../../components";
 import { columns, customStyles } from "./utilities/dataTableUtilities";
 import classes from "./DataTable.module.scss";
 

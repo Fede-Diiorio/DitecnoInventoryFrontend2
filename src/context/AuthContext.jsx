@@ -1,5 +1,6 @@
 import { createContext, useState, useEffect, useRef } from "react";
 import { userLogout } from "../services";
+import { useNavigate } from "react-router-dom";
 
 export const AuthContext = createContext();
 
@@ -9,6 +10,8 @@ export const AuthProvider = ({ children }) => {
     const storedUser = sessionStorage.getItem("user");
     return storedUser ? JSON.parse(storedUser) : null;
   });
+
+  const navigate = useNavigate();
 
   const logoutTimerRef = useRef(null); // Referencia para el temporizador
 
@@ -26,6 +29,7 @@ export const AuthProvider = ({ children }) => {
     if (logoutTimerRef.current) clearTimeout(logoutTimerRef.current);
     logoutTimerRef.current = setTimeout(() => {
       logout();
+      navigate("/");
     }, 5 * 60 * 1000); // 5 minutos en milisegundos
   };
 

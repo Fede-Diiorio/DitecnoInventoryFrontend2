@@ -1,5 +1,6 @@
 import DataTable from "react-data-table-component";
 import { OrderQuantityUpdater } from "../OrderQuantityUpdater/OrderQuantityUpdater";
+import { customStyles } from "../../../../utilities";
 
 export const OrderItemContainer = ({ items, orderNumber, orderId }) => {
   const showUpdateColumn = orderNumber === "Sin asignar";
@@ -33,14 +34,15 @@ export const OrderItemContainer = ({ items, orderNumber, orderId }) => {
       ignoreRowClick: true,
       allowOverflow: true,
       button: true,
+      width: "200px",
     });
   }
 
   return (
     <DataTable
-      title="Lista de productos"
       columns={columns}
       data={items}
+      customStyles={customStyles}
       responsive
       highlightOnHover
     />

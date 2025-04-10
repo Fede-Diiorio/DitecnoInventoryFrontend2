@@ -1,5 +1,10 @@
 import { Login, Dashboard } from "./pages";
-import { AuthContext, AuthProvider, RefreshProvider } from "./context";
+import {
+  AuthContext,
+  AuthProvider,
+  RefreshProvider,
+  AdderProvider,
+} from "./context";
 import { useContext } from "react";
 import { ToastContainer } from "react-toastify";
 
@@ -23,10 +28,12 @@ function AppContent() {
 function App() {
   return (
     <AuthProvider>
-      <RefreshProvider>
-        <AppContent />
-        <ToastContainer position="bottom-right" />
-      </RefreshProvider>
+      <AdderProvider>
+        <RefreshProvider>
+          <AppContent />
+          <ToastContainer position="bottom-right" />
+        </RefreshProvider>
+      </AdderProvider>
     </AuthProvider>
   );
 }

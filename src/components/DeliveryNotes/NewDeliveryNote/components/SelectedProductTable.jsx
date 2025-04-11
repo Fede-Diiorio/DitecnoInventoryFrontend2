@@ -1,4 +1,5 @@
 import DataTable from "react-data-table-component";
+import { customStyles } from "../../../../utilities";
 
 export const SelectedProductsTable = ({
   products,
@@ -16,20 +17,17 @@ export const SelectedProductsTable = ({
       selector: (row) => row.name,
       sortable: true,
     },
-    {
-      name: "Cantidad Disponible",
-      selector: (row) => row.quantity,
-    },
+
     {
       name: "Cantidad a Cargar",
       cell: (row) => (
         <input
           type="number"
           value={row.quantityToLoad}
-          min={0}
+          min={1}
           max={row.quantity}
           onChange={(e) => onQuantityChange(row.id, e.target.value)}
-          style={{ width: "80px" }}
+          style={{ width: "80px", textAlign: "center" }}
         />
       ),
     },
@@ -47,14 +45,7 @@ export const SelectedProductsTable = ({
       noDataComponent="No hay productos seleccionados"
       dense
       highlightOnHover
-      customStyles={{
-        headCells: {
-          style: {
-            fontWeight: "bold",
-            fontSize: "14px",
-          },
-        },
-      }}
+      customStyles={customStyles}
     />
   );
 };

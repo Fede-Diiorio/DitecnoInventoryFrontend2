@@ -63,7 +63,7 @@ export const OrderDetail = () => {
             <h4>Productos: </h4>
           </div>
 
-          {!order.isComplete && (
+          {!order.isComplete && order.number !== "Sin asignar" && (
             <Button
               label="Generar remito"
               parentMethod={handleCreateDeliveryNote}

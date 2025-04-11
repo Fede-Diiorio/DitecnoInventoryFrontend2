@@ -4,7 +4,7 @@ import { columns } from "../../utilities/dataTableUtilities";
 import classes from "../../DataTable.module.scss";
 import { customStyles } from "../../../../utilities";
 
-export const SimpleDataTable = ({ data }) => {
+export const SimpleDataTable = ({ data, onRowClick }) => {
   return (
     <Container>
       <section className={classes.background}>
@@ -15,6 +15,7 @@ export const SimpleDataTable = ({ data }) => {
           noDataComponent="No hay nada por aquí"
           highlightOnHover
           dense
+          onRowClicked={onRowClick}
         />
       </section>
     </Container>

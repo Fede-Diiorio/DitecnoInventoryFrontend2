@@ -4,6 +4,7 @@ import {
   AuthProvider,
   RefreshProvider,
   AdderProvider,
+  DeliveryNoteProvider,
 } from "./context";
 import { useContext } from "react";
 import { ToastContainer } from "react-toastify";
@@ -30,8 +31,10 @@ function App() {
     <AuthProvider>
       <AdderProvider>
         <RefreshProvider>
-          <AppContent />
-          <ToastContainer position="bottom-right" />
+          <DeliveryNoteProvider>
+            <AppContent />
+            <ToastContainer position="bottom-right" />
+          </DeliveryNoteProvider>
         </RefreshProvider>
       </AdderProvider>
     </AuthProvider>

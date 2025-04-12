@@ -8,10 +8,13 @@ export const DeliveryNoteProvider = ({ children }) => {
   const [deliveryNoteData, setDeliveryNoteData] = useState({
     order: null,
     products: [],
+    deliveryNotes: [],
   });
 
-  const setDraftDeliveryNote = (order, products) => {
-    setDeliveryNoteData({ order, products });
+  console.log(deliveryNoteData.deliveryNotes);
+
+  const setDraftDeliveryNote = (order, products, deliveryNotes) => {
+    setDeliveryNoteData({ order, products, deliveryNotes });
   };
 
   const clearDeliveryNote = () => {

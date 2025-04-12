@@ -33,7 +33,7 @@ export const OrderDetail = () => {
   const { order, user, products, deliveryNotes } = orderHanlder(data);
 
   const handleCreateDeliveryNote = () => {
-    setDraftDeliveryNote(order, products);
+    setDraftDeliveryNote(order, products, deliveryNotes);
     navigate("/remito");
   };
 

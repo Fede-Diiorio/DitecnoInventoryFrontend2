@@ -1,16 +1,23 @@
 import { useDeliveryNoteContext } from "../../../context";
 import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
-import { SimpleDataTable } from "../../../components";
+import { useState, useEffect, useMemo } from "react";
+import { SimpleDataTable, Button } from "../../../components";
 import { SelectedProductsTable } from "./components/SelectedProductTable";
 import { Container } from "../../../styled-components";
 import { createDeliveryNote } from "../../../services";
+import { getPendingQuantities } from "../../../utilities";
+import { toast } from "react-toastify";
 
 export const NewDeliveryNote = () => {
-  const { order, products, clearDeliveryNote } = useDeliveryNoteContext();
+  const { order, products, clearDeliveryNote, deliveryNotes } =
+    useDeliveryNoteContext();
   const [selectedProducts, setSelectedProducts] = useState([]);
   const [deliveryNoteNumber, setDeliveryNoteNumber] = useState("");
   const navigate = useNavigate();
+
+  const productsWithPending = useMemo(() => {
+    return getPendingQuantities(products, deliveryNotes);
+  }, [products, deliveryNotes]);
 
   useEffect(() => {
     if (!order && location.pathname === "/remito") {
@@ -39,6 +46,22 @@ export const NewDeliveryNote = () => {
   };
 
   const handleSave = async () => {
+    const pendingMap = getPendingQuantities(products, deliveryNotes).reduce(
+      (acc, p) => ({ ...acc, [p.id]: p.pending }),
+      {}
+    );
+
+    for (const product of selectedProducts) {
+      if (product.quantityToLoad > pendingMap[product.id]) {
+        toast.error(
+          `La cantidad ingresada de "${
+            product.name
+          }" supera la cantidad pendiente (${pendingMap[product.id]}).`
+        );
+        return;
+      }
+    }
+
     const payload = {
       orderNumber: order.number,
       deliveryNoteNumber,
@@ -62,7 +85,10 @@ export const NewDeliveryNote = () => {
     <Container>
       <h2>Nuevo Remito para orden {order.number}</h2>
       <h3>Seleccioná los productos a cargar:</h3>
-      <SimpleDataTable data={products} onRowClick={handleSelectProduct} />
+      <SimpleDataTable
+        data={productsWithPending}
+        onRowClick={handleSelectProduct}
+      />
 
       <label>
         Número de remito:
@@ -83,7 +109,7 @@ export const NewDeliveryNote = () => {
         }
       />
 
-      <button onClick={handleSave}>Guardar Remito</button>
+      <Button label="Guardar Remito" parentMethod={handleSave} />
     </Container>
   );
 };

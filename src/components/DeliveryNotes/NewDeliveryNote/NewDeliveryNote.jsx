@@ -1,12 +1,13 @@
 import { useDeliveryNoteContext } from "../../../context";
 import { useNavigate } from "react-router-dom";
-import { useState, useEffect, useMemo } from "react";
+import { useState, useMemo } from "react";
 import { SimpleDataTable, Button } from "../../../components";
 import { SelectedProductsTable } from "./components/SelectedProductTable";
 import { Container } from "../../../styled-components";
 import { createDeliveryNote } from "../../../services";
 import { getPendingQuantities } from "../../../utilities";
 import { toast } from "react-toastify";
+import classes from "./NewDeliveryNote.module.scss";
 
 export const NewDeliveryNote = () => {
   const { order, products, clearDeliveryNote, deliveryNotes } =
@@ -18,14 +19,6 @@ export const NewDeliveryNote = () => {
   const productsWithPending = useMemo(() => {
     return getPendingQuantities(products, deliveryNotes);
   }, [products, deliveryNotes]);
-
-  useEffect(() => {
-    if (!order && location.pathname === "/remito") {
-      navigate("/ordenes", { replace: true });
-    }
-  }, [order, location, navigate]);
-
-  if (!order) return null;
 
   const handleSelectProduct = (product) => {
     // evitar duplicados
@@ -82,15 +75,15 @@ export const NewDeliveryNote = () => {
   };
 
   return (
-    <Container>
-      <h2>Nuevo Remito para orden {order.number}</h2>
-      <h3>Seleccioná los productos a cargar:</h3>
+    <Container className={classes.container}>
+      <h3>Nuevo Remito para orden {order.number}</h3>
+      <h4>Seleccioná los productos a cargar:</h4>
       <SimpleDataTable
         data={productsWithPending}
         onRowClick={handleSelectProduct}
       />
 
-      <label>
+      <label className={classes.input}>
         Número de remito:
         <input
           type="text"
@@ -108,8 +101,10 @@ export const NewDeliveryNote = () => {
           setSelectedProducts((prev) => prev.filter((p) => p.id !== id))
         }
       />
-
-      <Button label="Guardar Remito" parentMethod={handleSave} />
+      <div className={classes.buttonWrapper}>
+        <Button label="volver" parentMethod={() => navigate(-1)} />
+        <Button label="Guardar Remito" parentMethod={handleSave} />
+      </div>
     </Container>
   );
 };

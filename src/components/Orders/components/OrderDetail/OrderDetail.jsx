@@ -18,7 +18,7 @@ export const OrderDetail = () => {
   const navigate = useNavigate();
   const { refresh } = useRefreshContext();
   const handleNavigate = () => {
-    navigate(-1);
+    navigate("/ordenes");
   };
   const { setDraftDeliveryNote } = useDeliveryNoteContext();
 
@@ -60,7 +60,6 @@ export const OrderDetail = () => {
                 order.number
               )}
             </p>
-            <h4>Productos: </h4>
           </div>
 
           {!order.isComplete && order.number !== "Sin asignar" && (
@@ -70,7 +69,7 @@ export const OrderDetail = () => {
             />
           )}
         </div>
-        <OrderItemContainer
+        <OrderItemContainer // Esta es la tabla que muestra los productos de la orden
           items={products}
           orderId={order.id}
           orderNumber={order.number}

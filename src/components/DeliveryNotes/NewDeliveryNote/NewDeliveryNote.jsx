@@ -1,7 +1,7 @@
 import { useDeliveryNoteContext } from "../../../context";
 import { useNavigate } from "react-router-dom";
 import { useState, useMemo } from "react";
-import { SimpleDataTable, Button } from "../../../components";
+import { Button, DataTableForOrders } from "../../../components";
 import { SelectedProductsTable } from "./components/SelectedProductTable";
 import { Container } from "../../../styled-components";
 import { createDeliveryNote } from "../../../services";
@@ -36,6 +36,15 @@ export const NewDeliveryNote = () => {
         p.id === id ? { ...p, quantityToLoad: Number(value) } : p
       )
     );
+  };
+
+  const handleProductMatch = (product) => {
+    if (!selectedProducts.find((p) => p.id === product.id)) {
+      setSelectedProducts((prev) => [
+        ...prev,
+        { ...product, quantityToLoad: 1 },
+      ]);
+    }
   };
 
   const handleSave = async () => {
@@ -78,9 +87,10 @@ export const NewDeliveryNote = () => {
     <Container className={classes.container}>
       <h3>Nuevo Remito para orden {order.number}</h3>
       <h4>Seleccioná los productos a cargar:</h4>
-      <SimpleDataTable
+      <DataTableForOrders
         data={productsWithPending}
         onRowClick={handleSelectProduct}
+        onProductMatch={handleProductMatch}
       />
 
       <label className={classes.input}>

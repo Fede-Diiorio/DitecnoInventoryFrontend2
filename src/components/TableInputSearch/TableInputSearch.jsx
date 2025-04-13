@@ -1,6 +1,6 @@
 import classes from "./TableInputSearch.module.scss";
 
-export const TableInputSearch = ({ value, onChange, placeholder }) => {
+export const TableInputSearch = ({ value, onChange, placeholder, ref }) => {
   return (
     <input
       type="text"
@@ -10,6 +10,7 @@ export const TableInputSearch = ({ value, onChange, placeholder }) => {
       value={value}
       onChange={onChange}
       className={classes.input}
+      ref={ref}
     />
   );
 };

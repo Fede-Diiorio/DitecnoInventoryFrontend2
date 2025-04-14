@@ -1,4 +1,5 @@
 import axios from "axios";
+import { handleApiError } from "../utilities";
 
 const apiUrl = import.meta.env.VITE_HOST;
 
@@ -12,11 +13,7 @@ export const getAllOrders = async () => {
     });
     return response.data;
   } catch (error) {
-    console.error("Error obteniendo usuario:", error);
-    return {
-      error: error,
-      message: error.response.data.error,
-    };
+    throw new Error(handleApiError(error));
   }
 };
 
@@ -30,8 +27,7 @@ export const getOrderById = async (id) => {
     });
     return response.data;
   } catch (error) {
-    console.error("Error obteniendo producto:", error);
-    return { error: error.message };
+    throw new Error(handleApiError(error));
   }
 };
 
@@ -50,8 +46,8 @@ export const createOrder = async (products) => {
 
     return response.data;
   } catch (error) {
-    console.error("Error al crear la orden:", error);
-    return { error: error.message };
+    console.log(error);
+    throw new Error(handleApiError(error));
   }
 };
 
@@ -68,8 +64,7 @@ export const updateOrdernumber = async (id, orderNumber) => {
       }
     );
   } catch (error) {
-    console.error("Error obteniendo producto:", error);
-    return { error: error.message };
+    throw new Error(handleApiError(error));
   }
 };
 
@@ -86,7 +81,6 @@ export const updateOrderQuantity = async (orderId, productId, quantity) => {
       }
     );
   } catch (error) {
-    console.error("Error obteniendo producto:", error);
-    return { error: error.message };
+    throw new Error(handleApiError(error));
   }
 };

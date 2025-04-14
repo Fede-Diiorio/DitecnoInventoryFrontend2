@@ -12,7 +12,6 @@ export const ProductAdder = () => {
   const { cart, addItem, clearCart } = useAdderContext();
   const inputRef = useAutoFocus();
   const successNotify = (message) => toast.success(message);
-  const errorNotify = (message) => toast.error(message);
 
   const { logout, resetLogoutTimer } = useContext(AuthContext);
 
@@ -27,31 +26,27 @@ export const ProductAdder = () => {
     try {
       setError("");
 
-      if (query === "CMD00001" && cart.length !== 0) {
-        successNotify("Carrito vaciado");
+      if (query === "CMD00001") {
+        successNotify("Carrito está vacío");
         clearCart();
-      } else if (query === "CMD00001" && cart.length === 0) {
-        errorNotify("El carrito ya se ecuentra vacío");
       }
 
-      if (query === "CMD00002" && cart.length !== 0) {
+      if (query === "CMD00002") {
+        setQuery("");
         await descountStock(cart);
         successNotify("Items descontados");
         clearCart();
-      } else if (query === "CMD00002" && cart.length === 0) {
-        errorNotify("El carrito se ecuentra vacío");
-      }
-
-      if (query === "CMD00004" && cart.length !== 0) {
-        await createOrder(cart);
-        successNotify("Orden creada");
-        clearCart();
-      } else if (query === "CMD00004" && cart.length === 0) {
-        errorNotify("No se pudo crear la orden");
       }
 
       if (query === "CMD00003") {
         logout();
+      }
+
+      if (query === "CMD00004") {
+        setQuery("");
+        await createOrder(cart);
+        successNotify("Orden creada");
+        clearCart();
       }
 
       const product = await getProductByCode(query);

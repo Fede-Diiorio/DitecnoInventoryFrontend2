@@ -30,7 +30,7 @@ export const AuthProvider = ({ children }) => {
     logoutTimerRef.current = setTimeout(() => {
       logout();
       navigate("/");
-    }, 5 * 60 * 1000); // 5 minutos en milisegundos
+    }, 60 * 60 * 1000); // 5 minutos en milisegundos
   };
 
   // Función para iniciar sesión

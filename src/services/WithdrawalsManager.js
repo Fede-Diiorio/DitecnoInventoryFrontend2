@@ -1,4 +1,5 @@
 import axios from "axios";
+import { handleApiError } from "../utilities";
 
 const apiUrl = import.meta.env.VITE_HOST;
 
@@ -12,8 +13,7 @@ export const getAllWithdrawals = async () => {
     });
     return response.data;
   } catch (error) {
-    console.error("Error obteniendo producto:", error);
-    return { error: error.message };
+    throw new Error(handleApiError(error));
   }
 };
 
@@ -27,7 +27,6 @@ export const getWithdrawalById = async (id) => {
     });
     return response.data;
   } catch (error) {
-    console.error("Error obteniendo producto:", error);
-    return { error: error.message };
+    throw new Error(handleApiError(error));
   }
 };

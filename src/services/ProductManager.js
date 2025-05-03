@@ -67,3 +67,22 @@ export const descountStock = async (products) => {
     throw new Error(handleApiError(error));
   }
 };
+
+export const getProductByCodeAndSupplier = async (code, supplier) => {
+  const token = sessionStorage.getItem("token");
+  try {
+    const products = await axios.post(
+      `${apiUrl}/api/budget/product`,
+      { code, supplier },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    return products.data;
+  } catch (error) {
+    throw new Error(handleApiError(error));
+  }
+};

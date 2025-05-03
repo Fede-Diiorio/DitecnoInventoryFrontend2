@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import DataTable from "react-data-table-component";
 import { Container } from "../../../../styled-components";
-import { TableInputSearch } from "../../../../components";
+import { TableInputSearch, Button } from "../../../../components";
 import { ordersColumns } from "./utilities/dataTableUtilities";
 import { useNavigate } from "react-router-dom";
 import { customStyles } from "../../../../utilities";
+import classes from "./OrdersContainer.module.scss";
 
 export const OrdersContainer = ({ orders }) => {
   const [filteredOrders, setFilteredOrders] = useState([]);
@@ -13,6 +14,10 @@ export const OrdersContainer = ({ orders }) => {
 
   const handleRowClick = (row) => {
     navigate(`/ordenes/${row.id}`);
+  };
+
+  const handleNavigateOrder = () => {
+    navigate("/ordenes/crear");
   };
 
   useEffect(() => {
@@ -35,11 +40,15 @@ export const OrdersContainer = ({ orders }) => {
   return (
     <Container>
       <section>
-        <TableInputSearch
-          value={searchValue}
-          onChange={handleSearchChange}
-          placeholder={"Buscar por usuario o número de orden"}
-        />
+        <div className={classes.box}>
+          <TableInputSearch
+            value={searchValue}
+            onChange={handleSearchChange}
+            placeholder={"Buscar por usuario o número de orden"}
+          />
+          <Button label="Crear orden" parentMethod={handleNavigateOrder} />
+        </div>
+
         <DataTable
           columns={ordersColumns}
           data={filteredOrders}

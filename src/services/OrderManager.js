@@ -31,12 +31,12 @@ export const getOrderById = async (id) => {
   }
 };
 
-export const createOrder = async (products) => {
+export const createOrder = async (products, supplier) => {
   const token = sessionStorage.getItem("token");
   try {
     const response = await axios.post(
       `${apiUrl}/api/orders`,
-      { products },
+      { products, supplier },
       {
         headers: {
           Authorization: `Bearer ${token}`,

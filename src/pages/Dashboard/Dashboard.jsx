@@ -8,6 +8,7 @@ import {
   OrderDetail,
   CustomDataTable,
   NewDeliveryNote,
+  CreateOrder,
 } from "../../components";
 import { WithdrawalDetail } from "../../components";
 import { Routes, Route } from "react-router-dom";
@@ -32,6 +33,7 @@ export const Dashboard = {
         <Route path="/ordenes" element={<Orders />} />
         <Route path="/ordenes/:id" element={<OrderDetail />} />
         <Route path="/remito" element={<NewDeliveryNote />} />
+        <Route path="/ordenes/crear" element={<CreateOrder />} />
       </Routes>
     </>
   ),

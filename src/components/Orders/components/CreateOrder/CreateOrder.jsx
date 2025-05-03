@@ -28,34 +28,59 @@ export const CreateOrder = () => {
     if (!codeInput.trim()) return;
 
     try {
-      const product = await getProductByCodeAndSupplier(
+      const productsFound = await getProductByCodeAndSupplier(
         codeInput.trim(),
         selectedSupplier
       );
 
-      if (product) {
-        setProducts((prev) => {
-          const existingProduct = prev.find((p) => p.id === product.id);
+      console.log(productsFound);
 
-          if (existingProduct) {
-            return prev.map((p) =>
-              p.id === product.id
-                ? { ...p, quantityToLoad: (p.quantityToLoad || 1) + 1 }
-                : p
-            );
-          }
+      if (productsFound.length === 0) {
+        return Swal.fire("Error", "Producto no encontrado", "error");
+      }
 
-          // Asegurar que quantityToLoad comience en 1 si es nuevo
-          return [...prev, { ...product, quantityToLoad: 1 }];
+      if (productsFound.length === 1) {
+        addOrUpdateProduct(productsFound[0]);
+      } else {
+        // Múltiples productos: que el usuario elija uno
+        const inputOptions = productsFound.reduce((acc, product, index) => {
+          acc[index] = `${product.name} - ${product.description}`;
+          return acc;
+        }, {});
+
+        const { value: selectedIndex } = await Swal.fire({
+          title: "Seleccioná el producto",
+          input: "select",
+          inputOptions,
+          inputPlaceholder: "Seleccioná uno",
+          showCancelButton: true,
         });
 
-        setCodeInput("");
-      } else {
-        Swal.fire("Error", "Producto no encontrado", "error");
+        if (selectedIndex !== undefined) {
+          addOrUpdateProduct(productsFound[selectedIndex]);
+        }
       }
+
+      setCodeInput("");
     } catch (error) {
       Swal.fire("Error", "No se pudo obtener el producto", "error");
     }
+  };
+
+  const addOrUpdateProduct = (product) => {
+    setProducts((prev) => {
+      const existingProduct = prev.find((p) => p.id === product.id);
+
+      if (existingProduct) {
+        return prev.map((p) =>
+          p.id === product.id
+            ? { ...p, quantityToLoad: (p.quantityToLoad || 1) + 1 }
+            : p
+        );
+      }
+
+      return [...prev, { ...product, quantityToLoad: 1 }];
+    });
   };
 
   const handleKeyDown = (e) => {

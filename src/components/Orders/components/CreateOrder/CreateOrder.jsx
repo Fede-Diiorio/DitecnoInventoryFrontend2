@@ -1,16 +1,13 @@
 import { useState, useEffect } from "react";
 import classes from "./CreateOrder.module.scss";
-import {
-  getAllSuppliers,
-  getProductByCodeAndSupplier,
-  createOrder,
-} from "../../../../services";
+import { getAllSuppliers } from "../../../../services";
 import { useFetch } from "../../../../hooks";
 import Swal from "sweetalert2";
 import { Container } from "../../../../styled-components";
 import { OrderProductsTable } from "./components";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../../../../components";
+import { addProduct, createNewOrder } from "./utilities/componentFunctions";
 
 export const CreateOrder = () => {
   const {
@@ -25,68 +22,12 @@ export const CreateOrder = () => {
   const navigate = useNavigate();
 
   const handleAddProduct = async () => {
-    if (!codeInput.trim()) return;
-
-    try {
-      const productsFound = await getProductByCodeAndSupplier(
-        codeInput.trim(),
-        selectedSupplier
-      );
-
-      console.log(productsFound);
-
-      if (productsFound.length === 0) {
-        return Swal.fire("Error", "Producto no encontrado", "error");
-      }
-
-      if (productsFound.length === 1) {
-        addOrUpdateProduct(productsFound[0]);
-      } else {
-        // Múltiples productos: que el usuario elija uno
-        const inputOptions = productsFound.reduce((acc, product, index) => {
-          acc[index] = `${product.name} - ${product.description}`;
-          return acc;
-        }, {});
-
-        const { value: selectedIndex } = await Swal.fire({
-          title: "Seleccioná el producto",
-          input: "select",
-          inputOptions,
-          inputPlaceholder: "Seleccioná uno",
-          showCancelButton: true,
-        });
-
-        if (selectedIndex !== undefined) {
-          addOrUpdateProduct(productsFound[selectedIndex]);
-        }
-      }
-
-      setCodeInput("");
-    } catch (error) {
-      Swal.fire("Error", "No se pudo obtener el producto", "error");
-    }
+    addProduct(codeInput, selectedSupplier, setProducts);
+    setCodeInput("");
   };
 
-  const addOrUpdateProduct = (product) => {
-    setProducts((prev) => {
-      const existingProduct = prev.find((p) => p.id === product.id);
-
-      if (existingProduct) {
-        return prev.map((p) =>
-          p.id === product.id
-            ? { ...p, quantityToLoad: (p.quantityToLoad || 1) + 1 }
-            : p
-        );
-      }
-
-      return [...prev, { ...product, quantityToLoad: 1 }];
-    });
-  };
-
-  const handleKeyDown = (e) => {
-    if (e.key === "Enter") {
-      handleAddProduct();
-    }
+  const handleInputChange = (e) => {
+    setCodeInput(e.target.value);
   };
 
   const handleQuantityChange = (id, value) => {
@@ -120,16 +61,7 @@ export const CreateOrder = () => {
   }, [suppliers]);
 
   const handleCrateOrder = async () => {
-    const payload = {
-      supplier: selectedSupplier,
-      products: products.map((p) => ({
-        id: p.id,
-        quantity: p.quantityToLoad,
-      })),
-    };
-
-    console.log(payload);
-    await createOrder(payload.products, payload.supplier);
+    await createNewOrder(selectedSupplier, products);
     navigate("/ordenes");
   };
 
@@ -143,16 +75,21 @@ export const CreateOrder = () => {
       <Container>
         {selectedSupplier && <p>Proveedor seleccionado: {selectedSupplier}</p>}
 
-        <div className={classes.inputGroup}>
+        <form
+          className={classes.inputGroup}
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleAddProduct();
+          }}
+        >
           <input
             type="text"
             value={codeInput}
-            onChange={(e) => setCodeInput(e.target.value)}
-            onKeyDown={handleKeyDown}
+            onChange={handleInputChange}
             placeholder="Ingresá el código del producto"
           />
-          <button onClick={handleAddProduct}>Agregar</button>
-        </div>
+          <button type="submit">Agregar</button>
+        </form>
 
         <OrderProductsTable
           products={products}

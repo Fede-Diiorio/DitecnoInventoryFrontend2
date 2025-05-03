@@ -4,7 +4,7 @@ import classes from "./ProductAdder.module.scss";
 import { ItemContainerForAdder } from "../../components";
 import { useAutoFocus } from "../../hooks";
 import { useAdderContext, AuthContext } from "../../context";
-import { getProductByCode, descountStock, createOrder } from "../../services";
+import { getProductByCode, descountStock } from "../../services";
 
 export const ProductAdder = () => {
   const [query, setQuery] = useState("");
@@ -40,13 +40,6 @@ export const ProductAdder = () => {
 
       if (query === "CMD00003") {
         logout();
-      }
-
-      if (query === "CMD00004") {
-        setQuery("");
-        await createOrder(cart);
-        successNotify("Orden creada");
-        clearCart();
       }
 
       const product = await getProductByCode(query);

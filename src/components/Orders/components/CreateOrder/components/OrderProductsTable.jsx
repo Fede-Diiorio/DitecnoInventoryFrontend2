@@ -28,9 +28,8 @@ export const OrderProductsTable = ({
       cell: (row) => (
         <input
           type="number"
-          value={row.quantityToLoad}
+          value={row.quantityToLoad || 1}
           min={1}
-          defaultValue={1}
           max={row.quantity}
           onChange={(e) => onQuantityChange(row.id, e.target.value)}
           style={{ width: "80px", textAlign: "center" }}
@@ -44,7 +43,6 @@ export const OrderProductsTable = ({
     },
     {
       name: "Eliminar",
-      button: true,
       cell: (row) => <button onClick={() => onRemove(row.id)}>🗑️</button>,
     },
   ];

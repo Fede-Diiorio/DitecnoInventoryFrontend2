@@ -32,8 +32,6 @@ export const OrderItemContainer = ({ items, orderNumber, orderId }) => {
         <OrderQuantityUpdater orderId={orderId} productId={row.id} />
       ),
       ignoreRowClick: true,
-      allowOverflow: true,
-      button: true,
       width: "200px",
     });
   }

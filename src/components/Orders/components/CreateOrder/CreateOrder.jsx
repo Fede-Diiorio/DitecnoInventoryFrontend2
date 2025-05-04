@@ -1,8 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import classes from "./CreateOrder.module.scss";
-import { getAllSuppliers } from "../../../../services";
-import { useFetch } from "../../../../hooks";
-import Swal from "sweetalert2";
+import { useSupplierSelector } from "../../../../hooks";
 import { Container } from "../../../../styled-components";
 import { OrderProductsTable } from "./components";
 import { useNavigate } from "react-router-dom";
@@ -10,13 +8,8 @@ import { Button } from "../../../../components";
 import { addProduct, createNewOrder } from "./utilities/componentFunctions";
 
 export const CreateOrder = () => {
-  const {
-    data: suppliers,
-    supplierLoading,
-    supplierError,
-  } = useFetch(getAllSuppliers);
+  const selectedSupplier = useSupplierSelector();
 
-  const [selectedSupplier, setSelectedSupplier] = useState("");
   const [products, setProducts] = useState([]);
   const [codeInput, setCodeInput] = useState("");
   const navigate = useNavigate();
@@ -38,35 +31,17 @@ export const CreateOrder = () => {
     );
   };
 
-  useEffect(() => {
-    if (suppliers && suppliers.length > 0) {
-      Swal.fire({
-        title: "Seleccioná un proveedor",
-        input: "select",
-        inputOptions: suppliers.reduce((acc, supplier) => {
-          acc[supplier.id] = supplier.name;
-          return acc;
-        }, {}),
-        inputPlaceholder: "Seleccioná un proveedor",
-        showCancelButton: true,
-      }).then((result) => {
-        if (result.isConfirmed) {
-          const chosen = suppliers.find((s) => s.id === Number(result.value));
-          if (chosen) {
-            setSelectedSupplier(chosen.name);
-          }
-        }
-      });
-    }
-  }, [suppliers]);
-
   const handleCrateOrder = async () => {
     await createNewOrder(selectedSupplier, products);
     navigate("/ordenes");
   };
 
-  if (supplierLoading) return <h2>Cargando...</h2>;
-  if (supplierError) return <h2>Ha ocurrido un error</h2>;
+  if (!selectedSupplier)
+    return (
+      <Container>
+        <p style={{ marginTop: "1rem" }}>Esperando selección de proveedor...</p>
+      </Container>
+    );
 
   return (
     <section className={classes.container}>

@@ -38,8 +38,7 @@ export const OrderProductsTable = ({
     },
     {
       name: "Subtotal",
-      cell: (row) =>
-        (row.price * row.quantityToLoad || row.price * 1).toFixed(2),
+      cell: (row) => (row.price * (row.quantityToLoad || 1)).toFixed(2),
     },
     {
       name: "Eliminar",
@@ -47,14 +46,28 @@ export const OrderProductsTable = ({
     },
   ];
 
+  const total = products.reduce(
+    (acc, p) => acc + p.price * (p.quantityToLoad || 1),
+    0
+  );
+
   return (
-    <DataTable
-      data={products}
-      columns={columns}
-      noDataComponent="La orden no tiene productos"
-      dense
-      highlightOnHover
-      customStyles={customStyles}
-    />
+    <>
+      <DataTable
+        data={products}
+        columns={columns}
+        noDataComponent="La orden no tiene productos"
+        dense
+        highlightOnHover
+        customStyles={customStyles}
+      />
+      {products.length > 0 && (
+        <div
+          style={{ marginTop: "1rem", textAlign: "right", fontWeight: "bold" }}
+        >
+          Total: ${total.toFixed(2)}
+        </div>
+      )}
+    </>
   );
 };

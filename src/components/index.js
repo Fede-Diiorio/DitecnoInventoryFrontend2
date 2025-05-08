@@ -14,3 +14,4 @@ export * from "./DataTable/components";
 export * from "./TableInputSearch/TableInputSearch";
 export * from "./DeliveryNotes";
 export * from "./DeliveryNotes/NewDeliveryNote/components";
+export * from "./Suppliers/Suppliers";

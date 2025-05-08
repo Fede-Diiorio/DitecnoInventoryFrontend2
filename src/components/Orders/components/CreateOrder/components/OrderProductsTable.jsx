@@ -6,11 +6,12 @@ export const OrderProductsTable = ({
   onQuantityChange,
   onRemove,
 }) => {
+  const calculateMin = (row) => {
+    const result = row.packaging / row.unit_value;
+    return result;
+  };
+
   const columns = [
-    {
-      name: "Nombre",
-      selector: (row) => row.name,
-    },
     {
       name: "Código",
       selector: (row) => row.code,
@@ -18,6 +19,10 @@ export const OrderProductsTable = ({
     {
       name: "Descripción",
       selector: (row) => row.description,
+    },
+    {
+      name: "Unidad",
+      selector: (row) => row.unit_value,
     },
     {
       name: "Precio",
@@ -28,9 +33,10 @@ export const OrderProductsTable = ({
       cell: (row) => (
         <input
           type="number"
-          value={row.quantityToLoad || 1}
-          min={1}
+          value={row.quantityToLoad || calculateMin(row)}
+          min={calculateMin(row)}
           max={row.quantity}
+          step={calculateMin(row)}
           onChange={(e) => onQuantityChange(row.id, e.target.value)}
           style={{ width: "80px", textAlign: "center" }}
         />

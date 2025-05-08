@@ -17,18 +17,23 @@ export const addProduct = async (codeInput, selectedSupplier, setProducts) => {
   }
 
   const addOrUpdateProduct = (product) => {
+    const minQuantity = product.packaging / product.unit_value;
+
     setProducts((prev) => {
       const existingProduct = prev.find((p) => p.id === product.id);
 
       if (existingProduct) {
         return prev.map((p) =>
           p.id === product.id
-            ? { ...p, quantityToLoad: (p.quantityToLoad || 1) + 1 }
+            ? {
+                ...p,
+                quantityToLoad: (p.quantityToLoad || minQuantity) + minQuantity,
+              }
             : p
         );
       }
 
-      return [...prev, { ...product, quantityToLoad: 1 }];
+      return [...prev, { ...product, quantityToLoad: minQuantity }];
     });
   };
 

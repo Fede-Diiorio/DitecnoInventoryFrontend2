@@ -1,5 +1,5 @@
 import DataTable from "react-data-table-component";
-import { customStyles } from "../../../../../utilities";
+import { customStyles, formatCurrency } from "../../../../../utilities";
 
 export const OrderProductsTable = ({
   products,
@@ -8,6 +8,7 @@ export const OrderProductsTable = ({
 }) => {
   const calculateMin = (row) => {
     const result = row.packaging / row.unit_value;
+    console.log(row);
     return result;
   };
 
@@ -19,15 +20,9 @@ export const OrderProductsTable = ({
     {
       name: "Descripción",
       selector: (row) => row.description,
+      width: "600px",
     },
-    {
-      name: "Unidad",
-      selector: (row) => row.unit_value,
-    },
-    {
-      name: "Precio",
-      selector: (row) => row.price,
-    },
+
     {
       name: "Cantidad",
       cell: (row) => (
@@ -41,6 +36,10 @@ export const OrderProductsTable = ({
           style={{ width: "80px", textAlign: "center" }}
         />
       ),
+    },
+    {
+      name: "Precio",
+      selector: (row) => formatCurrency(row.price),
     },
     {
       name: "Subtotal",

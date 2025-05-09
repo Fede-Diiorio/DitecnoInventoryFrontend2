@@ -1,4 +1,4 @@
-export * from "./formattedDate";
+export * from "./formatterNumber";
 export * from "./orderHandler";
 export * from "./stylesForDataTable";
 export * from "./handleApiError";

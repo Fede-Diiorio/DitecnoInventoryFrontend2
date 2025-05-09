@@ -10,12 +10,11 @@ export const SelectedProductsTable = ({
     {
       name: "Código",
       selector: (row) => row.code,
-      sortable: true,
     },
     {
-      name: "Nombre",
-      selector: (row) => row.name,
-      sortable: true,
+      name: "Descripción",
+      selector: (row) => row.description,
+      width: "600px",
     },
 
     {

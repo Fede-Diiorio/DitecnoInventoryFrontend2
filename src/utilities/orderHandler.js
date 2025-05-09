@@ -1,4 +1,4 @@
-import { formatDate, formatTime } from "./formattedDate";
+import { formatDate, formatTime } from "./formatterNumber";
 
 export const orderHanlder = (data) => {
   const orderInfo = data.orderInfo.order;

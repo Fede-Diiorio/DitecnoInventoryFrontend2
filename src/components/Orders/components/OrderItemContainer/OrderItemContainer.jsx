@@ -1,40 +1,32 @@
 import DataTable from "react-data-table-component";
-import { OrderQuantityUpdater } from "../OrderQuantityUpdater/OrderQuantityUpdater";
 import { customStyles } from "../../../../utilities";
+import { formatCurrency } from "../../../../utilities";
 
-export const OrderItemContainer = ({ items, orderNumber, orderId }) => {
-  const showUpdateColumn = orderNumber === "Sin asignar";
-
+export const OrderItemContainer = ({ items, orderNumber }) => {
   // Definimos las columnas de la tabla
   const columns = [
     {
-      name: "Nombre",
-      selector: (row) => row.name,
-      sortable: true,
-    },
-    {
       name: "Código",
       selector: (row) => row.code,
-      sortable: true,
+    },
+    {
+      name: "Description",
+      selector: (row) => row.description,
+      width: "600px",
     },
     {
       name: "Cantidad",
       selector: (row) => row.quantity,
-      sortable: true,
+    },
+    {
+      name: "Precio unitario",
+      selector: (row) => formatCurrency(row.price),
+    },
+    {
+      name: "Subtotal",
+      selector: (row) => formatCurrency(row.quantity * row.price),
     },
   ];
-
-  // Agregamos columna dinámica si corresponde
-  if (showUpdateColumn) {
-    columns.push({
-      name: "Modificar cantidad",
-      cell: (row) => (
-        <OrderQuantityUpdater orderId={orderId} productId={row.id} />
-      ),
-      ignoreRowClick: true,
-      width: "200px",
-    });
-  }
 
   return (
     <DataTable

@@ -13,3 +13,10 @@ export const formatTime = (date) => {
     second: "2-digit",
   });
 };
+
+export const formatCurrency = (number) => {
+  const num = Number(number);
+  const truncated = Math.floor(num * 100) / 100;
+  const parts = truncated.toFixed(2).split(".");
+  return `$${parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ".")},${parts[1]}`;
+};

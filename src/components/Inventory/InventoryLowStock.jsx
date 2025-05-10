@@ -1,21 +1,22 @@
-import { useState, useEffect } from "react";
 import DataTable from "react-data-table-component";
+import { useState, useEffect } from "react";
 import { useFetch } from "../../hooks";
-import { Container } from "../../styled-components";
 import { TableInputSearch } from "../../components";
-import classes from "./DataTable.module.scss";
 import { customStyles, columnsForinventory } from "../../utilities";
+import { getProductsWithLowStock } from "../../services";
+import { Container } from "../../styled-components";
+import classes from "./Inventory.module.scss";
 
-export const CustomDataTable = ({ fetchFunction }) => {
-  const { data, loading, error } = useFetch(fetchFunction);
+export const InventoryLowStock = () => {
+  const { data: products, loading, error } = useFetch(getProductsWithLowStock);
   const [filteredData, setFilteredData] = useState([]);
   const [searchValue, setSearchValue] = useState("");
 
   useEffect(() => {
-    if (Array.isArray(data)) {
-      setFilteredData(data);
+    if (Array.isArray(products)) {
+      setFilteredData(products);
     }
-  }, [data]);
+  }, [products]);
 
   const handleSearchChange = (e) => {
     const inputValue = e.target.value.toLowerCase();

@@ -1,5 +1,5 @@
 export * from "./formatterNumber";
 export * from "./orderHandler";
-export * from "./stylesForDataTable";
+export * from "./dataTableFunctions";
 export * from "./handleApiError";
 export * from "./deliveryNotesHelper";

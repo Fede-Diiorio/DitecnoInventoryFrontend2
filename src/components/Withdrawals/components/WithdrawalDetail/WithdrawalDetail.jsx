@@ -3,9 +3,15 @@ import { useAsync } from "../../../../hooks";
 import { useParams, useNavigate } from "react-router-dom";
 import { useCallback } from "react";
 import { Container } from "../../../../styled-components";
-import { formatDate, formatTime } from "../../../../utilities";
-import { ItemContainer, Button } from "../../../../components";
+import {
+  formatDate,
+  formatTime,
+  columnsForinventory,
+  customStyles,
+} from "../../../../utilities";
+import { Button } from "../../../../components";
 import classes from "./WithdrawalDetail.module.scss";
+import DataTable from "react-data-table-component";
 
 export const WithdrawalDetail = () => {
   const { id } = useParams();
@@ -40,7 +46,11 @@ export const WithdrawalDetail = () => {
           <h4>Productos: </h4>
         </div>
 
-        <ItemContainer items={products} />
+        <DataTable
+          data={products}
+          columns={columnsForinventory}
+          customStyles={customStyles}
+        />
         <Button label={"Volver"} parentMethod={handleNavigate} />
       </section>
     </Container>

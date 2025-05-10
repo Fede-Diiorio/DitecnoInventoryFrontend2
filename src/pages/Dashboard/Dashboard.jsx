@@ -10,6 +10,8 @@ import {
   NewDeliveryNote,
   CreateOrder,
   Suppliers,
+  Inventory,
+  InventoryLowStock,
 } from "../../components";
 import { WithdrawalDetail } from "../../components";
 import { Routes, Route } from "react-router-dom";
@@ -21,14 +23,8 @@ export const Dashboard = {
       <Header navBar={<NavbarAdmin />} />
       <Routes>
         <Route path="/" element={<ProductAdder />} />
-        <Route
-          path="/inventario"
-          element={<CustomDataTable fetchFunction={getInventory} />}
-        />
-        <Route
-          path="/bajo-stock"
-          element={<CustomDataTable fetchFunction={getProductsWithLowStock} />}
-        />
+        <Route path="/inventario" element={<Inventory />} />
+        <Route path="/bajo-stock" element={<InventoryLowStock />} />
         <Route path="/retiros" element={<Withdrawals />} />
         <Route path="/retiros/:id" element={<WithdrawalDetail />} />
         <Route path="/ordenes" element={<Orders />} />

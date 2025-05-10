@@ -44,6 +44,10 @@ export const WithdrawalsContainer = ({ withdrawals }) => {
         dense
         pagination
         onRowClicked={handleRowClick}
+        paginationComponentOptions={{
+          rowsPerPageText: "Filas por página",
+          rangeSeparatorText: "de",
+        }}
       />
     </Container>
   );

@@ -1,10 +1,12 @@
 import { useState, useContext } from "react";
 import { toast } from "react-toastify";
 import classes from "./ProductAdder.module.scss";
-import { ItemContainerForAdder } from "../../components";
 import { useAutoFocus } from "../../hooks";
 import { useAdderContext, AuthContext } from "../../context";
 import { getProductByCode, descountStock } from "../../services";
+import DataTable from "react-data-table-component";
+import { columnsForIndex, customStyles } from "../../utilities";
+import { Container } from "../../styled-components";
 
 export const ProductAdder = () => {
   const [query, setQuery] = useState("");
@@ -70,7 +72,14 @@ export const ProductAdder = () => {
         />
         <button type="submit"></button>
       </form>
-      <ItemContainerForAdder items={cart} useAdder={true} />
+      <Container>
+        <DataTable
+          data={cart}
+          columns={columnsForIndex}
+          customStyles={customStyles}
+          noDataComponent="Sin productos para descontar"
+        />
+      </Container>
     </section>
   );
 };

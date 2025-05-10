@@ -4,7 +4,6 @@ export * from "./CommandForm/CommandForm";
 export * from "./Navbar";
 export * from "./ProductAdder/ProductAdder";
 export * from "./Withdrawals/Withdrawals";
-export * from "./ItemContainerForAdder/ItemContainerForAdder";
 export * from "./Withdrawals/components";
 export * from "./Orders/Orders";
 export * from "./Orders/components";

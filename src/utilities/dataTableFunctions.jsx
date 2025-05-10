@@ -189,3 +189,25 @@ export const columnsForOrder = (orderNumber, orderId) => {
 
   return columns;
 };
+
+export const columnsForIndex = [
+  {
+    name: "Código",
+    selector: (row) => row.code,
+  },
+  {
+    name: "Descripción",
+    selector: (row) => row.description,
+    sortable: true,
+    width: "600px",
+  },
+  {
+    name: "Cantidad",
+    selector: (row) => (row.quantity !== 0 ? row.quantity : 0),
+  },
+  {
+    name: "Stock",
+    selector: (row) =>
+      row.stock !== 0 ? `${row.stock - row.quantity}` : "Sin stock",
+  },
+];

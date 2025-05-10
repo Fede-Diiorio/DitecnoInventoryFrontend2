@@ -6,7 +6,7 @@ import { Container } from "../../../../styled-components";
 import {
   formatDate,
   formatTime,
-  columnsForinventory,
+  columnsForInventory,
   customStyles,
 } from "../../../../utilities";
 import { Button } from "../../../../components";
@@ -48,7 +48,7 @@ export const WithdrawalDetail = () => {
 
         <DataTable
           data={products}
-          columns={columnsForinventory}
+          columns={columnsForInventory}
           customStyles={customStyles}
         />
         <Button label={"Volver"} parentMethod={handleNavigate} />

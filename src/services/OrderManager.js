@@ -46,7 +46,6 @@ export const createOrder = async (products, supplier) => {
 
     return response.data;
   } catch (error) {
-    console.log(error);
     throw new Error(handleApiError(error));
   }
 };

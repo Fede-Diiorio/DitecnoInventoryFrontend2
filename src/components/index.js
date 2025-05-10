@@ -8,8 +8,6 @@ export * from "./ItemContainerForAdder/ItemContainerForAdder";
 export * from "./Withdrawals/components";
 export * from "./Orders/Orders";
 export * from "./Orders/components";
-export * from "./DataTable/DataTable";
-export * from "./DataTable/components";
 export * from "./TableInputSearch/TableInputSearch";
 export * from "./DeliveryNotes";
 export * from "./DeliveryNotes/NewDeliveryNote/components";

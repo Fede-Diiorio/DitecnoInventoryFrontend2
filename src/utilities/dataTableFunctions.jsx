@@ -1,3 +1,6 @@
+import { formatDate, formatTime, formatCurrency } from "../utilities";
+import { OrderQuantityUpdater } from "../components";
+
 export const customStyles = {
   rows: {
     style: {
@@ -23,7 +26,32 @@ export const customStyles = {
   },
 };
 
-export const columnsForinventory = [
+// Se utiliza principalmente para el inventario
+export const columnsForInventory = [
+  {
+    name: "Código",
+    selector: (row) => row.code,
+  },
+  {
+    name: "Descripción",
+    selector: (row) => row.description,
+    width: "600px",
+    sortable: true,
+  },
+  {
+    name: "Cantidad",
+    selector: (row) =>
+      row.stock != null ? row.stock : row.quantity != null ? row.quantity : "0",
+  },
+];
+
+const calculateMin = (row) => {
+  const result = row.packaging / row.unit_value;
+  return result;
+};
+
+// Se utiliza para cargar nuevas ordenes al sistema
+export const columnsForCreateOrder = (onQuantityChange, onRemove) => [
   {
     name: "Código",
     selector: (row) => row.code,
@@ -34,29 +62,10 @@ export const columnsForinventory = [
     width: "600px",
   },
   {
-    name: "Cantidad",
-    selector: (row) =>
-      row.stock != null ? row.stock : row.quantity != null ? row.quantity : "0",
-  },
-];
-
-export const columnsForCreateOrder = [
-  {
-    name: "Código",
-    selector: (row) => row.code,
-  },
-  {
-    name: "Descripción",
-    selector: (row) => row.description,
-  },
-  {
     name: "Unidad",
     selector: (row) => row.unit_value,
   },
-  {
-    name: "Precio",
-    selector: (row) => row.price,
-  },
+
   {
     name: "Cantidad",
     cell: (row) => (
@@ -72,11 +81,111 @@ export const columnsForCreateOrder = [
     ),
   },
   {
+    name: "Precio",
+    selector: (row) => formatCurrency(row.price),
+  },
+  {
     name: "Subtotal",
-    cell: (row) => (row.price * (row.quantityToLoad || 1)).toFixed(2),
+    cell: (row) =>
+      formatCurrency((row.price * (row.quantityToLoad || 1)).toFixed(2)),
   },
   {
     name: "Eliminar",
     cell: (row) => <button onClick={() => onRemove(row.id)}>🗑️</button>,
   },
 ];
+
+// Se utiliza para mostrar todas las ordenes al picar el botón de ordenes
+export const ordersColumns = [
+  {
+    name: "Nombre",
+    selector: (row) => `${row.user_name} ${row.user_lastname}`,
+    sortable: true,
+  },
+  {
+    name: "Número de orden",
+    selector: (row) => row.order_number || "Sin asignar",
+    sortable: true,
+  },
+  {
+    name: "Fecha de carga",
+    selector: (row) => formatDate(row.order_date),
+    sortable: true,
+  },
+  {
+    name: "Hora de carga",
+    selector: (row) => formatTime(row.order_date),
+  },
+  {
+    name: "Orden completa",
+    selector: (row) => (row.is_complete === 1 ? "Sí" : "No"),
+    sortable: true,
+  },
+];
+
+// Cargar un nuevo remito (desde dentro de las ordenes)
+export const columnsForCreateDeliveryNote = (onQuantityChange, onRemove) => [
+  {
+    name: "Código",
+    selector: (row) => row.code,
+  },
+  {
+    name: "Descripción",
+    selector: (row) => row.description,
+    width: "600px",
+  },
+  {
+    name: "Cantidad a Cargar",
+    cell: (row) => (
+      <input
+        type="number"
+        value={row.quantityToLoad}
+        min={1}
+        max={row.quantity}
+        onChange={(e) => onQuantityChange(row.id, e.target.value)}
+        style={{ width: "80px", textAlign: "center" }}
+      />
+    ),
+  },
+  {
+    name: "Eliminar",
+    button: true,
+    cell: (row) => <button onClick={() => onRemove(row.id)}>🗑️</button>,
+  },
+];
+
+// Lista de productos que tienen las ordenes
+export const columnsForOrder = (orderNumber, orderId) => {
+  const showUpdateColumn = orderNumber === "Sin asignar";
+
+  const columns = [
+    {
+      name: "Código",
+      selector: (row) => row.code,
+    },
+    {
+      name: "Descripción",
+      selector: (row) => row.description,
+      sortable: true,
+      width: "600px",
+    },
+    {
+      name: "Cantidad",
+      selector: (row) => row.quantity,
+    },
+  ];
+
+  // Agregamos columna dinámica si corresponde
+  if (showUpdateColumn) {
+    columns.push({
+      name: "Modificar cantidad",
+      cell: (row) => (
+        <OrderQuantityUpdater orderId={orderId} productId={row.id} />
+      ),
+      ignoreRowClick: true,
+      width: "200px",
+    });
+  }
+
+  return columns;
+};

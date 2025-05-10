@@ -6,16 +6,14 @@ import {
   Withdrawals,
   Orders,
   OrderDetail,
-  CustomDataTable,
   NewDeliveryNote,
   CreateOrder,
   Suppliers,
   Inventory,
   InventoryLowStock,
+  WithdrawalDetail,
 } from "../../components";
-import { WithdrawalDetail } from "../../components";
 import { Routes, Route } from "react-router-dom";
-import { getInventory, getProductsWithLowStock } from "../../services";
 
 export const Dashboard = {
   Admin: () => (

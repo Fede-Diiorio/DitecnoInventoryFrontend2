@@ -2,9 +2,8 @@ import { useState, useEffect } from "react";
 import DataTable from "react-data-table-component";
 import { Container } from "../../../../styled-components";
 import { TableInputSearch, Button } from "../../../../components";
-import { ordersColumns } from "./utilities/dataTableUtilities";
 import { useNavigate } from "react-router-dom";
-import { customStyles } from "../../../../utilities";
+import { customStyles, ordersColumns } from "../../../../utilities";
 import classes from "./OrdersContainer.module.scss";
 
 export const OrdersContainer = ({ orders }) => {

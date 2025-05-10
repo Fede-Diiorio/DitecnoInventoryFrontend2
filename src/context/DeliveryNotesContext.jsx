@@ -11,8 +11,6 @@ export const DeliveryNoteProvider = ({ children }) => {
     deliveryNotes: [],
   });
 
-  console.log(deliveryNoteData.deliveryNotes);
-
   const setDraftDeliveryNote = (order, products, deliveryNotes) => {
     setDeliveryNoteData({ order, products, deliveryNotes });
   };

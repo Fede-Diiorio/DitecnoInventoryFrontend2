@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import classes from "./CreateOrder.module.scss";
 import { useSupplierSelector } from "../../../../hooks";
 import { Container } from "../../../../styled-components";
@@ -13,6 +13,13 @@ export const CreateOrder = () => {
   const [products, setProducts] = useState([]);
   const [codeInput, setCodeInput] = useState("");
   const navigate = useNavigate();
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    if (selectedSupplier && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [selectedSupplier]);
 
   const handleAddProduct = async () => {
     addProduct(codeInput, selectedSupplier, setProducts);
@@ -55,10 +62,12 @@ export const CreateOrder = () => {
           onSubmit={(e) => {
             e.preventDefault();
             handleAddProduct();
+            inputRef.current?.focus();
           }}
         >
           <input
             type="text"
+            ref={inputRef}
             value={codeInput}
             onChange={handleInputChange}
             placeholder="Ingresá el código del producto"

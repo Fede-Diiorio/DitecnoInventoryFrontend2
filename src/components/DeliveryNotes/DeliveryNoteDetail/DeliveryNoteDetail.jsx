@@ -1,6 +1,10 @@
-import { formatDate } from "../../../utilities";
-import { SimpleDataTable } from "../../../components";
+import {
+  formatDate,
+  columnsForInventory,
+  customStyles,
+} from "../../../utilities";
 import classes from "./DeliveryNoteDetail.module.scss";
+import DataTable from "react-data-table-component";
 
 export const DeliveryNoteDetail = ({
   deliveryNoteNumber,
@@ -20,7 +24,14 @@ export const DeliveryNoteDetail = ({
         </p>
       </div>
 
-      <SimpleDataTable data={products} />
+      <DataTable
+        columns={columnsForInventory}
+        data={products}
+        customStyles={customStyles}
+        noDataComponent="No hay nada por aquí"
+        highlightOnHover
+        dense
+      />
     </div>
   );
 };

@@ -2,7 +2,7 @@ import DataTable from "react-data-table-component";
 import { useState, useEffect } from "react";
 import { useFetch } from "../../hooks";
 import { TableInputSearch } from "..";
-import { customStyles, columnsForinventory } from "../../utilities";
+import { customStyles, columnsForInventory } from "../../utilities";
 import { getInventory } from "../../services";
 import { Container } from "../../styled-components";
 import classes from "./Inventory.module.scss";
@@ -39,7 +39,7 @@ export const Inventory = () => {
           <TableInputSearch value={searchValue} onChange={handleSearchChange} />
 
           <DataTable
-            columns={columnsForinventory}
+            columns={columnsForInventory}
             data={filteredData}
             customStyles={customStyles}
             noDataComponent="No hay nada por aquí"

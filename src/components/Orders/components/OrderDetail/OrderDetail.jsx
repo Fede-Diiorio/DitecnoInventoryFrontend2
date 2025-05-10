@@ -3,13 +3,13 @@ import { useAsync } from "../../../../hooks";
 import { useParams, useNavigate } from "react-router-dom";
 import { useCallback } from "react";
 import { Container } from "../../../../styled-components";
-import { orderHanlder } from "../../../../utilities";
 import {
-  Button,
-  DeliveryNotes,
-  NumberUpdates,
-  OrderItemContainer,
-} from "../../../../components";
+  orderHanlder,
+  columnsForOrder,
+  customStyles,
+} from "../../../../utilities";
+import { Button, DeliveryNotes, NumberUpdates } from "../../../../components";
+import DataTable from "react-data-table-component";
 import classes from "./OrderDetail.module.scss";
 import { useRefreshContext, useDeliveryNoteContext } from "../../../../context";
 
@@ -69,10 +69,11 @@ export const OrderDetail = () => {
             />
           )}
         </div>
-        <OrderItemContainer // Esta es la tabla que muestra los productos de la orden
-          items={products}
-          orderId={order.id}
-          orderNumber={order.number}
+
+        <DataTable
+          data={products}
+          columns={columnsForOrder(order.number, order.id)}
+          customStyles={customStyles}
         />
         <DeliveryNotes deliveryNotes={deliveryNotes} />
         <Button label={"Volver"} parentMethod={handleNavigate} />

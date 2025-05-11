@@ -35,7 +35,7 @@ export const columnsForInventory = [
   {
     name: "Descripción",
     selector: (row) => row.description,
-    width: "600px",
+    width: "550px",
     sortable: true,
   },
   {
@@ -55,11 +55,12 @@ export const columnsForCreateOrder = (onQuantityChange, onRemove) => [
   {
     name: "Código",
     selector: (row) => row.code,
+    width: "175px",
   },
   {
     name: "Descripción",
     selector: (row) => row.description,
-    width: "600px",
+    width: "550px",
   },
   {
     name: "Unidad",
@@ -132,7 +133,7 @@ export const columnsForCreateDeliveryNote = (onQuantityChange, onRemove) => [
   {
     name: "Descripción",
     selector: (row) => row.description,
-    width: "600px",
+    width: "550px",
   },
   {
     name: "Cantidad a Cargar",
@@ -167,7 +168,7 @@ export const columnsForOrder = (orderNumber, orderId) => {
       name: "Descripción",
       selector: (row) => row.description,
       sortable: true,
-      width: "600px",
+      width: "550px",
     },
     {
       name: "Cantidad",
@@ -199,7 +200,7 @@ export const columnsForIndex = [
     name: "Descripción",
     selector: (row) => row.description,
     sortable: true,
-    width: "600px",
+    width: "550px",
   },
   {
     name: "Cantidad",

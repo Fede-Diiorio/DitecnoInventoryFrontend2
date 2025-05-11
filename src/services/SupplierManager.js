@@ -17,3 +17,27 @@ export const getAllSuppliers = async () => {
     throw new Error(handleApiError(error));
   }
 };
+
+export const updatePriceList = async (supplierName, document) => {
+  const token = sessionStorage.getItem("token");
+  const formData = new FormData();
+  formData.append("supplierName", supplierName);
+  formData.append("document", document); // esto debe ser un archivo (Blob o File)
+
+  try {
+    const response = await axios.post(
+      `${apiUrl}/api/supplier/table`,
+      formData,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data", // axios la infiere pero es mejor dejarla explícita
+        },
+      }
+    );
+
+    return response.data;
+  } catch (error) {
+    throw new Error(handleApiError(error));
+  }
+};

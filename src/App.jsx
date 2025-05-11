@@ -28,16 +28,14 @@ function AppContent() {
 
 function App() {
   return (
-    <AuthProvider>
-      <AdderProvider>
-        <RefreshProvider>
-          <DeliveryNoteProvider>
-            <AppContent />
-            <ToastContainer position="bottom-right" />
-          </DeliveryNoteProvider>
-        </RefreshProvider>
-      </AdderProvider>
-    </AuthProvider>
+    <AdderProvider>
+      <RefreshProvider>
+        <DeliveryNoteProvider>
+          <AppContent />
+          <ToastContainer position="bottom-right" />
+        </DeliveryNoteProvider>
+      </RefreshProvider>
+    </AdderProvider>
   );
 }
 

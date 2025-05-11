@@ -2,7 +2,7 @@ import { getAllSuppliers } from "../../services";
 import { useFetch } from "../../hooks";
 import classes from "./Suppliers.module.scss";
 import { Container } from "../../styled-components";
-import { FileUploader } from "./components/FileUploadCard";
+import { FileUploader, AddSupplier } from "./components";
 
 export const Suppliers = () => {
   const { data: suppliers, loading, error } = useFetch(getAllSuppliers);
@@ -21,6 +21,7 @@ export const Suppliers = () => {
           ))}
         </div>
         <FileUploader />
+        <AddSupplier />
       </Container>
     </section>
   );

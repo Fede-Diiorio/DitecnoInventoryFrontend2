@@ -35,6 +35,7 @@ export const FileUploader = () => {
 
   return (
     <div>
+      <h4>Actualizar lista de precios:</h4>
       <select
         value={supplierName}
         onChange={(e) => setSupplierName(e.target.value)}

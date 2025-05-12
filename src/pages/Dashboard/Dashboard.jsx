@@ -39,7 +39,7 @@ export const Dashboard = {
       <Header navBar={<NavbarUser />} />
       <Routes>
         <Route path="/" element={<ProductAdder />} />
-        <Route path="/inventario" element={<InventoryList />} />
+        <Route path="/inventario" element={<Inventory />} />
       </Routes>
     </>
   ),

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { createSupplier } from "../../../services";
 
-export const AddSupplier = () => {
+export const AddSupplier = ({ onRefresh }) => {
   const [supplierName, setSupplierName] = useState("");
 
   const handleSubmit = async (e) => {
@@ -12,6 +12,7 @@ export const AddSupplier = () => {
     await createSupplier(supplierName);
 
     setSupplierName("");
+    onRefresh();
   };
 
   return (

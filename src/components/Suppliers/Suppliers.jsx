@@ -1,11 +1,16 @@
 import { getAllSuppliers } from "../../services";
-import { useFetch } from "../../hooks";
+import { useFetch, useReload } from "../../hooks";
 import classes from "./Suppliers.module.scss";
 import { Container } from "../../styled-components";
 import { FileUploader, AddSupplier } from "./components";
 
 export const Suppliers = () => {
-  const { data: suppliers, loading, error } = useFetch(getAllSuppliers);
+  const { reloadFlag, reload } = useReload();
+  const {
+    data: suppliers,
+    loading,
+    error,
+  } = useFetch(getAllSuppliers, [reloadFlag]);
 
   if (loading) return <h2>Cargando</h2>;
   if (error) return <h2>Hubo un error</h2>;
@@ -21,7 +26,7 @@ export const Suppliers = () => {
           ))}
         </div>
         <FileUploader />
-        <AddSupplier />
+        <AddSupplier onRefresh={reload} />
       </Container>
     </section>
   );

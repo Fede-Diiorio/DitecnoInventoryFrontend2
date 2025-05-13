@@ -66,7 +66,10 @@ export const columnsForCreateOrder = (onQuantityChange, onRemove) => [
     name: "Unidad",
     selector: (row) => row.unit_value,
   },
-
+  {
+    name: "PK",
+    selector: (row) => row.packaging,
+  },
   {
     name: "Cantidad",
     cell: (row) => (
@@ -89,6 +92,7 @@ export const columnsForCreateOrder = (onQuantityChange, onRemove) => [
     name: "Subtotal",
     cell: (row) =>
       formatCurrency((row.price * (row.quantityToLoad || 1)).toFixed(2)),
+    width: "120px",
   },
   {
     name: "Eliminar",

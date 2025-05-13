@@ -25,7 +25,7 @@ export const NavbarAdmin = () => {
         </Link>
 
         <Link to={"/bajo-stock"}>
-          <Button label={"Bajo stock"} />
+          <Button label={"Stock min"} />
         </Link>
 
         <Link to={"/retiros"}>

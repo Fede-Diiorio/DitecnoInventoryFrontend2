@@ -1,12 +1,10 @@
 import { useDeliveryNoteContext } from "../../../context";
 import { useNavigate } from "react-router-dom";
-import { useState, useMemo } from "react";
+import { useState } from "react";
 import { Button, DataTableForOrders } from "../../../components";
 import { SelectedProductsTable } from "./components/SelectedProductTable";
 import { Container } from "../../../styled-components";
 import { createDeliveryNote } from "../../../services";
-import { getPendingQuantities } from "../../../utilities";
-import { toast } from "react-toastify";
 import classes from "./NewDeliveryNote.module.scss";
 
 export const NewDeliveryNote = () => {
@@ -15,10 +13,6 @@ export const NewDeliveryNote = () => {
   const [selectedProducts, setSelectedProducts] = useState([]);
   const [deliveryNoteNumber, setDeliveryNoteNumber] = useState("");
   const navigate = useNavigate();
-
-  const productsWithPending = useMemo(() => {
-    return getPendingQuantities(products, deliveryNotes);
-  }, [products, deliveryNotes]);
 
   const handleSelectProduct = (product) => {
     // evitar duplicados
@@ -48,22 +42,6 @@ export const NewDeliveryNote = () => {
   };
 
   const handleSave = async () => {
-    const pendingMap = getPendingQuantities(products, deliveryNotes).reduce(
-      (acc, p) => ({ ...acc, [p.id]: p.pending }),
-      {}
-    );
-
-    for (const product of selectedProducts) {
-      if (product.quantityToLoad > pendingMap[product.id]) {
-        toast.error(
-          `La cantidad ingresada de "${
-            product.name
-          }" supera la cantidad pendiente (${pendingMap[product.id]}).`
-        );
-        return;
-      }
-    }
-
     const payload = {
       orderNumber: order.number,
       deliveryNoteNumber,
@@ -88,7 +66,7 @@ export const NewDeliveryNote = () => {
       <h3>Nuevo Remito para orden {order.number}</h3>
       <h4>Seleccioná los productos a cargar:</h4>
       <DataTableForOrders
-        data={productsWithPending}
+        data={products}
         onRowClick={handleSelectProduct}
         onProductMatch={handleProductMatch}
       />

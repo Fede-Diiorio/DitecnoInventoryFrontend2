@@ -1,7 +1,6 @@
 import DataTable from "react-data-table-component";
 import { Container } from "../../../../styled-components";
-import { columns } from "../utilities/dataTableUtilities";
-import { customStyles } from "../../../../utilities";
+import { customStyles, columnsForDeliveryNote } from "../../../../utilities";
 import { TableInputSearch } from "../../../../components";
 import { useState, useEffect } from "react";
 import { useAutoFocus } from "../../../../hooks";
@@ -43,7 +42,7 @@ export const DataTableForOrders = ({ data, onRowClick, onProductMatch }) => {
       />
       <section>
         <DataTable
-          columns={columns}
+          columns={columnsForDeliveryNote}
           data={data}
           customStyles={customStyles}
           noDataComponent="No hay nada por aquí"

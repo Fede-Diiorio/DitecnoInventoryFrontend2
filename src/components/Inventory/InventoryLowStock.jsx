@@ -23,7 +23,6 @@ export const InventoryLowStock = () => {
     setSearchValue(inputValue);
     const filtered = data.filter(
       (item) =>
-        item.name.toLowerCase().includes(inputValue) ||
         item.description.toLowerCase().includes(inputValue) ||
         item.code.toLowerCase().includes(inputValue)
     );

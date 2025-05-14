@@ -146,7 +146,7 @@ export const columnsForCreateDeliveryNote = (onQuantityChange, onRemove) => [
         type="number"
         value={row.quantityToLoad}
         min={1}
-        max={row.quantity}
+        max={row.pending}
         onChange={(e) => onQuantityChange(row.id, e.target.value)}
         style={{ width: "80px", textAlign: "center" }}
       />
@@ -178,6 +178,10 @@ export const columnsForOrder = (orderNumber, orderId) => {
       name: "Cantidad",
       selector: (row) => row.quantity,
     },
+    {
+      name: "Pendiente",
+      selector: (row) => row.pending,
+    },
   ];
 
   // Agregamos columna dinámica si corresponde
@@ -194,6 +198,27 @@ export const columnsForOrder = (orderNumber, orderId) => {
 
   return columns;
 };
+
+export const columnsForDeliveryNote = [
+  {
+    name: "Código",
+    selector: (row) => row.code,
+  },
+  {
+    name: "Descripción",
+    selector: (row) => row.description,
+    sortable: true,
+    width: "550px",
+  },
+  {
+    name: "Cantidad",
+    selector: (row) => row.quantity,
+  },
+  {
+    name: "Pendiente",
+    selector: (row) => row.pending,
+  },
+];
 
 export const columnsForIndex = [
   {

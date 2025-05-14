@@ -1,5 +1,5 @@
 import { formatDate, formatTime, formatCurrency } from "../utilities";
-import { OrderQuantityUpdater } from "../components";
+import { Button, OrderQuantityUpdater } from "../components";
 
 export const customStyles = {
   rows: {
@@ -239,5 +239,32 @@ export const columnsForIndex = [
     name: "Stock",
     selector: (row) =>
       row.stock !== 0 ? `${row.stock - row.quantity}` : "Sin stock",
+  },
+];
+
+export const columnsForPendingProducts = (orderNavigate) => [
+  {
+    name: "Código",
+    selector: (row) => row.code,
+  },
+  {
+    name: "Descripción",
+    selector: (row) => row.description,
+    sortable: true,
+    width: "550px",
+  },
+  {
+    name: "Cantidad pendiente",
+    selector: (row) => row.pending,
+  },
+  {
+    name: "Número de orden",
+    selector: (row) => row.order_number,
+  },
+  {
+    name: "Acciones",
+    cell: (row) => (
+      <button onClick={() => orderNavigate(row.order_id)}>Ver Detalles</button>
+    ),
   },
 ];

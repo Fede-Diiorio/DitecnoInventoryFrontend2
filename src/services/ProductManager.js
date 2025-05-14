@@ -86,3 +86,19 @@ export const getProductByCodeAndSupplier = async (code, supplier) => {
     throw new Error(handleApiError(error));
   }
 };
+
+export const getPendingProducts = async () => {
+  const token = sessionStorage.getItem("token");
+
+  try {
+    const products = await axios.get(`${apiUrl}/api/orders/pending`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    return products.data;
+  } catch (error) {
+    throw new Error(handleApiError(error));
+  }
+};

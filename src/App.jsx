@@ -1,7 +1,6 @@
 import { Login, Dashboard } from "./pages";
 import {
   AuthContext,
-  AuthProvider,
   RefreshProvider,
   AdderProvider,
   DeliveryNoteProvider,

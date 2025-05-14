@@ -45,7 +45,13 @@ export const OrdersContainer = ({ orders }) => {
             onChange={handleSearchChange}
             placeholder={"Buscar por usuario o número de orden"}
           />
-          <Button label="Crear orden" parentMethod={handleNavigateOrder} />
+          <div className={classes.buttonBox}>
+            <Button label="Crear orden" parentMethod={handleNavigateOrder} />
+            <Button
+              label="Pendientes"
+              parentMethod={() => navigate("/ordenes/pendientes")}
+            />
+          </div>
         </div>
 
         <DataTable

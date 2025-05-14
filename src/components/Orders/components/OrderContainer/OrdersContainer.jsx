@@ -48,9 +48,10 @@ export const OrdersContainer = ({ orders }) => {
           <div className={classes.buttonBox}>
             <Button label="Crear orden" parentMethod={handleNavigateOrder} />
             <Button
-              label="Pendientes"
+              label="Materiales pendientes"
               parentMethod={() => navigate("/ordenes/pendientes")}
             />
+            <Button label={"Ordenes completas"} />
           </div>
         </div>
 

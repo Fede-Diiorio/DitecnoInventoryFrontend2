@@ -242,7 +242,7 @@ export const columnsForIndex = [
   },
 ];
 
-export const columnsForPendingProducts = (orderNavigate) => [
+export const columnsForPendingProducts = [
   {
     name: "Código",
     selector: (row) => row.code,
@@ -254,17 +254,15 @@ export const columnsForPendingProducts = (orderNavigate) => [
     width: "550px",
   },
   {
+    name: "Proveedor",
+    selector: (row) => row.supplier,
+  },
+  {
     name: "Cantidad pendiente",
     selector: (row) => row.pending,
   },
   {
     name: "Número de orden",
-    selector: (row) => row.order_number,
-  },
-  {
-    name: "Acciones",
-    cell: (row) => (
-      <button onClick={() => orderNavigate(row.order_id)}>Ver Detalles</button>
-    ),
+    selector: (row) => (row.order_number ? row.order_number : "Sin asignar"),
   },
 ];

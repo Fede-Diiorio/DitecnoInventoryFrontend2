@@ -11,10 +11,6 @@ export const PendingProducts = () => {
   const { data: products, loading, error } = useFetch(getPendingProducts);
   const navigate = useNavigate();
 
-  const handleNavigateOrder = (id) => {
-    navigate(`/ordenes/${id}`);
-  };
-
   return (
     <Container>
       {loading && <h3>Cargando...</h3>}
@@ -22,10 +18,12 @@ export const PendingProducts = () => {
       {!loading && !error && (
         <section className={classes.background}>
           <DataTable
-            columns={columnsForPendingProducts(handleNavigateOrder)}
+            className={classes.dataTable}
+            columns={columnsForPendingProducts}
             data={products}
             customStyles={customStyles}
             noDataComponent="No hay nada por aquí"
+            onRowClicked={(row) => navigate(`/ordenes/${row.order_id}`)}
             pagination
             highlightOnHover
             dense

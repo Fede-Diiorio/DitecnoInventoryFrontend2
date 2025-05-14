@@ -17,7 +17,7 @@ export const NavbarAdmin = () => {
       <UserInfo />
       <FlexContainerRow>
         <Link to={"/"}>
-          <Button label={"Agregar productos"} />
+          <Button label={"Descontar material"} />
         </Link>
 
         <Link to={"/inventario"}>

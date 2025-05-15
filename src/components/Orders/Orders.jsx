@@ -1,10 +1,10 @@
-import { getAllOrders } from "../../services";
+import { getAllIncompleteOrders } from "../../services";
 import { useAsync } from "../../hooks";
 import { OrdersContainer } from "../../components";
 import classes from "./Orders.module.scss";
 
 export const Orders = () => {
-  const { data: orders, error, loading } = useAsync(getAllOrders);
+  const { data: orders, error, loading } = useAsync(getAllIncompleteOrders);
 
   if (loading) return <h3>Cargando...</h3>;
 

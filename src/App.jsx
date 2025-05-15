@@ -9,9 +9,17 @@ import { useContext } from "react";
 import { ToastContainer } from "react-toastify";
 
 function AppContent() {
-  const { token, user } = useContext(AuthContext);
+  const context = useContext(AuthContext);
 
-  if (!token) {
+  if (!context) {
+    // Esto se ejecuta solo si el contexto está roto
+    window.location.reload(); // fuerza recarga completa
+    return null;
+  }
+
+  const { token, user } = context || {};
+
+  if (!token || !user) {
     return <Login />;
   }
 

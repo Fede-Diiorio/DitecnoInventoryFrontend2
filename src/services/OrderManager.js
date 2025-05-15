@@ -3,10 +3,24 @@ import { handleApiError } from "../utilities";
 
 const apiUrl = import.meta.env.VITE_HOST;
 
-export const getAllOrders = async () => {
+export const getAllIncompleteOrders = async () => {
   try {
     const token = sessionStorage.getItem("token");
     const response = await axios.get(`${apiUrl}/api/orders`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw new Error(handleApiError(error));
+  }
+};
+
+export const getAllCompleteOrders = async () => {
+  try {
+    const token = sessionStorage.getItem("token");
+    const response = await axios.get(`${apiUrl}/api/orders/complete`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

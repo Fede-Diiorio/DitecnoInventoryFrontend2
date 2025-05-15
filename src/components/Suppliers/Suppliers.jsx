@@ -19,14 +19,16 @@ export const Suppliers = () => {
     <section>
       <h2>Proveedores</h2>
       <Container>
-        <div className={classes.box}>
-          <h4>Proveedores registrados:</h4>
-          {suppliers.map((p) => (
-            <p key={p.id}>{p.name}</p>
-          ))}
+        <div className={classes.container}>
+          <div className={classes.box}>
+            <h4>Proveedores registrados:</h4>
+            {suppliers.map((p) => (
+              <p key={p.id}>{p.name}</p>
+            ))}
+          </div>
+          <AddSupplier onRefresh={reload} />
+          <FileUploader />
         </div>
-        <FileUploader />
-        <AddSupplier onRefresh={reload} />
       </Container>
     </section>
   );

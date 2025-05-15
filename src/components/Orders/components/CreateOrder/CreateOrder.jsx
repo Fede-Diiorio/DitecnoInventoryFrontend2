@@ -55,25 +55,29 @@ export const CreateOrder = () => {
       <h2>Crear Orden</h2>
 
       <Container>
-        {selectedSupplier && <p>Proveedor seleccionado: {selectedSupplier}</p>}
+        <div className={classes.supplierInfo}>
+          {selectedSupplier && (
+            <p>Proveedor seleccionado: {selectedSupplier}</p>
+          )}
 
-        <form
-          className={classes.inputGroup}
-          onSubmit={(e) => {
-            e.preventDefault();
-            handleAddProduct();
-            inputRef.current?.focus();
-          }}
-        >
-          <input
-            type="text"
-            ref={inputRef}
-            value={codeInput}
-            onChange={handleInputChange}
-            placeholder="Ingresá el código del producto"
-          />
-          <button type="submit">Agregar</button>
-        </form>
+          <form
+            className={classes.inputGroup}
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleAddProduct();
+              inputRef.current?.focus();
+            }}
+          >
+            <input
+              type="text"
+              ref={inputRef}
+              value={codeInput}
+              onChange={handleInputChange}
+              placeholder="Ingresá el código del producto"
+            />
+            <button type="submit">Agregar</button>
+          </form>
+        </div>
 
         <OrderProductsTable
           products={products}

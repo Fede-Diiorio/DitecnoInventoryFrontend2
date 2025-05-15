@@ -51,7 +51,10 @@ export const OrdersContainer = ({ orders }) => {
               label="Materiales pendientes"
               parentMethod={() => navigate("/ordenes/pendientes")}
             />
-            <Button label={"Ordenes completas"} />
+            <Button
+              label={"Ordenes completas"}
+              parentMethod={() => navigate("/ordenes/completas")}
+            />
           </div>
         </div>
 

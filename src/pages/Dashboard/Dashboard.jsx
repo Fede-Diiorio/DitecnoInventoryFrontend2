@@ -13,6 +13,7 @@ import {
   InventoryLowStock,
   WithdrawalDetail,
   PendingProducts,
+  CompleteOrders,
 } from "../../components";
 import { Routes, Route } from "react-router-dom";
 
@@ -28,6 +29,7 @@ export const Dashboard = {
         <Route path="/retiros/:id" element={<WithdrawalDetail />} />
         <Route path="/ordenes" element={<Orders />} />
         <Route path="/ordenes/pendientes" element={<PendingProducts />} />
+        <Route path="/ordenes/completas" element={<CompleteOrders />} />
         <Route path="/ordenes/:id" element={<OrderDetail />} />
         <Route path="/remito" element={<NewDeliveryNote />} />
         <Route path="/ordenes/crear" element={<CreateOrder />} />

@@ -5,6 +5,8 @@ import FilePondPluginFileValidateType from "filepond-plugin-file-validate-type";
 import { updatePriceList, getAllSuppliers } from "../../../services";
 import { toast } from "react-toastify";
 import { useFetch } from "../../../hooks";
+import { FlexContainerRow } from "../../../styled-components";
+import classes from "./FileUploadCard.module.scss";
 
 // Registrar plugin para validar tipo de archivo
 registerPlugin(FilePondPluginFileValidateType);
@@ -34,19 +36,30 @@ export const FileUploader = () => {
   if (error) return <h2>Acceso denegado</h2>;
 
   return (
-    <div>
+    <div className={classes.box}>
       <h4>Actualizar lista de precios:</h4>
-      <select
-        value={supplierName}
-        onChange={(e) => setSupplierName(e.target.value)}
-      >
-        <option value="">Selecciona un proveedor</option>
-        {suppliers.map((supplier) => (
-          <option key={supplier.id} value={supplier.name}>
-            {supplier.name}
-          </option>
-        ))}
-      </select>
+      <FlexContainerRow>
+        <div className={classes.buttonOptions}>
+          <select
+            value={supplierName}
+            onChange={(e) => setSupplierName(e.target.value)}
+          >
+            <option value="">Selecciona un proveedor</option>
+            {suppliers.map((supplier) => (
+              <option key={supplier.id} value={supplier.name}>
+                {supplier.name}
+              </option>
+            ))}
+          </select>
+
+          <button
+            onClick={handleUpload}
+            disabled={uploading || !files[0] || !supplierName}
+          >
+            {uploading ? "Subiendo..." : "Subir archivo"}
+          </button>
+        </div>
+      </FlexContainerRow>
 
       <FilePond
         files={files}
@@ -60,13 +73,6 @@ export const FileUploader = () => {
           "text/csv",
         ]}
       />
-
-      <button
-        onClick={handleUpload}
-        disabled={uploading || !files[0] || !supplierName}
-      >
-        {uploading ? "Subiendo..." : "Subir archivo"}
-      </button>
     </div>
   );
 };

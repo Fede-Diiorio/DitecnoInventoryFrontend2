@@ -24,7 +24,7 @@ export const RestitutionsContainer = ({ restitutions }) => {
   };
 
   const handleRowClick = (row) => {
-    navigate(`/retiros/${row.id}`);
+    navigate(`/reposiciones/${row.id}`);
   };
 
   return (

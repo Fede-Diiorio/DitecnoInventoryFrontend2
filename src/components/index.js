@@ -6,6 +6,7 @@ export * from "./ProductAdder/ProductAdder";
 export * from "./Withdrawals/Withdrawals";
 export * from "./Withdrawals/components";
 export * from "./Restitutions/Restitutions";
+export * from "./Restitutions/components/RestitutionDetail";
 export * from "./Orders/Orders";
 export * from "./Orders/components";
 export * from "./TableInputSearch/TableInputSearch";

@@ -20,7 +20,7 @@ export const getAllRestitutions = async () => {
 export const getRestitutionById = async (id) => {
   try {
     const token = sessionStorage.getItem("token");
-    const response = await axios.get(`${apiUrl}/api/restitution/${id}`, {
+    const response = await axios.get(`${apiUrl}/api/restitutions/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

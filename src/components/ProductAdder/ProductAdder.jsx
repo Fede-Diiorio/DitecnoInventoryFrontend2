@@ -3,7 +3,11 @@ import { toast } from "react-toastify";
 import classes from "./ProductAdder.module.scss";
 import { useAutoFocus } from "../../hooks";
 import { useAdderContext, AuthContext } from "../../context";
-import { getProductByCode, descountStock } from "../../services";
+import {
+  getProductByCode,
+  descountStock,
+  createRestitution,
+} from "../../services";
 import DataTable from "react-data-table-component";
 import { columnsForIndex, customStyles } from "../../utilities";
 import { Container } from "../../styled-components";
@@ -42,6 +46,13 @@ export const ProductAdder = () => {
 
       if (query === "CMD00003") {
         logout();
+      }
+
+      if (query === "CMD00004") {
+        setQuery("");
+        await createRestitution(cart);
+        successNotify("Stock cargado");
+        clearCart();
       }
 
       const product = await getProductByCode(query);

@@ -1,26 +1,23 @@
 import { useState, useEffect } from "react";
 import DataTable from "react-data-table-component";
 import { useNavigate } from "react-router-dom";
-import { TableInputSearch } from "../../../../components"; // tu input personalizado
-import {
-  customStyles,
-  columnsRestitutionWhitdrawal,
-} from "../../../../utilities";
-import { Container } from "../../../../styled-components";
+import { TableInputSearch } from "../../../components";
+import { customStyles, columnsRestitutionWhitdrawal } from "../../../utilities";
+import { Container } from "../../../styled-components";
 
-export const WithdrawalsContainer = ({ withdrawals }) => {
+export const RestitutionsContainer = ({ restitutions }) => {
   const [filteredData, setFilteredData] = useState([]);
   const [searchValue, setSearchValue] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (Array.isArray(withdrawals)) setFilteredData(withdrawals);
-  }, [withdrawals]);
+    if (Array.isArray(restitutions)) setFilteredData(restitutions);
+  }, [restitutions]);
 
   const handleSearchChange = (e) => {
     const value = e.target.value.toLowerCase();
     setSearchValue(value);
-    const filtered = withdrawals.filter((item) =>
+    const filtered = restitutions.filter((item) =>
       `${item.name} ${item.lastname}`.toLowerCase().includes(value)
     );
     setFilteredData(filtered);
@@ -37,6 +34,7 @@ export const WithdrawalsContainer = ({ withdrawals }) => {
         onChange={handleSearchChange}
         placeholder="Buscar por operario"
       />
+
       <DataTable
         columns={columnsRestitutionWhitdrawal}
         data={filteredData}

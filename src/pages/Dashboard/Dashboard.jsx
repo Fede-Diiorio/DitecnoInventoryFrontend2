@@ -14,6 +14,7 @@ import {
   WithdrawalDetail,
   PendingProducts,
   CompleteOrders,
+  Restitutions,
 } from "../../components";
 import { Routes, Route } from "react-router-dom";
 
@@ -26,6 +27,7 @@ export const Dashboard = {
         <Route path="/inventario" element={<Inventory />} />
         <Route path="/bajo-stock" element={<InventoryLowStock />} />
         <Route path="/retiros" element={<Withdrawals />} />
+        <Route path="/reposiciones" element={<Restitutions />} />
         <Route path="/retiros/:id" element={<WithdrawalDetail />} />
         <Route path="/ordenes" element={<Orders />} />
         <Route path="/ordenes/pendientes" element={<PendingProducts />} />

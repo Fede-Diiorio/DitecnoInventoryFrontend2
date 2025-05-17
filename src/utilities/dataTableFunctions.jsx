@@ -1,5 +1,5 @@
 import { formatDate, formatTime, formatCurrency } from "../utilities";
-import { Button, OrderQuantityUpdater } from "../components";
+import { OrderQuantityUpdater } from "../components";
 
 export const customStyles = {
   rows: {
@@ -264,5 +264,24 @@ export const columnsForPendingProducts = [
   {
     name: "Número de orden",
     selector: (row) => (row.order_number ? row.order_number : "Sin asignar"),
+  },
+];
+
+export const columnsRestitutionWhitdrawal = [
+  {
+    name: "Nombre",
+    selector: (row) => `${row.name} ${row.lastname}`,
+    sortable: true,
+  },
+  {
+    name: "Fecha",
+    selector: (row) => row.date,
+    sortable: true,
+    format: (row) => formatDate(row.date),
+  },
+  {
+    name: "Hora",
+    selector: (row) => row.date,
+    format: (row) => formatTime(row.date),
   },
 ];

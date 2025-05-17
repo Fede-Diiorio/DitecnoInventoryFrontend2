@@ -32,6 +32,10 @@ export const NavbarAdmin = () => {
           <Button label={"Retiros"} />
         </Link>
 
+        <Link to={"/reposiciones"}>
+          <Button label={"Reposiciones"} />
+        </Link>
+
         <Link to={"/ordenes"}>
           <Button label={"Ordenes"} />
         </Link>

@@ -1,16 +1,18 @@
 import DataTable from "react-data-table-component";
 import { useState, useEffect } from "react";
 import { useFetch } from "../../hooks";
-import { TableInputSearch } from "..";
+import { TableInputSearch } from "../../components";
 import { customStyles, columnsForInventory } from "../../utilities";
 import { getInventory } from "../../services";
 import { Container } from "../../styled-components";
 import classes from "./Inventory.module.scss";
+import { useNavigate } from "react-router-dom";
 
 export const Inventory = () => {
   const { data: products, loading, error } = useFetch(getInventory);
   const [filteredData, setFilteredData] = useState([]);
   const [searchValue, setSearchValue] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (Array.isArray(products)) {
@@ -29,6 +31,10 @@ export const Inventory = () => {
     setFilteredData(filtered);
   };
 
+  const handleRowClick = (row) => {
+    navigate(`/inventario/${row.id}`);
+  };
+
   return (
     <Container>
       {loading && <h3>Cargando...</h3>}
@@ -45,6 +51,7 @@ export const Inventory = () => {
             pagination
             highlightOnHover
             dense
+            onRowClicked={handleRowClick}
             paginationComponentOptions={{
               rowsPerPageText: "Filas por página",
               rangeSeparatorText: "de",

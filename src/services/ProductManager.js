@@ -31,6 +31,20 @@ export const getProductsWithLowStock = async () => {
   }
 };
 
+export const getProductById = async (id) => {
+  const token = sessionStorage.getItem("token");
+  try {
+    const response = await axios.get(`${apiUrl}/api/products/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw new Error(handleApiError(error));
+  }
+};
+
 export const getProductByCode = async (code) => {
   const token = sessionStorage.getItem("token");
   try {

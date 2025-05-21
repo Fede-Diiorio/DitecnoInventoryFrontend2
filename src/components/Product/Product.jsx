@@ -1,14 +1,11 @@
 import { useCallback, useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useFetch } from "../../hooks";
-import {
-  getProductById,
-  updateProduct,
-  updateProductStatus,
-} from "../../services";
+import { getProductById } from "../../services";
 import { Container } from "../../styled-components";
 import classes from "./Product.module.scss";
 import { Button } from "../../components";
+import { ProductStatusButton, UpdateProductButton } from "./components";
 
 export const Product = () => {
   const { productId } = useParams();
@@ -18,6 +15,7 @@ export const Product = () => {
   );
 
   const { data: product, loading, error } = useFetch(fetchProduct);
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     code: "",
@@ -37,33 +35,6 @@ export const Product = () => {
     }
   }, [product]);
 
-  const navigate = useNavigate();
-
-  const handleNavigate = () => {
-    navigate(-1);
-  };
-
-  const handleProductState = async () => {
-    try {
-      const response = await updateProductStatus(formData.code);
-      console.log(response);
-    } catch (error) {
-      console.error("Error updating product:", error);
-    }
-  };
-
-  const handleFormSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await updateProduct(productId, formData);
-      if (response === "Actualizado") {
-        navigate("/inventario");
-      }
-    } catch (error) {
-      console.error("Error updating product:", error);
-    }
-  };
-
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -79,9 +50,9 @@ export const Product = () => {
       <h2>Detalles del Producto</h2>
       <form className={classes.productForm}>
         <div className={classes.discButton}>
-          <Button
-            label={"Descontinuar producto"}
-            parentMethod={handleProductState}
+          <ProductStatusButton
+            productStatus={product.is_active}
+            productCode={product.code}
           />
         </div>
 
@@ -123,8 +94,8 @@ export const Product = () => {
           />
         </div>
         <div className={classes.buttons}>
-          <Button label={"Volver"} parentMethod={handleNavigate} />
-          <Button label={"Guardar Cambios"} parentMethod={handleFormSubmit} />
+          <Button label={"Volver"} parentMethod={() => navigate(-1)} />
+          <UpdateProductButton productId={productId} productInfo={formData} />
         </div>
       </form>
     </Container>

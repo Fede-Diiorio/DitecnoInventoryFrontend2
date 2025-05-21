@@ -1,5 +1,6 @@
 import axios from "axios";
 import { handleApiError } from "../utilities";
+import { toast } from "react-toastify";
 
 const apiUrl = import.meta.env.VITE_HOST;
 
@@ -112,6 +113,50 @@ export const getPendingProducts = async () => {
     });
 
     return products.data;
+  } catch (error) {
+    throw new Error(handleApiError(error));
+  }
+};
+
+export const updateProduct = async (productId, productInfo) => {
+  const token = sessionStorage.getItem("token");
+  const { code, description, stock, stock_alert } = productInfo;
+  try {
+    const response = await axios.put(
+      `${apiUrl}/api/products/${productId}`,
+      {
+        code,
+        description,
+        stock,
+        stock_alert,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    toast.success(response.data);
+    return response.data;
+  } catch (error) {
+    throw new Error(handleApiError(error));
+  }
+};
+
+export const updateProductStatus = async (code) => {
+  const token = sessionStorage.getItem("token");
+  try {
+    const response = await axios.put(
+      `${apiUrl}/api/products/status`,
+      { code },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    return response.data;
   } catch (error) {
     throw new Error(handleApiError(error));
   }

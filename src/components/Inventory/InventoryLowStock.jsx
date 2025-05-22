@@ -6,11 +6,13 @@ import { customStyles, columnsForInventory } from "../../utilities";
 import { getProductsWithLowStock } from "../../services";
 import { Container } from "../../styled-components";
 import classes from "./Inventory.module.scss";
+import { useNavigate } from "react-router-dom";
 
 export const InventoryLowStock = () => {
   const { data: products, loading, error } = useFetch(getProductsWithLowStock);
   const [filteredData, setFilteredData] = useState([]);
   const [searchValue, setSearchValue] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (Array.isArray(products)) {
@@ -29,6 +31,12 @@ export const InventoryLowStock = () => {
     setFilteredData(filtered);
   };
 
+  const handleRowClick = (row) => {
+    navigate(`/inventario/${row.id}`);
+  };
+
+  console.log(products);
+
   return (
     <Container>
       {loading && <h3>Cargando...</h3>}
@@ -44,6 +52,7 @@ export const InventoryLowStock = () => {
             noDataComponent="No hay nada por aquí"
             pagination
             highlightOnHover
+            onRowClicked={handleRowClick}
             dense
             paginationComponentOptions={{
               rowsPerPageText: "Filas por página",

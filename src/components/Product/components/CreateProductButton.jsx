@@ -1,36 +1,35 @@
 import Swal from "sweetalert2";
 import { Button } from "../../../components";
-import { updateProduct } from "../../../services";
+import { createNewProduct } from "../../../services";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-export const UpdateProductButton = ({ productId, productInfo }) => {
+export const CreateProductButton = ({ productInfo }) => {
   const navigate = useNavigate();
+
   const handleFormSubmit = async () => {
     const result = await Swal.fire({
       title: "¿Estás seguro?",
-      text: "Una vez confirmada la actualización, no podrás deshacer los cambios a menos que modifiques la información manualmente.",
+      text: "¿Seguro que desean incorporar este nuevo porducto al inventario?",
       icon: "question",
       showCancelButton: true,
       confirmButtonColor: "#d33",
       cancelButtonColor: "#3085d6",
-      confirmButtonText: "Sí, actualizar",
+      confirmButtonText: "Sí, crear",
       cancelButtonText: "Cancelar",
     });
-
     if (result.isConfirmed) {
       try {
-        const response = await updateProduct(productId, productInfo);
-        if (response === "Actualizado") {
+        const response = await createNewProduct(productInfo);
+        if (response.message === "Producto creado") {
           navigate("/inventario");
-          toast.success(response);
+          toast.success(response.message);
         }
       } catch (error) {
         console.error("Error updating product:", error);
-        Swal.fire("Error", "No se pudo actualizar el producto.", "error");
       }
     }
   };
 
-  return <Button label={"Guardar cambios"} parentMethod={handleFormSubmit} />;
+  return <Button label={"Crear producto"} parentMethod={handleFormSubmit} />;
 };

@@ -161,3 +161,23 @@ export const updateProductStatus = async (code) => {
     throw new Error(handleApiError(error));
   }
 };
+
+export const createNewProduct = async (product) => {
+  const token = sessionStorage.getItem("token");
+  const { code, description, stock, stock_alert } = product;
+  try {
+    const response = await axios.post(
+      `${apiUrl}/api/products`,
+      { code, description, stock, stock_alert },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    return response.data;
+  } catch (error) {
+    throw new Error(handleApiError(error));
+  }
+};

@@ -16,4 +16,4 @@ export * from "./Suppliers/Suppliers";
 export * from "./Inventory/Inventory";
 export * from "./Inventory/InventoryLowStock";
 export * from "./Inventory/PendingProducts";
-export * from "./Product/Product";
+export * from "./Product";

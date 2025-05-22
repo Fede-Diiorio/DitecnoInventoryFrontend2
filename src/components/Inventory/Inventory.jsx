@@ -1,10 +1,10 @@
 import DataTable from "react-data-table-component";
 import { useState, useEffect } from "react";
 import { useFetch } from "../../hooks";
-import { TableInputSearch } from "../../components";
+import { Button, TableInputSearch } from "../../components";
 import { customStyles, columnsForInventory } from "../../utilities";
 import { getInventory } from "../../services";
-import { Container } from "../../styled-components";
+import { Container, FlexContainerRow } from "../../styled-components";
 import classes from "./Inventory.module.scss";
 import { useNavigate } from "react-router-dom";
 
@@ -41,7 +41,16 @@ export const Inventory = () => {
       {error && <h3>Acceso denegado</h3>}
       {!loading && !error && (
         <section className={classes.background}>
-          <TableInputSearch value={searchValue} onChange={handleSearchChange} />
+          <FlexContainerRow>
+            <TableInputSearch
+              value={searchValue}
+              onChange={handleSearchChange}
+            />
+            <Button
+              label={"Crear producto"}
+              parentMethod={() => navigate("/inventario/nuevo-producto")}
+            />
+          </FlexContainerRow>
 
           <DataTable
             columns={columnsForInventory}

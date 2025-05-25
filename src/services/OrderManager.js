@@ -97,3 +97,32 @@ export const updateOrderQuantity = async (orderId, productId, quantity) => {
     throw new Error(handleApiError(error));
   }
 };
+
+export const dowloadExcel = async (orderId) => {
+  const token = sessionStorage.getItem("token");
+  try {
+    const response = await axios.post(
+      `${apiUrl}/api/orders/excel`,
+      { orderId },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        responseType: "blob", // <- clave para axios
+      }
+    );
+
+    const url = window.URL.createObjectURL(new Blob([response.data]));
+
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `presupuesto-${orderId}.xlsx`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+
+    window.URL.revokeObjectURL(url);
+  } catch (error) {
+    throw new Error(handleApiError(error));
+  }
+};

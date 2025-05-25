@@ -1,4 +1,4 @@
-import { getOrderById } from "../../../../services";
+import { getOrderById, dowloadExcel } from "../../../../services";
 import { useAsync } from "../../../../hooks";
 import { useParams, useNavigate } from "react-router-dom";
 import { useCallback } from "react";
@@ -61,13 +61,18 @@ export const OrderDetail = () => {
               )}
             </p>
           </div>
-
-          {!order.isComplete && order.number !== "Sin asignar" && (
+          <div className={classes.buttons}>
+            {!order.isComplete && order.number !== "Sin asignar" && (
+              <Button
+                label="Generar remito"
+                parentMethod={handleCreateDeliveryNote}
+              />
+            )}
             <Button
-              label="Generar remito"
-              parentMethod={handleCreateDeliveryNote}
+              label={"Descargar orden"}
+              parentMethod={() => dowloadExcel(order.id)}
             />
-          )}
+          </div>
         </div>
 
         <DataTable

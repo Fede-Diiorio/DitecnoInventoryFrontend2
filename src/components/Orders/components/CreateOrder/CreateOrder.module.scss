@@ -1,0 +1,30 @@
+.commands {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.totalGroup {
+  display: flex;
+  gap: 1rem;
+}
+
+.discountControls {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 0.5rem;
+
+  label {
+    display: flex;
+    flex-direction: column;
+    font-weight: 600;
+
+    input {
+      margin-top: 0.25rem;
+      padding: 0.3rem;
+      width: 100px;
+    }
+  }
+}

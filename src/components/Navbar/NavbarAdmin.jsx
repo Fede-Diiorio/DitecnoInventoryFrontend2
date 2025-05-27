@@ -24,10 +24,6 @@ export const NavbarAdmin = () => {
           <Button label={"Inventario"} />
         </Link>
 
-        <Link to={"/bajo-stock"}>
-          <Button label={"Stock min"} />
-        </Link>
-
         <Link to={"/retiros"}>
           <Button label={"Retiros"} />
         </Link>

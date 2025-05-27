@@ -29,8 +29,8 @@ export const Dashboard = {
         <Route path="/" element={<ProductAdder />} />
         <Route path="/inventario" element={<Inventory />} />
         <Route path="/inventario/nuevo-producto" element={<CreateProduct />} />
+        <Route path="/inventario/bajo-stock" element={<InventoryLowStock />} />
         <Route path="/inventario/:productId" element={<UpdateProduct />} />
-        <Route path="/bajo-stock" element={<InventoryLowStock />} />
         <Route path="/retiros" element={<Withdrawals />} />
         <Route path="/reposiciones" element={<Restitutions />} />
         <Route path="/reposiciones/:id" element={<RestitutionDetail />} />

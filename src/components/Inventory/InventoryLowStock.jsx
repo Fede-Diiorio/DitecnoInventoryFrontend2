@@ -1,7 +1,7 @@
 import DataTable from "react-data-table-component";
 import { useState, useEffect } from "react";
 import { useFetch } from "../../hooks";
-import { TableInputSearch } from "../../components";
+import { TableInputSearch, Button } from "../../components";
 import { customStyles, columnsForInventory } from "../../utilities";
 import { getProductsWithLowStock } from "../../services";
 import { Container } from "../../styled-components";
@@ -23,7 +23,7 @@ export const InventoryLowStock = () => {
   const handleSearchChange = (e) => {
     const inputValue = e.target.value.toLowerCase();
     setSearchValue(inputValue);
-    const filtered = data.filter(
+    const filtered = products.filter(
       (item) =>
         item.description.toLowerCase().includes(inputValue) ||
         item.code.toLowerCase().includes(inputValue)
@@ -34,8 +34,6 @@ export const InventoryLowStock = () => {
   const handleRowClick = (row) => {
     navigate(`/inventario/${row.id}`);
   };
-
-  console.log(products);
 
   return (
     <Container>
@@ -61,6 +59,7 @@ export const InventoryLowStock = () => {
           />
         </section>
       )}
+      <Button label={"Volver"} parentMethod={() => navigate(-1)} />
     </Container>
   );
 };

@@ -46,10 +46,16 @@ export const Inventory = () => {
               value={searchValue}
               onChange={handleSearchChange}
             />
-            <Button
-              label={"Crear producto"}
-              parentMethod={() => navigate("/inventario/nuevo-producto")}
-            />
+            <div className={classes.buttonsBox}>
+              <Button
+                label={"Crear producto"}
+                parentMethod={() => navigate("/inventario/nuevo-producto")}
+              />
+              <Button
+                label={"Stock min"}
+                parentMethod={() => navigate("/inventario/bajo-stock")}
+              />
+            </div>
           </FlexContainerRow>
 
           <DataTable

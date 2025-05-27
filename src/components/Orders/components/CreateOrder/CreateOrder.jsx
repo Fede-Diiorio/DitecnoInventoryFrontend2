@@ -1,19 +1,26 @@
 import { useState, useRef, useEffect } from "react";
-import classes from "./CreateOrder.module.scss";
+import DataTable from "react-data-table-component";
 import { useSupplierSelector } from "../../../../hooks";
 import { Container } from "../../../../styled-components";
-import { OrderProductsTable } from "./components";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../../../../components";
 import { addProduct, createNewOrder } from "./utilities/componentFunctions";
+import {
+  columnsForCreateOrder,
+  formatCurrency,
+  customStyles,
+} from "../../../../utilities";
+import classes from "./CreateOrder.module.scss";
 
 export const CreateOrder = () => {
   const selectedSupplier = useSupplierSelector();
-
   const [products, setProducts] = useState([]);
   const [codeInput, setCodeInput] = useState("");
-  const navigate = useNavigate();
+  const [exchangeRate, setExchangeRate] = useState(1);
+  const [discount, setDiscount] = useState(0);
+  const [nestedDiscount, setNestedDiscount] = useState(0);
   const inputRef = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (selectedSupplier && inputRef.current) {
@@ -43,6 +50,16 @@ export const CreateOrder = () => {
     navigate("/ordenes");
   };
 
+  const baseTotal = products.reduce(
+    (acc, p) => acc + p.price * (p.quantityToLoad || 1),
+    0
+  );
+
+  const discountedTotal =
+    baseTotal * (1 - discount / 100) * (1 - nestedDiscount / 100);
+
+  const discountedTotalArs = discountedTotal * exchangeRate;
+
   if (!selectedSupplier)
     return (
       <Container>
@@ -55,36 +72,78 @@ export const CreateOrder = () => {
       <h2>Crear Orden</h2>
 
       <Container>
-        <div className={classes.supplierInfo}>
-          {selectedSupplier && (
+        <div className={classes.commands}>
+          <div className={classes.supplierAndCode}>
             <p>Proveedor seleccionado: {selectedSupplier}</p>
-          )}
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                handleAddProduct();
+                inputRef.current?.focus();
+              }}
+              className={classes.codeForm}
+            >
+              <input
+                type="text"
+                ref={inputRef}
+                value={codeInput}
+                onChange={handleInputChange}
+                placeholder="Ingresá el código del producto"
+              />
+              <button type="submit">Agregar</button>
+            </form>
+          </div>
 
-          <form
-            className={classes.inputGroup}
-            onSubmit={(e) => {
-              e.preventDefault();
-              handleAddProduct();
-              inputRef.current?.focus();
-            }}
-          >
-            <input
-              type="text"
-              ref={inputRef}
-              value={codeInput}
-              onChange={handleInputChange}
-              placeholder="Ingresá el código del producto"
-            />
-            <button type="submit">Agregar</button>
-          </form>
+          <div className={classes.controlsRow}>
+            <div className={classes.discountControls}>
+              <label>
+                Tipo de cambio:
+                <input
+                  type="number"
+                  step="1"
+                  value={exchangeRate}
+                  onChange={(e) =>
+                    setExchangeRate(parseInt(e.target.value) || 1)
+                  }
+                />
+              </label>
+              <label>
+                Descuento:
+                <input
+                  type="number"
+                  step="1"
+                  value={discount}
+                  onChange={(e) => setDiscount(parseInt(e.target.value) || 0)}
+                />
+              </label>
+              <label>
+                Descuento anidado:
+                <input
+                  type="number"
+                  step="1"
+                  value={nestedDiscount}
+                  onChange={(e) =>
+                    setNestedDiscount(parseInt(e.target.value) || 0)
+                  }
+                />
+              </label>
+            </div>
+          </div>
+          <div className={classes.totalGroup}>
+            <span>Total: {formatCurrency(discountedTotal)}</span>
+            <span>Total ARS: {formatCurrency(discountedTotalArs)}</span>
+          </div>
         </div>
 
-        <OrderProductsTable
-          products={products}
-          onQuantityChange={handleQuantityChange}
-          onRemove={(id) =>
+        <DataTable
+          data={products}
+          columns={columnsForCreateOrder(handleQuantityChange, (id) =>
             setProducts((prev) => prev.filter((p) => p.id !== id))
-          }
+          )}
+          noDataComponent="La orden no tiene productos"
+          dense
+          highlightOnHover
+          customStyles={customStyles}
         />
 
         <Button label="Crear orden" parentMethod={handleCrateOrder} />

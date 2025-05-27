@@ -5,7 +5,9 @@ export const TableInputSearch = ({ value, onChange, placeholder, ref }) => {
     <input
       type="text"
       placeholder={
-        placeholder ? placeholder : "Buscar por nombre o código de producto"
+        placeholder
+          ? placeholder
+          : "Buscar por código de producto o descripción"
       }
       value={value}
       onChange={onChange}

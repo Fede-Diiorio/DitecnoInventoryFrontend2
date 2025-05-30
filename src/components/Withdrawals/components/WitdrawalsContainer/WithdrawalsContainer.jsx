@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import DataTable from "react-data-table-component";
 import { useNavigate } from "react-router-dom";
-import { TableInputSearch } from "../../../../components"; // tu input personalizado
+import { TableInputSearch, Button } from "../../../../components"; // tu input personalizado
 import {
   customStyles,
   columnsRestitutionWhitdrawal,
 } from "../../../../utilities";
-import { Container } from "../../../../styled-components";
+import { Container, FlexContainerRow } from "../../../../styled-components";
 
 export const WithdrawalsContainer = ({ withdrawals }) => {
   const [filteredData, setFilteredData] = useState([]);
@@ -27,16 +27,22 @@ export const WithdrawalsContainer = ({ withdrawals }) => {
   };
 
   const handleRowClick = (row) => {
-    navigate(`/retiros/${row.id}`);
+    navigate(`/movimientos/retiros/${row.id}`);
   };
 
   return (
     <Container>
-      <TableInputSearch
-        value={searchValue}
-        onChange={handleSearchChange}
-        placeholder="Buscar por operario"
-      />
+      <FlexContainerRow>
+        <TableInputSearch
+          value={searchValue}
+          onChange={handleSearchChange}
+          placeholder="Buscar por operario"
+        />
+        <Button
+          label={"Reposiciones"}
+          parentMethod={() => navigate("/movimientos/reposiciones")}
+        />
+      </FlexContainerRow>
       <DataTable
         columns={columnsRestitutionWhitdrawal}
         data={filteredData}

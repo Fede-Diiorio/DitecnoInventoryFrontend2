@@ -40,6 +40,7 @@ export const CompleteOrders = () => {
 
   return (
     <div className={classes.box}>
+      <h3>Ordenes Completas</h3>
       <Container>
         <section>
           <TableInputSearch

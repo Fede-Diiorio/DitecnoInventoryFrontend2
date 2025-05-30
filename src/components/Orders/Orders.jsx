@@ -12,6 +12,7 @@ export const Orders = () => {
 
   return (
     <div className={classes.box}>
+      <h3>Ordenes Pendientes</h3>
       <OrdersContainer orders={orders} />;
     </div>
   );

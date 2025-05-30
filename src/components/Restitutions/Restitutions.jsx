@@ -12,6 +12,7 @@ export const Restitutions = () => {
 
   return (
     <div className={classes.box}>
+      <h3>Reposiciones de Material</h3>
       <RestitutionsContainer restitutions={restitutions} />
     </div>
   );

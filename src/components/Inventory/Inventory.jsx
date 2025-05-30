@@ -2,7 +2,7 @@ import DataTable from "react-data-table-component";
 import { useState, useEffect } from "react";
 import { useFetch } from "../../hooks";
 import { Button, TableInputSearch } from "../../components";
-import { customStyles, columnsForInventory } from "../../utilities";
+import { customStyles, columnsForInventoryWithNavigate } from "../../utilities";
 import { getInventory } from "../../services";
 import { Container, FlexContainerRow } from "../../styled-components";
 import classes from "./Inventory.module.scss";
@@ -31,16 +31,13 @@ export const Inventory = () => {
     setFilteredData(filtered);
   };
 
-  const handleRowClick = (row) => {
-    navigate(`/inventario/${row.id}`);
-  };
-
   return (
     <Container>
       {loading && <h3>Cargando...</h3>}
       {error && <h3>Acceso denegado</h3>}
       {!loading && !error && (
         <section className={classes.background}>
+          <h3>Inventario</h3>
           <FlexContainerRow>
             <TableInputSearch
               value={searchValue}
@@ -59,14 +56,13 @@ export const Inventory = () => {
           </FlexContainerRow>
 
           <DataTable
-            columns={columnsForInventory}
+            columns={columnsForInventoryWithNavigate(navigate)}
             data={filteredData}
             customStyles={customStyles}
             noDataComponent="No hay nada por aquí"
             pagination
             highlightOnHover
             dense
-            onRowClicked={handleRowClick}
             paginationComponentOptions={{
               rowsPerPageText: "Filas por página",
               rangeSeparatorText: "de",

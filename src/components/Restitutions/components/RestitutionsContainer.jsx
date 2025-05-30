@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import DataTable from "react-data-table-component";
 import { useNavigate } from "react-router-dom";
-import { TableInputSearch } from "../../../components";
+import { TableInputSearch, Button } from "../../../components";
 import { customStyles, columnsRestitutionWhitdrawal } from "../../../utilities";
-import { Container } from "../../../styled-components";
+import { Container, FlexContainerRow } from "../../../styled-components";
 
 export const RestitutionsContainer = ({ restitutions }) => {
   const [filteredData, setFilteredData] = useState([]);
@@ -24,16 +24,22 @@ export const RestitutionsContainer = ({ restitutions }) => {
   };
 
   const handleRowClick = (row) => {
-    navigate(`/reposiciones/${row.id}`);
+    navigate(`/movimientos/reposiciones/${row.id}`);
   };
 
   return (
     <Container>
-      <TableInputSearch
-        value={searchValue}
-        onChange={handleSearchChange}
-        placeholder="Buscar por operario"
-      />
+      <FlexContainerRow>
+        <TableInputSearch
+          value={searchValue}
+          onChange={handleSearchChange}
+          placeholder="Buscar por operario"
+        />
+        <Button
+          label={"Retiros"}
+          parentMethod={() => navigate("/movimientos/retiros")}
+        />
+      </FlexContainerRow>
 
       <DataTable
         columns={columnsRestitutionWhitdrawal}

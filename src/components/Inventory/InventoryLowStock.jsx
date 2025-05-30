@@ -2,7 +2,7 @@ import DataTable from "react-data-table-component";
 import { useState, useEffect } from "react";
 import { useFetch } from "../../hooks";
 import { TableInputSearch, Button } from "../../components";
-import { customStyles, columnsForInventory } from "../../utilities";
+import { customStyles, columnsForInventoryWithNavigate } from "../../utilities";
 import { getProductsWithLowStock } from "../../services";
 import { Container } from "../../styled-components";
 import classes from "./Inventory.module.scss";
@@ -31,26 +31,22 @@ export const InventoryLowStock = () => {
     setFilteredData(filtered);
   };
 
-  const handleRowClick = (row) => {
-    navigate(`/inventario/${row.id}`);
-  };
-
   return (
     <Container>
       {loading && <h3>Cargando...</h3>}
       {error && <h3>Acceso denegado</h3>}
       {!loading && !error && (
         <section className={classes.background}>
+          <h3>Productos con bajo stock</h3>
           <TableInputSearch value={searchValue} onChange={handleSearchChange} />
 
           <DataTable
-            columns={columnsForInventory}
+            columns={columnsForInventoryWithNavigate(navigate)}
             data={filteredData}
             customStyles={customStyles}
             noDataComponent="No hay nada por aquí"
             pagination
             highlightOnHover
-            onRowClicked={handleRowClick}
             dense
             paginationComponentOptions={{
               rowsPerPageText: "Filas por página",

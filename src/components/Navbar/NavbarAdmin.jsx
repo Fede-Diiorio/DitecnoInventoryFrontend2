@@ -24,20 +24,20 @@ export const NavbarAdmin = () => {
           <Button label={"Inventario"} />
         </Link>
 
-        <Link to={"/retiros"}>
-          <Button label={"Retiros"} />
+        <Link to={"/movimientos/retiros"}>
+          <Button label={"Movimientos"} />
         </Link>
 
-        <Link to={"/reposiciones"}>
-          <Button label={"Reposiciones"} />
+        <Link to={"/proveedores"}>
+          <Button label={"Proveedores"} />
         </Link>
 
         <Link to={"/ordenes"}>
           <Button label={"Ordenes"} />
         </Link>
 
-        <Link to={"/proveedores"}>
-          <Button label={"Proveedores"} />
+        <Link to={"/usuarios"}>
+          <Button label={"Usuarios"} />
         </Link>
 
         <Link to={"/"}>

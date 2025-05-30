@@ -39,6 +39,7 @@ export const PendingProducts = () => {
       {error && <h3>Acceso denegado</h3>}
       {!loading && !error && (
         <section className={classes.background}>
+          <h3>Próximos Ingresos</h3>
           <TableInputSearch
             value={searchValue}
             onChange={handleSearchChange}

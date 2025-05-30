@@ -12,6 +12,7 @@ export const Withdrawals = () => {
 
   return (
     <div className={classes.box}>
+      <h3>Retiros de Material</h3>
       <WithdrawalsContainer withdrawals={withdrawals} />
     </div>
   );

@@ -45,6 +45,33 @@ export const columnsForInventory = [
   },
 ];
 
+export const columnsForInventoryWithNavigate = (navigate) => [
+  {
+    name: "Código",
+    selector: (row) => row.code,
+  },
+  {
+    name: "Descripción",
+    width: "550px",
+    sortable: true,
+    cell: (row) => (
+      <span
+        onClick={() => navigate(`/inventario/${row.id}`)}
+        style={{ cursor: "pointer", fontWeight: "normal", fontSize: "1rem" }}
+      >
+        {row.description}
+      </span>
+    ),
+    ignoreRowClick: true,
+    allowOverflow: true,
+  },
+  {
+    name: "Cantidad",
+    selector: (row) =>
+      row.stock != null ? row.stock : row.quantity != null ? row.quantity : "0",
+  },
+];
+
 const calculateMin = (row) => {
   const result = row.packaging / row.unit_value;
   return result;

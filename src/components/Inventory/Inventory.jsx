@@ -23,10 +23,11 @@ export const Inventory = () => {
   const handleSearchChange = (e) => {
     const inputValue = e.target.value.toLowerCase();
     setSearchValue(inputValue);
-    const filtered = data.filter(
+    const filtered = products.filter(
       (item) =>
         item.description.toLowerCase().includes(inputValue) ||
-        item.code.toLowerCase().includes(inputValue)
+        item.code.toLowerCase().includes(inputValue) ||
+        item.supplier.toLowerCase().includes(inputValue)
     );
     setFilteredData(filtered);
   };

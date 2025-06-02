@@ -17,17 +17,19 @@ export const Suppliers = () => {
 
   return (
     <section>
-      <h2>Proveedores</h2>
+      <h3>Proveedores</h3>
       <Container>
         <div className={classes.container}>
-          <div className={classes.box}>
-            <h4>Proveedores registrados:</h4>
-            {suppliers.map((p) => (
-              <p key={p.id}>{p.name}</p>
-            ))}
-          </div>
           <AddSupplier onRefresh={reload} />
-          <FileUploader />
+          <div>
+            <FileUploader />
+            <div className={classes.box}>
+              <h4>Proveedores registrados:</h4>
+              {suppliers.map((p) => (
+                <p key={p.id}>{p.name}</p>
+              ))}
+            </div>
+          </div>
         </div>
       </Container>
     </section>

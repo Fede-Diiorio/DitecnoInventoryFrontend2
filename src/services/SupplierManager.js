@@ -1,5 +1,6 @@
 import axios from "axios";
 import { handleApiError } from "../utilities";
+import { toast } from "react-toastify";
 
 const apiUrl = import.meta.env.VITE_HOST;
 
@@ -18,19 +19,25 @@ export const getAllSuppliers = async () => {
   }
 };
 
-export const createSupplier = async (supplierName) => {
+export const createSupplier = async (
+  name,
+  discount,
+  nestDiscount,
+  exchangeRate
+) => {
   const token = sessionStorage.getItem("token");
   try {
-    const supplier = axios.post(
+    const supplier = await axios.post(
       `${apiUrl}/api/supplier`,
-      { supplierName },
+      { name, discount, nestDiscount, exchangeRate },
       {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       }
     );
-    return supplier;
+    toast.success(supplier.data.message);
+    return supplier.data;
   } catch (error) {
     throw new Error(handleApiError(error));
   }

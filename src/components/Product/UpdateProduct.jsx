@@ -26,6 +26,8 @@ export const UpdateProduct = () => {
     description: "",
     stock: 0,
     stock_alert: 0,
+    price: 1,
+    supplier: "",
   });
 
   useEffect(() => {
@@ -34,7 +36,9 @@ export const UpdateProduct = () => {
         code: product.code || "",
         description: product.description || "",
         stock: product.stock || 0,
-        stock_alert: product.stock_alert || 0,
+        stock_alert: product.stockAlert || 0,
+        price: product.price || 1,
+        supplier: product.supplier || "",
       });
     }
   }, [product]);
@@ -53,12 +57,7 @@ export const UpdateProduct = () => {
     <Container>
       <div className={classes.frame}>
         <h3>Actualizar producto</h3>
-        <div className={classes.discButton}>
-          <ProductStatusButton
-            productCode={product.code}
-            productStatus={product.is_active}
-          />
-        </div>
+
         <ProductForm formData={formData} handleChange={handleChange} />
         <FlexContainerRow className={classes.buttons}>
           <Button label={"Volver"} parentMethod={() => navigate(-1)} />

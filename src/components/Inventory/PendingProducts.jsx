@@ -14,8 +14,6 @@ export const PendingProducts = () => {
   const [searchValue, setSearchValue] = useState("");
   const navigate = useNavigate();
 
-  console.log(filteredData);
-
   useEffect(() => {
     if (Array.isArray(products)) {
       setFilteredData(products);

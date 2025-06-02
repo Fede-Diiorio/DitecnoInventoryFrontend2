@@ -119,8 +119,10 @@ export const getPendingProducts = async () => {
 };
 
 export const updateProduct = async (productId, productInfo) => {
+  console.log(productInfo);
   const token = sessionStorage.getItem("token");
-  const { code, description, stock, stock_alert } = productInfo;
+  const { code, description, stock, stock_alert, price, supplier } =
+    productInfo;
   try {
     const response = await axios.put(
       `${apiUrl}/api/products/${productId}`,
@@ -129,6 +131,8 @@ export const updateProduct = async (productId, productInfo) => {
         description,
         stock,
         stock_alert,
+        price,
+        supplier,
       },
       {
         headers: {

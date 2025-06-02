@@ -11,6 +11,8 @@ export const CreateProduct = () => {
     description: "",
     stock: 0,
     stock_alert: 0,
+    supplierName: "",
+    price: 1,
   });
   const navigate = useNavigate();
 

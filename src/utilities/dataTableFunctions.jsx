@@ -51,6 +51,10 @@ export const columnsForInventoryWithNavigate = (navigate) => [
     selector: (row) => row.code,
   },
   {
+    name: "Proveedor",
+    selector: (row) => row.supplier,
+  },
+  {
     name: "Descripción",
     width: "550px",
     sortable: true,
@@ -69,6 +73,10 @@ export const columnsForInventoryWithNavigate = (navigate) => [
     name: "Cantidad",
     selector: (row) =>
       row.stock != null ? row.stock : row.quantity != null ? row.quantity : "0",
+  },
+  {
+    name: "Stock min",
+    selector: (row) => (row.stockAlert === 0 ? "Sin asignar" : row.stockAlert),
   },
 ];
 

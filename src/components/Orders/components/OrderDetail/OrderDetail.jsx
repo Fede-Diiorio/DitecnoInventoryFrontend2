@@ -69,7 +69,7 @@ export const OrderDetail = () => {
               />
             )}
             <Button
-              label={"Descargar orden"}
+              label={"Descargar archivo de pedido"}
               parentMethod={() => dowloadExcel(order.id)}
             />
           </div>

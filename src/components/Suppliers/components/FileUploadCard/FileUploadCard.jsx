@@ -2,10 +2,10 @@ import { useState } from "react";
 import { FilePond, registerPlugin } from "react-filepond";
 import "filepond/dist/filepond.min.css";
 import FilePondPluginFileValidateType from "filepond-plugin-file-validate-type";
-import { updatePriceList, getAllSuppliers } from "../../../services";
+import { updatePriceList, getAllSuppliers } from "../../../../services";
 import { toast } from "react-toastify";
-import { useFetch } from "../../../hooks";
-import { FlexContainerRow } from "../../../styled-components";
+import { useFetch } from "../../../../hooks";
+import { FlexContainerRow } from "../../../../styled-components";
 import classes from "./FileUploadCard.module.scss";
 
 // Registrar plugin para validar tipo de archivo

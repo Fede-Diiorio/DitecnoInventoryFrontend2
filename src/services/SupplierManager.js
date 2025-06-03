@@ -25,6 +25,7 @@ export const createSupplier = async (
   nestDiscount,
   exchangeRate
 ) => {
+  console.log(name);
   const token = sessionStorage.getItem("token");
   try {
     const supplier = await axios.post(

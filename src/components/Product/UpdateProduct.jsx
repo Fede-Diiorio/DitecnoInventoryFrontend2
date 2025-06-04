@@ -5,11 +5,7 @@ import { getProductById } from "../../services";
 import { Container, FlexContainerRow } from "../../styled-components";
 import classes from "./Product.module.scss";
 import { Button } from "../../components";
-import {
-  ProductStatusButton,
-  UpdateProductButton,
-  ProductForm,
-} from "./components";
+import { UpdateProductButton, ProductForm } from "./components";
 
 export const UpdateProduct = () => {
   const { productId } = useParams();

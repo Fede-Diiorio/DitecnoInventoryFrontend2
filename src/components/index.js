@@ -13,6 +13,7 @@ export * from "./TableInputSearch/TableInputSearch";
 export * from "./DeliveryNotes";
 export * from "./DeliveryNotes/NewDeliveryNote/components";
 export * from "./Suppliers/Suppliers";
+export * from "./Suppliers/components/UpdateSupplier/UpdateSupplier";
 export * from "./Inventory/Inventory";
 export * from "./Inventory/InventoryLowStock";
 export * from "./Inventory/PendingProducts";

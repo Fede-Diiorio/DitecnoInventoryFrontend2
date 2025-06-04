@@ -21,7 +21,7 @@ export const AddSupplier = () => {
   return (
     <div className={classes.frame}>
       <SupplierForm formData={formData} handleChange={handleChange} />
-      <div>
+      <div className={classes.button}>
         <AddSupplierButton supplierInfo={formData} />
       </div>
     </div>

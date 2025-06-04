@@ -3,7 +3,6 @@ import classes from "./SupplierForm.module.scss";
 export const SupplierForm = ({ formData, handleChange }) => {
   return (
     <form className={classes.form}>
-      <h4>Agregar un nuevo proveedor:</h4>
       <div className={classes.formGroup}>
         <label>
           Nombre del proveedor:

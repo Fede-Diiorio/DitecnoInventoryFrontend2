@@ -19,6 +19,7 @@ import {
   UpdateProduct,
   CreateProduct,
   Users,
+  UpdateSupplier,
 } from "../../components";
 import { Routes, Route } from "react-router-dom";
 
@@ -47,6 +48,7 @@ export const Dashboard = {
         <Route path="/ordenes/:id" element={<OrderDetail />} />
         <Route path="/remito" element={<NewDeliveryNote />} />
         <Route path="/proveedores" element={<Suppliers />} />
+        <Route path="/proveedores/:supplierName" element={<UpdateSupplier />} />
       </Routes>
     </>
   ),

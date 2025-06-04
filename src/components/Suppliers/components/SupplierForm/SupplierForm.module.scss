@@ -4,16 +4,11 @@
     margin-bottom: 1rem;
   }
 
-  .field {
+  label {
     display: flex;
     flex-direction: column;
     margin: 0.5rem 0;
     gap: 0.25rem;
-
-    label {
-      // font-size: 1.1rem;
-      text-align: start;
-    }
 
     input,
     select {

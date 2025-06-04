@@ -22,17 +22,11 @@ export const getSupplierByName = async (name) => {
   const token = sessionStorage.getItem("token");
 
   try {
-    const supplier = await axios.post(
-      `${apiUrl}/api/supplier`,
-      {
-        name,
+    const supplier = await axios.get(`${apiUrl}/api/supplier/${name}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
       },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+    });
 
     return supplier.data;
   } catch (error) {

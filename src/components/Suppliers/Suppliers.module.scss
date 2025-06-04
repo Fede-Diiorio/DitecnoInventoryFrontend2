@@ -2,4 +2,10 @@
   display: grid;
   grid-template-columns: 2fr 1fr;
   gap: 3rem;
+
+  .addSupplier {
+    h4 {
+      margin-bottom: 1rem;
+    }
+  }
 }

@@ -25,6 +25,8 @@ export const FileUploader = () => {
       const document = files[0]?.file;
       const result = await updatePriceList(supplierName, document);
       toast.success(result?.message || "Archivo subido correctamente.");
+      setFiles([]);
+      setSupplierName("");
     } catch (error) {
       console.error(error.message);
     } finally {

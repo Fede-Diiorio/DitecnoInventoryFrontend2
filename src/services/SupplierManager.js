@@ -18,13 +18,34 @@ export const getAllSuppliers = async () => {
   }
 };
 
+export const getSupplierByName = async (name) => {
+  const token = sessionStorage.getItem("token");
+
+  try {
+    const supplier = await axios.post(
+      `${apiUrl}/api/supplier`,
+      {
+        name,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    return supplier.data;
+  } catch (error) {
+    throw new Error(handleApiError(error));
+  }
+};
+
 export const createSupplier = async (
   name,
   discount,
   nestDiscount,
   exchangeRate
 ) => {
-  console.log(name);
   const token = sessionStorage.getItem("token");
   try {
     const supplier = await axios.post(

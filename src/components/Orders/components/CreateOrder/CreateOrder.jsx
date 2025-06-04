@@ -1,6 +1,5 @@
 import { useState, useRef, useEffect } from "react";
 import DataTable from "react-data-table-component";
-import { useSupplierSelector } from "../../../../hooks";
 import { Container } from "../../../../styled-components";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../../../../components";
@@ -11,9 +10,11 @@ import {
   customStyles,
 } from "../../../../utilities";
 import classes from "./CreateOrder.module.scss";
+import Swal from "sweetalert2";
+import { getAllSuppliers, getSupplierByName } from "../../../../services";
 
 export const CreateOrder = () => {
-  const selectedSupplier = useSupplierSelector();
+  const [selectedSupplier, setSelectedSupplier] = useState(null);
   const [products, setProducts] = useState([]);
   const [codeInput, setCodeInput] = useState("");
   const [exchangeRate, setExchangeRate] = useState(1);
@@ -21,6 +22,49 @@ export const CreateOrder = () => {
   const [nestedDiscount, setNestedDiscount] = useState(0);
   const inputRef = useRef(null);
   const navigate = useNavigate();
+  const [supplier, setSupplier] = useState({
+    name: "",
+    discount: 0,
+    nestedDiscount: 0,
+    exchangeRate: "Dolar",
+  });
+
+  useEffect(() => {
+    const fetchAndSelect = async () => {
+      try {
+        const suppliers = await getAllSuppliers();
+
+        if (suppliers && suppliers.length > 0) {
+          const { value, isConfirmed } = await Swal.fire({
+            title: "Seleccioná un proveedor",
+            input: "select",
+            inputOptions: suppliers.reduce((acc, s) => {
+              acc[s.id] = s.name;
+              return acc;
+            }, {}),
+            inputPlaceholder: "Seleccioná un proveedor",
+            showCancelButton: true,
+          });
+
+          if (isConfirmed) {
+            const selected = suppliers.find((s) => s.id === Number(value));
+            setSelectedSupplier(selected?.name || null);
+
+            const supplier = await getSupplierByName(selected.name);
+
+            console.log(supplier);
+
+            setDiscount(supplier.discount);
+            setNestedDiscount(supplier.nested_discount);
+          }
+        }
+      } catch (error) {
+        console.error("Error al obtener proveedores:", error);
+      }
+    };
+
+    fetchAndSelect();
+  }, []);
 
   useEffect(() => {
     if (selectedSupplier && inputRef.current) {

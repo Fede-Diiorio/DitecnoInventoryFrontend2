@@ -148,10 +148,16 @@ export const ordersColumns = [
     sortable: true,
   },
   {
+    name: "Proveedor",
+    selector: (row) => row.supplier_name,
+    sortable: true,
+  },
+  {
     name: "Fecha de carga",
     selector: (row) => formatDate(row.order_date),
     sortable: true,
   },
+
   {
     name: "Hora de carga",
     selector: (row) => formatTime(row.order_date),

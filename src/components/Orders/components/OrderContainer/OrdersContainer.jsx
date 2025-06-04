@@ -15,6 +15,8 @@ export const OrdersContainer = ({ orders }) => {
     navigate(`/ordenes/${row.id}`);
   };
 
+  console.log(orders);
+
   const handleNavigateOrder = () => {
     navigate("/ordenes/crear");
   };

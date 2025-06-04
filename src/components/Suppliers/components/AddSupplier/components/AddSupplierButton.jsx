@@ -1,13 +1,11 @@
 import Swal from "sweetalert2";
 import { Button } from "../../../../../components";
-import { useNavigate } from "react-router-dom";
 import { createSupplier } from "../../../../../services";
 import { toast } from "react-toastify";
+import { useReload } from "../../../../../context";
 
 export const AddSupplierButton = ({ supplierInfo }) => {
-  const navigate = useNavigate();
-
-  console.log(supplierInfo);
+  const { reload } = useReload();
 
   const { name, discount, nestedDiscount, exchangeRate } = supplierInfo;
 
@@ -31,8 +29,8 @@ export const AddSupplierButton = ({ supplierInfo }) => {
           exchangeRate
         );
         if (response.message === "Proveedor cargado correctamente") {
-          navigate("/inventario");
           toast.success(response.message);
+          reload();
         }
       } catch (error) {
         console.error("Error updating product:", error);

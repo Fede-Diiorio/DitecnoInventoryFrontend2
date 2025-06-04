@@ -1,9 +1,9 @@
 import { Login, Dashboard } from "./pages";
 import {
   AuthContext,
-  RefreshProvider,
   AdderProvider,
   DeliveryNoteProvider,
+  ReloadProvider,
 } from "./context";
 import { useContext } from "react";
 import { ToastContainer } from "react-toastify";
@@ -36,12 +36,12 @@ function AppContent() {
 function App() {
   return (
     <AdderProvider>
-      <RefreshProvider>
-        <DeliveryNoteProvider>
+      <DeliveryNoteProvider>
+        <ReloadProvider>
           <AppContent />
           <ToastContainer position="bottom-right" />
-        </DeliveryNoteProvider>
-      </RefreshProvider>
+        </ReloadProvider>
+      </DeliveryNoteProvider>
     </AdderProvider>
   );
 }

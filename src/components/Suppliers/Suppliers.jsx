@@ -1,11 +1,12 @@
 import { getAllSuppliers } from "../../services";
-import { useFetch, useReload } from "../../hooks";
+import { useFetch } from "../../hooks";
+import { useReload } from "../../context";
 import classes from "./Suppliers.module.scss";
 import { Container } from "../../styled-components";
 import { FileUploader, AddSupplier } from "./components";
 
 export const Suppliers = () => {
-  const { reloadFlag, reload } = useReload();
+  const { reloadFlag } = useReload();
   const {
     data: suppliers,
     loading,
@@ -20,7 +21,7 @@ export const Suppliers = () => {
       <h3>Proveedores</h3>
       <Container>
         <div className={classes.container}>
-          <AddSupplier onRefresh={reload} />
+          <AddSupplier />
           <div>
             <FileUploader />
             <div className={classes.box}>

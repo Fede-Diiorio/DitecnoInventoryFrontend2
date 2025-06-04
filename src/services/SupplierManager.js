@@ -1,6 +1,5 @@
 import axios from "axios";
 import { handleApiError } from "../utilities";
-import { toast } from "react-toastify";
 
 const apiUrl = import.meta.env.VITE_HOST;
 
@@ -37,7 +36,6 @@ export const createSupplier = async (
         },
       }
     );
-    toast.success(supplier.data.message);
     return supplier.data;
   } catch (error) {
     throw new Error(handleApiError(error));

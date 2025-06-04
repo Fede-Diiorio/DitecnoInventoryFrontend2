@@ -11,18 +11,18 @@ import {
 import { Button, DeliveryNotes, NumberUpdates } from "../../../../components";
 import DataTable from "react-data-table-component";
 import classes from "./OrderDetail.module.scss";
-import { useRefreshContext, useDeliveryNoteContext } from "../../../../context";
+import { useDeliveryNoteContext, useReload } from "../../../../context";
 
 export const OrderDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { refresh } = useRefreshContext();
+  const { reloadFlag } = useReload();
   const handleNavigate = () => {
     navigate("/ordenes");
   };
   const { setDraftDeliveryNote } = useDeliveryNoteContext();
 
-  const fetchOrder = useCallback(() => getOrderById(id), [id, refresh]);
+  const fetchOrder = useCallback(() => getOrderById(id), [id, reloadFlag]);
 
   const { data, loading, error } = useAsync(fetchOrder);
 

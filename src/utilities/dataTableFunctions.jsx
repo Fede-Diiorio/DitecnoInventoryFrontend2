@@ -76,7 +76,8 @@ export const columnsForInventoryWithNavigate = (navigate) => [
   },
   {
     name: "Stock min",
-    selector: (row) => (row.stockAlert === 0 ? "Sin asignar" : row.stockAlert),
+    selector: (row) =>
+      row.stockAlert === null ? "Sin asignar" : row.stockAlert,
   },
 ];
 

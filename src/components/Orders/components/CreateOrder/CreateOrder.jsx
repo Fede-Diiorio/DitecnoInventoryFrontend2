@@ -17,17 +17,11 @@ export const CreateOrder = () => {
   const [selectedSupplier, setSelectedSupplier] = useState(null);
   const [products, setProducts] = useState([]);
   const [codeInput, setCodeInput] = useState("");
-  const [exchangeRate, setExchangeRate] = useState(1);
+  const [exchangeRate, setExchangeRate] = useState("1");
   const [discount, setDiscount] = useState(0);
   const [nestedDiscount, setNestedDiscount] = useState(0);
   const inputRef = useRef(null);
   const navigate = useNavigate();
-  const [supplier, setSupplier] = useState({
-    name: "",
-    discount: 0,
-    nestedDiscount: 0,
-    exchangeRate: "Dolar",
-  });
 
   useEffect(() => {
     const fetchAndSelect = async () => {
@@ -51,8 +45,6 @@ export const CreateOrder = () => {
             setSelectedSupplier(selected?.name || null);
 
             const supplier = await getSupplierByName(selected.name);
-
-            console.log(supplier);
 
             setDiscount(supplier.discount);
             setNestedDiscount(supplier.nested_discount);
@@ -144,11 +136,9 @@ export const CreateOrder = () => {
                 Tipo de cambio:
                 <input
                   type="number"
-                  step="1"
+                  step={0.01}
                   value={exchangeRate}
-                  onChange={(e) =>
-                    setExchangeRate(parseInt(e.target.value) || 1)
-                  }
+                  onChange={(e) => setExchangeRate(e.target.value)}
                 />
               </label>
               <label>

@@ -1,5 +1,6 @@
 import axios from "axios";
 import { handleApiError } from "../utilities";
+import { toast } from "react-toastify";
 
 const apiUrl = import.meta.env.VITE_HOST;
 
@@ -75,6 +76,37 @@ export const updatePriceList = async (supplierName, document) => {
       }
     );
 
+    return response.data;
+  } catch (error) {
+    throw new Error(handleApiError(error));
+  }
+};
+
+export const updateSupplier = async (
+  id,
+  name,
+  discount,
+  nestedDiscount,
+  exchangeRate
+) => {
+  const token = sessionStorage.getItem("token");
+
+  try {
+    const response = await axios.put(
+      `${apiUrl}/api/supplier/${id}`,
+      {
+        name,
+        discount,
+        nestedDiscount,
+        exchangeRate,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    toast.success(response.data.message);
     return response.data;
   } catch (error) {
     throw new Error(handleApiError(error));

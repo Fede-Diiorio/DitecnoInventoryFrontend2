@@ -6,6 +6,7 @@ import { Button } from "../../../../components";
 import { getSupplierByName } from "../../../../services";
 import { useFetch } from "../../../../hooks";
 import classes from "./UpdateSupplier.module.scss";
+import { UpdateSupplierButton } from "./components/UpdateSupplierButton";
 
 export const UpdateSupplier = () => {
   const { supplierName } = useParams();
@@ -18,6 +19,7 @@ export const UpdateSupplier = () => {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
+    id: null,
     name: "",
     discount: 0,
     nestedDiscount: 0,
@@ -27,6 +29,7 @@ export const UpdateSupplier = () => {
   useEffect(() => {
     if (supplier) {
       setFormData({
+        id: supplier.id || null,
         name: supplier.name || "",
         discount: supplier.discount || 0,
         nestedDiscount: supplier.nested_discount || 0,
@@ -52,6 +55,7 @@ export const UpdateSupplier = () => {
         <SupplierForm formData={formData} handleChange={handleChange} />
         <div className={classes.buttons}>
           <Button label={"volver"} parentMethod={() => navigate(-1)} />
+          <UpdateSupplierButton supplierInfo={formData} />
         </div>
       </div>
     </Container>

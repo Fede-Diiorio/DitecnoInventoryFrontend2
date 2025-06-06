@@ -1,0 +1,30 @@
+.form {
+  h4 {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  label {
+    display: flex;
+    flex-direction: column;
+    margin: 0.5rem 0;
+    gap: 0.25rem;
+
+    input,
+    select {
+      padding: 0.5rem;
+      border-radius: 1rem;
+      border: 1px solid $lightPrimaryColor;
+
+      &:focus {
+        outline: none;
+        border-color: $primaryColor; // Cambia esto al color que quieras
+      }
+    }
+  }
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+}

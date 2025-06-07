@@ -69,7 +69,7 @@ export const createUser = async (name, lastname, code, role) => {
         },
       }
     );
-
+    toast.success(response.data.message);
     return response.data;
   } catch (error) {
     throw new Error(handleApiError(error));

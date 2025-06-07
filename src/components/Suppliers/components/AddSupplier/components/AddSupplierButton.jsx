@@ -4,7 +4,7 @@ import { createSupplier } from "../../../../../services";
 import { toast } from "react-toastify";
 import { useReload } from "../../../../../context";
 
-export const AddSupplierButton = ({ supplierInfo }) => {
+export const AddSupplierButton = ({ supplierInfo, resetForm }) => {
   const { reload } = useReload();
 
   const { name, discount, nestedDiscount, exchangeRate } = supplierInfo;
@@ -31,6 +31,7 @@ export const AddSupplierButton = ({ supplierInfo }) => {
         if (response.message === "Proveedor cargado correctamente") {
           toast.success(response.message);
           reload();
+          resetForm();
         }
       } catch (error) {
         console.error("Error updating product:", error);

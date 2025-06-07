@@ -3,7 +3,7 @@ import { Button } from "../../../../../components";
 import { useReload } from "../../../../../context";
 import { createUser } from "../../../../../services";
 
-export const AddUserButton = ({ userInfo }) => {
+export const AddUserButton = ({ userInfo, resetForm }) => {
   const { reload } = useReload();
 
   const { name, lastname, code, role } = userInfo;
@@ -24,6 +24,7 @@ export const AddUserButton = ({ userInfo }) => {
         const response = await createUser(name, lastname, code, role);
         if (response.message === "Usuario registrado") {
           reload();
+          resetForm();
         }
       } catch (error) {
         console.error("Error updating product:", error);

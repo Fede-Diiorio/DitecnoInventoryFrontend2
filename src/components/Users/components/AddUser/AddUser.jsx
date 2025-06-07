@@ -4,14 +4,16 @@ import { UserForm } from "../../components";
 import { AddUserButton } from "./components";
 
 export const AddUser = () => {
-  const [formData, setFormData] = useState({
+  const initialState = {
     name: "",
     lastname: "",
     code: "",
     role: "user",
-    email: "",
-    password: "",
-  });
+  };
+
+  const [formData, setFormData] = useState(initialState);
+
+  const resetForm = () => setFormData(initialState);
 
   const handleChange = (e) => {
     setFormData({
@@ -24,7 +26,7 @@ export const AddUser = () => {
     <div className={classes.frame}>
       <UserForm formData={formData} handleChange={handleChange} />
       <div className={classes.button}>
-        <AddUserButton userInfo={formData} />
+        <AddUserButton userInfo={formData} resetForm={resetForm} />
       </div>
     </div>
   );

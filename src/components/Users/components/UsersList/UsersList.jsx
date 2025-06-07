@@ -20,7 +20,7 @@ export const UserList = () => {
     <div className={classes.box}>
       <h4>Lista de usuarios:</h4>
       {users.map((u) => (
-        <FlexContainerRow key={u.id}>
+        <FlexContainerRow key={u.id} className={classes.user}>
           <p>
             {u.name} {u.lastname}
           </p>

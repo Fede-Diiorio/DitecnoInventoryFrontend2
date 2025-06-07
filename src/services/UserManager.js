@@ -50,3 +50,28 @@ export const getAllUsers = async () => {
     throw new Error(handleApiError(error));
   }
 };
+
+export const createUser = async (name, lastname, code, role) => {
+  const token = sessionStorage.getItem("token");
+
+  try {
+    const response = await axios.post(
+      `${apiUrl}/api/users/register`,
+      {
+        name,
+        lastname,
+        code,
+        role,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    return response.data;
+  } catch (error) {
+    throw new Error(handleApiError(error));
+  }
+};

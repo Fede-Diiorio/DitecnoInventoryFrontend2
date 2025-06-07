@@ -31,7 +31,7 @@ export const UserForm = ({ formData, handleChange }) => {
         <label>
           Código de usuario:
           <input
-            type="text"
+            type="password"
             id="code"
             name="code"
             placeholder="Código del usuario"

@@ -1,11 +1,12 @@
 import Swal from "sweetalert2";
 import { Button } from "../../../../../components";
 import { useReload } from "../../../../../context";
+import { createUser } from "../../../../../services";
 
 export const AddUserButton = ({ userInfo }) => {
   const { reload } = useReload();
 
-  const { name, lastname, code, role, email, password } = userInfo;
+  const { name, lastname, code, role } = userInfo;
 
   const handleFormSubmit = async () => {
     const result = await Swal.fire({
@@ -20,8 +21,8 @@ export const AddUserButton = ({ userInfo }) => {
     });
     if (result.isConfirmed) {
       try {
-        console.log(name, lastname, code, role, email, password);
-        if (response.message === "Proveedor cargado correctamente") {
+        const response = await createUser(name, lastname, code, role);
+        if (response.message === "Usuario registrado") {
           reload();
         }
       } catch (error) {

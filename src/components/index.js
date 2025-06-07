@@ -1,6 +1,5 @@
 export * from "./Button/Button";
 export * from "./Header/Header";
-export * from "./CommandForm/CommandForm";
 export * from "./Navbar";
 export * from "./ProductAdder/ProductAdder";
 export * from "./Withdrawals/Withdrawals";

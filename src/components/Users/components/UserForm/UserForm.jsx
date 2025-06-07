@@ -53,30 +53,6 @@ export const UserForm = ({ formData, handleChange }) => {
             <option value="admin">Administrador</option>
           </select>
         </label>
-
-        <label>
-          Email:
-          <input
-            type="email"
-            id="email"
-            name="email"
-            placeholder="Correo electrónico"
-            value={formData.email}
-            onChange={handleChange}
-          />
-        </label>
-
-        <label>
-          Contraseña:
-          <input
-            type="password"
-            id="password"
-            name="password"
-            placeholder="Contraseña"
-            value={formData.password}
-            onChange={handleChange}
-          />
-        </label>
       </div>
     </form>
   );

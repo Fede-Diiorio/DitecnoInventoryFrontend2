@@ -1,18 +1,20 @@
 import axios from "axios";
 import { handleApiError } from "../utilities";
+import { toast } from "react-toastify";
 
 const apiUrl = import.meta.env.VITE_HOST;
 
 export const authUserByCode = async (code) => {
   try {
-    const response = await axios.post(`${apiUrl}/api/users/code`, { code });
+    const response = await axios.post(`${apiUrl}/api/users/login`, { code });
+    if (response.data.message === "Bienvenido") {
+      toast.success(response.data.message);
+    } else {
+      toast.warning(response.data.message);
+    }
     return response.data;
   } catch (error) {
-    console.error("Error obteniendo usuario:", error);
-    return {
-      error: error,
-      message: error.response.data.error,
-    };
+    throw new Error(handleApiError(error));
   }
 };
 
@@ -29,12 +31,7 @@ export const userLogout = async (token) => {
     );
     return response.data;
   } catch (error) {
-    console.error("Error cerrando sesión:", error);
-    return {
-      error: error.message,
-      message:
-        "Hubo un error al cerrar la sesión y su usuario puede haber quedado bloqueado.",
-    };
+    throw new Error(handleApiError(error));
   }
 };
 

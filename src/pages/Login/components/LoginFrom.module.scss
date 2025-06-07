@@ -4,3 +4,26 @@
   border-radius: 0.4rem;
   width: 20rem;
 }
+
+.section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 3rem;
+
+  .form {
+    border: 2px solid $lightPrimaryColor;
+    border-radius: 2rem;
+    padding: 1rem 1rem 1rem 1rem;
+    gap: 1rem;
+    min-height: 10rem;
+    min-width: 25rem;
+
+    .error {
+      color: $darkRed;
+      margin-top: 1rem;
+      text-align: center;
+      font-size: 1rem;
+    }
+  }
+}

@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import { useFetch } from "../../../../hooks";
 import { FlexContainerRow } from "../../../../styled-components";
 import classes from "./FileUploadCard.module.scss";
+import { useReload } from "../../../../context";
 
 // Registrar plugin para validar tipo de archivo
 registerPlugin(FilePondPluginFileValidateType);
@@ -15,8 +16,13 @@ export const FileUploader = () => {
   const [files, setFiles] = useState([]);
   const [supplierName, setSupplierName] = useState("");
   const [uploading, setUploading] = useState(false);
+  const { reloadFlag } = useReload();
 
-  const { data: suppliers, loading, error } = useFetch(getAllSuppliers);
+  const {
+    data: suppliers,
+    loading,
+    error,
+  } = useFetch(getAllSuppliers, [reloadFlag]);
 
   const handleUpload = async () => {
     setUploading(true);

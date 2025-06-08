@@ -38,14 +38,14 @@ export const getSupplierByName = async (name) => {
 export const createSupplier = async (
   name,
   discount,
-  nestDiscount,
+  nestedDiscount,
   exchangeRate
 ) => {
   const token = sessionStorage.getItem("token");
   try {
     const supplier = await axios.post(
       `${apiUrl}/api/supplier`,
-      { name, discount, nestDiscount, exchangeRate },
+      { name, discount, nestedDiscount, exchangeRate },
       {
         headers: {
           Authorization: `Bearer ${token}`,

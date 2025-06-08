@@ -68,10 +68,12 @@ export const OrderDetail = () => {
                 parentMethod={handleCreateDeliveryNote}
               />
             )}
-            <Button
-              label={"Descargar archivo de pedido"}
-              parentMethod={() => dowloadExcel(order.id)}
-            />
+            {order.number === "Sin asignar" && (
+              <Button
+                label={"Descargar archivo de pedido"}
+                parentMethod={() => dowloadExcel(order.id)}
+              />
+            )}
           </div>
         </div>
 

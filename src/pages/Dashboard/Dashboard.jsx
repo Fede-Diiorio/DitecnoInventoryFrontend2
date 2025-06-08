@@ -20,6 +20,7 @@ import {
   CreateProduct,
   Users,
   UpdateSupplier,
+  UpdateUser,
 } from "../../components";
 import { Routes, Route } from "react-router-dom";
 
@@ -41,6 +42,7 @@ export const Dashboard = {
           element={<RestitutionDetail />}
         />
         <Route path="/usuarios" element={<Users />} />
+        <Route path="/usuarios/:id" element={<UpdateUser />} />
         <Route path="/ordenes" element={<Orders />} />
         <Route path="/ordenes/pendientes" element={<PendingProducts />} />
         <Route path="/ordenes/completas" element={<CompleteOrders />} />

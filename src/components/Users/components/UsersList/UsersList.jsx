@@ -26,7 +26,7 @@ export const UserList = () => {
           </p>
           <Button
             label={"Editar"}
-            parentMethod={() => console.log("Ahora no pasa nada")}
+            parentMethod={() => navigate(`/usuarios/${u.id}`)}
           />
         </FlexContainerRow>
       ))}

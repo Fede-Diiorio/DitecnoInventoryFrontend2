@@ -75,3 +75,38 @@ export const createUser = async (name, lastname, code, role) => {
     throw new Error(handleApiError(error));
   }
 };
+
+export const getUserById = async (id) => {
+  const token = sessionStorage.getItem("token");
+
+  try {
+    const response = await axios.get(`${apiUrl}/api/users/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw new Error(handleApiError(error));
+  }
+};
+
+export const updateUser = async (id, name, lastname, code, role) => {
+  const token = sessionStorage.getItem("token");
+
+  try {
+    const response = await axios.put(
+      `${apiUrl}/api/users/${id}`,
+      { name, lastname, code, role },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    toast.success(response.data.message);
+    return response.data;
+  } catch (error) {
+    throw new Error(handleApiError(error));
+  }
+};

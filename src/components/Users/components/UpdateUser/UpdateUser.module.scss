@@ -1,0 +1,17 @@
+.frame {
+  border: 1px solid $lightPrimaryColor;
+  padding: 1rem 2rem;
+  border-radius: 1rem;
+
+  .buttons {
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+}

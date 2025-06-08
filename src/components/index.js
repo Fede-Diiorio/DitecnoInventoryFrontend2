@@ -18,3 +18,4 @@ export * from "./Inventory/InventoryLowStock";
 export * from "./Inventory/PendingProducts";
 export * from "./Product";
 export * from "./Users/Users";
+export * from "./Users/components/UpdateUser/UpdateUser";

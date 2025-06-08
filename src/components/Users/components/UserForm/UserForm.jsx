@@ -1,6 +1,6 @@
 import classes from "./UserForm.module.scss";
 
-export const UserForm = ({ formData, handleChange }) => {
+export const UserForm = ({ formData, handleChange, legend }) => {
   return (
     <form className={classes.form}>
       <div className={classes.formGroup}>
@@ -39,6 +39,11 @@ export const UserForm = ({ formData, handleChange }) => {
             onChange={handleChange}
           />
         </label>
+        {legend && (
+          <small className={classes.legend}>
+            Si no ingresás un nuevo código, se mantendrá el actual.
+          </small>
+        )}
 
         <label>
           Rol:

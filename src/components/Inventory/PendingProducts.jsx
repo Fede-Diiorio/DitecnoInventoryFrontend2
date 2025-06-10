@@ -26,7 +26,8 @@ export const PendingProducts = () => {
     const filtered = products.filter(
       (item) =>
         item.supplier.toLowerCase().includes(inputValue) ||
-        item.code.toLowerCase().includes(inputValue)
+        item.code.toLowerCase().includes(inputValue) ||
+        item.description.toLowerCase().includes(inputValue)
     );
     setFilteredData(filtered);
   };
@@ -41,7 +42,7 @@ export const PendingProducts = () => {
           <TableInputSearch
             value={searchValue}
             onChange={handleSearchChange}
-            placeholder={"Buscar por código de producto o proveedor"}
+            placeholder={"Buscar por código, descripción o proveedor"}
           />
           <DataTable
             className={classes.dataTable}

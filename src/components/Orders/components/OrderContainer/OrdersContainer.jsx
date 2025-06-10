@@ -33,7 +33,9 @@ export const OrdersContainer = ({ orders }) => {
         `${order.user_name} ${order.user_lastname}`
           .toLowerCase()
           .includes(input) ||
-        (order.order_number && order.order_number.toLowerCase().includes(input))
+        (order.order_number &&
+          order.order_number.toLowerCase().includes(input)) ||
+        order.supplier_name.toLowerCase().includes(input)
     );
     setFilteredOrders(filtered);
   };
@@ -45,7 +47,7 @@ export const OrdersContainer = ({ orders }) => {
           <TableInputSearch
             value={searchValue}
             onChange={handleSearchChange}
-            placeholder={"Buscar por usuario o número de orden"}
+            placeholder={"Buscar por usuario, número de orden o proveedor"}
           />
           <div className={classes.buttonBox}>
             <Button label="Crear orden" parentMethod={handleNavigateOrder} />

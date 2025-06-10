@@ -39,7 +39,11 @@ export const InventoryLowStock = () => {
       {!loading && !error && (
         <section className={classes.background}>
           <h3>Productos con bajo stock</h3>
-          <TableInputSearch value={searchValue} onChange={handleSearchChange} />
+          <TableInputSearch
+            value={searchValue}
+            onChange={handleSearchChange}
+            placeholder={"Buscar por código, descripción o proveedor"}
+          />
 
           <DataTable
             columns={columnsForInventoryWithNavigate(navigate)}

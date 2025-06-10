@@ -43,6 +43,7 @@ export const Inventory = () => {
             <TableInputSearch
               value={searchValue}
               onChange={handleSearchChange}
+              placeholder={"Buscar por código, descripción o proveedor"}
             />
             <div className={classes.buttonsBox}>
               <Button

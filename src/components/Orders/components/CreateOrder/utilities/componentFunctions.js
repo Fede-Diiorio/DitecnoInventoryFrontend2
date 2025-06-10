@@ -1,7 +1,4 @@
-import {
-  getProductByCodeAndSupplier,
-  createOrder,
-} from "../../../../../services";
+import { getProductByCodeAndSupplier } from "../../../../../services";
 import Swal from "sweetalert2";
 
 export const addProduct = async (codeInput, selectedSupplier, setProducts) => {
@@ -57,16 +54,4 @@ export const addProduct = async (codeInput, selectedSupplier, setProducts) => {
       addOrUpdateProduct(productsFound[selectedIndex]);
     }
   }
-};
-
-export const createNewOrder = async (selectedSupplier, products) => {
-  const payload = {
-    supplier: selectedSupplier,
-    products: products.map((p) => ({
-      id: p.id,
-      quantity: p.quantityToLoad,
-    })),
-  };
-
-  await createOrder(payload.products, payload.supplier);
 };

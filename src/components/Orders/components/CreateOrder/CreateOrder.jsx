@@ -1,9 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import DataTable from "react-data-table-component";
 import { Container } from "../../../../styled-components";
-import { useNavigate } from "react-router-dom";
-import { Button } from "../../../../components";
-import { addProduct, createNewOrder } from "./utilities/componentFunctions";
+import { addProduct } from "./utilities/componentFunctions";
 import {
   columnsForCreateOrder,
   formatCurrency,
@@ -12,6 +10,7 @@ import {
 import classes from "./CreateOrder.module.scss";
 import Swal from "sweetalert2";
 import { getAllSuppliers, getSupplierByName } from "../../../../services";
+import { CreateOrderButton } from "./components/CreateOrderButton";
 
 export const CreateOrder = () => {
   const [selectedSupplier, setSelectedSupplier] = useState(null);
@@ -21,7 +20,6 @@ export const CreateOrder = () => {
   const [discount, setDiscount] = useState(0);
   const [nestedDiscount, setNestedDiscount] = useState(0);
   const inputRef = useRef(null);
-  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchAndSelect = async () => {
@@ -79,11 +77,6 @@ export const CreateOrder = () => {
         p.id === id ? { ...p, quantityToLoad: Number(value) } : p
       )
     );
-  };
-
-  const handleCrateOrder = async () => {
-    await createNewOrder(selectedSupplier, products);
-    navigate("/ordenes");
   };
 
   const baseTotal = products.reduce(
@@ -180,7 +173,7 @@ export const CreateOrder = () => {
           customStyles={customStyles}
         />
 
-        <Button label="Crear orden" parentMethod={handleCrateOrder} />
+        <CreateOrderButton supplier={selectedSupplier} products={products} />
       </Container>
     </section>
   );

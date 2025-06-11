@@ -4,7 +4,7 @@ import { FileUploader, AddSupplier, SuppliersList } from "./components";
 
 export const Suppliers = () => {
   return (
-    <section>
+    <section className={classes.box}>
       <h3>Proveedores</h3>
       <Container>
         <div className={classes.container}>

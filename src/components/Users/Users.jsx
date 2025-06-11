@@ -5,13 +5,15 @@ import { UserList, AddUser } from "./components";
 export const Users = () => {
   return (
     <Container>
-      <h3>Usuarios</h3>
-      <div className={classes.container}>
-        <div className={classes.addUser}>
-          <h4>Agregar un nuevo usuario:</h4>
-          <AddUser />
+      <div className={classes.box}>
+        <h3>Usuarios</h3>
+        <div className={classes.container}>
+          <div className={classes.addUser}>
+            <h4>Agregar un nuevo usuario:</h4>
+            <AddUser />
+          </div>
+          <UserList />
         </div>
-        <UserList />
       </div>
     </Container>
   );

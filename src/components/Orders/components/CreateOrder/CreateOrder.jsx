@@ -98,7 +98,7 @@ export const CreateOrder = () => {
 
   return (
     <section className={classes.container}>
-      <h2>Crear Orden</h2>
+      <h3>Crear Orden</h3>
 
       <Container>
         <div className={classes.commands}>

@@ -23,7 +23,6 @@ export const UpdateProductButton = ({ productId, productInfo }) => {
         const response = await updateProduct(productId, productInfo);
         if (response === "Actualizado") {
           navigate("/inventario");
-          toast.success(response);
         }
       } catch (error) {
         console.error("Error updating product:", error);

@@ -26,6 +26,8 @@ function AppContent() {
   switch (user.role) {
     case "admin":
       return <Dashboard.Admin />;
+    case "master":
+      return <Dashboard.Master />;
     case "user":
       return <Dashboard.User />;
     default:

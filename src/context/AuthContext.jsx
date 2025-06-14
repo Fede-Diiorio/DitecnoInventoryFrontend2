@@ -25,12 +25,18 @@ export const AuthProvider = ({ children }) => {
   };
 
   // Función para reiniciar el temporizador
+  // Función para reiniciar el temporizador
   const resetLogoutTimer = () => {
     if (logoutTimerRef.current) clearTimeout(logoutTimerRef.current);
+
+    // Duración según el rol del usuario
+    const isPrivilegedUser = user?.role === "admin" || user?.role === "master";
+    const timeoutDuration = isPrivilegedUser ? 30 * 60 * 1000 : 5 * 60 * 1000;
+
     logoutTimerRef.current = setTimeout(() => {
       logout();
       navigate("/");
-    }, 60 * 60 * 1000); // 5 minutos en milisegundos
+    }, timeoutDuration);
   };
 
   // Función para iniciar sesión
